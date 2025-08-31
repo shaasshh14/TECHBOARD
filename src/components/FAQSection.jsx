@@ -9,7 +9,17 @@ const faqData = [
 ];
 
 const FAQItem = ({ faq, index, toggleFAQ }) => {
+    
+    // This handler is specifically for the close button
+    const handleClose = (e) => {
+        // This is crucial: it prevents the click from reaching the parent div
+        e.stopPropagation();
+        // Call the toggle function to close the current item
+        toggleFAQ(index);
+    };
+
     return (
+        // The main div still opens and closes the FAQ
         <div className={`faq-item ${faq.open ? 'open' : ''}`} onClick={() => toggleFAQ(index)}>
             <div className="faq-question">
                 {faq.question}
@@ -18,6 +28,10 @@ const FAQItem = ({ faq, index, toggleFAQ }) => {
             <div className="faq-answer-wrapper">
                 <div className="faq-answer-content">
                     <p>{faq.answer}</p>
+                    {/* The new close button is added here */}
+                    <button className="faq-close-btn" onClick={handleClose}>
+                        Close
+                    </button>
                 </div>
             </div>
         </div>
@@ -35,7 +49,7 @@ const FAQSection = () => {
                 if (i === index) {
                     faq.open = !faq.open;
                 } else {
-                    faq.open = false; // Optional: close other FAQs when one is opened
+                    faq.open = false;
                 }
                 return faq;
             })
@@ -46,7 +60,11 @@ const FAQSection = () => {
         <section>
             <div className="faq-section-container">
                 <div className="faq-title-wrapper">
-                    <h2 className="faq-title">Frequently Asked Questions</h2>
+                    {/* UPDATED: Title is now split into spans for animation */}
+                    <h2 className="faq-title">
+                        <span className="faq-title-line-1">Frequently Asked</span>
+                        <span className="faq-title-line-2">Questions</span>
+                    </h2>
                 </div>
                 <div className="faq-list">
                     {faqs.map((faq, index) => (

@@ -1,139 +1,561 @@
 /* src/index.css */
 /* Add this line at the top of src/index.css */
-@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
 /* --- GLOBAL STYLES & FONTS (OPERA GX THEME) --- */
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
 :root {
-    /* --- Opera GX Color Palette --- */
-    --base-bg: #121212;
-    --charcoal: #e0e0e0;
-    --warm-white: #1e1e1e;
-    --light-taupe: #3a3a3a;
-    --pink: #ff1b8d;
-    --yellow: #00f0f0;
-    --light-orange: #ff4d4d;
-    --dark-orange: #ff1b1b;
-    --vibrant-purple: #9f50ff;
-    
-    /* Exact Colors from Header Image */
-    --gx-background: #1A1A1D;
-    --gx-red: #FF1A50;
-    --gx-text-dim: #adadad;
-    --gx-text-bright: #ffffff;
+  /* --- Opera GX Color Palette --- */
+  --base-bg: #121212;
+  --charcoal: #e0e0e0;
+  --warm-white: #1e1e1e;
+  --light-taupe: #3a3a3a;
+  --pink: #ff1b8d;
+  --yellow: #00f0f0;
+  --light-orange: #ff4d4d;
+  --dark-orange: #ff1b1b;
+  --vibrant-purple: #9f50ff;
+
+  /* Exact Colors from Header Image */
+  --gx-background: #1a1a1d;
+  --gx-red: #ff1a50;
+  --gx-text-dim: #adadad;
+  --gx-text-bright: #ffffff;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background-color: var(--base-bg);
-    background-image: radial-gradient(circle at top left, rgba(255, 27, 27, 0.2), transparent 35%),
-                      radial-gradient(circle at bottom right, rgba(0, 240, 240, 0.2), transparent 35%);
-    background-attachment: fixed;
-    color: var(--charcoal);
-    overflow-x: hidden;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background-color: var(--base-bg);
+  background-image: radial-gradient(
+      circle at top left,
+      rgba(255, 27, 27, 0.2),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(0, 240, 240, 0.2),
+      transparent 35%
+    );
+  background-attachment: fixed;
+  color: var(--charcoal);
+  overflow-x: hidden;
 }
-
 
 /* --- HEADER CSS (PIXEL-PERFECT OPERA GX REPLICA W/ SVG) --- */
 .site-header-new {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2.5rem;
-    background-color: var(--gx-background);
-    width: 100%;
-    box-sizing: border-box;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    font-family: 'Inter', sans-serif;
-    border-bottom: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2.5rem;
+  background-color: var(--gx-background);
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  font-family: "Inter", sans-serif;
+  border-bottom: none;
 }
-.site-header-new::after { content: none; }
-.header-logo a { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
-.logo-icon { width: 28px; height: 28px; }
-.logo-text { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.25rem; color: var(--gx-text-bright); margin: 0; text-shadow: none; }
-.header-nav-center { display: flex; align-items: center; gap: 2.5rem; }
-.nav-link { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; transition: opacity 0.2s ease; }
-.nav-link:hover { opacity: 0.8; }
-.nav-link .nav-icon { width: 26px; height: 26px; stroke: var(--gx-red); }
-.nav-text { color: var(--gx-text-dim); font-weight: 500; font-size: 1rem; }
-.dropdown-arrow { width: 14px; height: 14px; stroke: var(--gx-text-dim); margin-left: 0.1rem; }
-.header-cta-right { display: flex; justify-content: flex-end; }
-.cta-button { display: flex; align-items: center; gap: 0.75rem; background-color: var(--gx-red); color: #000; padding: 0.8rem 1.5rem; border-radius: 6px; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; transition: filter 0.2s ease; }
-.cta-button:hover { filter: brightness(0.9); }
-.cta-icon { width: 18px; height: 18px; fill: #000; }
+.site-header-new::after {
+  content: none;
+}
+/* Replace the old rules with these */
+.header-logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
 
+.logo-icon {
+  width: 55px; /* Increased size for better visibility */
+  height: 100%; /* Increased size for better visibility */
+  object-fit: cover; /* Ensures the image covers the area well */
+}
+
+/* Remove the now-unused logo text style */
+.logo-text {
+  display: none;
+}
+.header-nav-center {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+.nav-link:hover {
+  opacity: 0.8;
+  color: var(--gx-red);
+}
+.nav-link .nav-icon {
+  width: 26px;
+  height: 26px;
+  stroke: var(--gx-red);
+}
+.nav-text {
+  color: var(--gx-text-dim);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.dropdown-arrow {
+  width: 14px;
+  height: 14px;
+  margin-left: 0.1rem;
+}
+.header-cta-right {
+  display: flex;
+  justify-content: flex-end;
+}
+.cta-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: var(--gx-red);
+  color: #000;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: filter 0.2s ease;
+}
+.cta-button:hover {
+  filter: brightness(0.9);
+}
+.cta-icon {
+  width: 18px;
+  height: 18px;
+  fill: #000;
+}
 
 /* --- APP-WIDE & SECTION STYLES --- */
 section {
-    padding: 6rem 2rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+  padding: 6rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
-.button-primary { background: var(--dark-orange); color: var(--charcoal); border: 2px solid var(--yellow); padding: 1rem 2rem; font-family: 'Fredoka One', cursive; font-size: 1.2rem; box-shadow: 4px 4px 0 var(--yellow); cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; text-decoration: none; }
-.button-primary:hover { transform: scale(1.05) translate(-2px, -2px); box-shadow: 6px 6px 0 var(--yellow); }
-.main-headline { font-family: 'Fredoka One', cursive; font-size: clamp(3rem, 10vw, 6rem); text-shadow: 6px 6px 0 var(--dark-orange); -webkit-text-stroke: 2px var(--warm-white); color: var(--base-bg); margin: 0; }
-.section-title { font-family: 'Fredoka One', cursive; font-size: 3rem; margin-bottom: 3rem; color: var(--charcoal); }
+.button-primary {
+  background: var(--dark-orange);
+  color: var(--charcoal);
+  border: 2px solid var(--yellow);
+  padding: 1rem 2rem;
+  font-family: "Fredoka One", cursive;
+  font-size: 1.2rem;
+  box-shadow: 4px 4px 0 var(--yellow);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+}
+.button-primary:hover {
+  transform: scale(1.05) translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--yellow);
+}
+.main-headline {
+  font-family: "Fredoka One", cursive;
+  font-size: clamp(3rem, 10vw, 6rem);
+  text-shadow: 6px 6px 0 var(--dark-orange);
+  -webkit-text-stroke: 2px var(--warm-white);
+  color: var(--base-bg);
+  margin: 0;
+}
+.section-title {
+  font-family: "Fredoka One", cursive;
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  color: var(--charcoal);
+}
 
 /* --- HERO SECTION --- */
-.hero-section { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 8rem; background-color: transparent; }
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 8rem;
+  background-color: transparent;
+}
 
 /* --- ABOUT SECTION --- */
-.sticker-bg-yellow { background-color: var(--yellow); color: #121212; font-weight: 600; display: inline-block; padding: 0.5rem 2rem; transform: rotate(1.5deg); border: 2px solid var(--charcoal); box-shadow: 4px 4px 0 var(--charcoal); }
-.about-content { max-width: 900px; margin: 2rem auto; text-align: left; }
-.about-mission { font-size: 1.25rem; line-height: 1.6; text-align: center; margin-bottom: 4rem; }
-.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
-.team-member-card { text-align: center; background: var(--warm-white); border: 2px solid var(--light-taupe); border-radius: 15px; padding: 1.5rem; box-shadow: 0 0 15px rgba(0, 240, 240, 0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.team-member-card:hover { transform: translateY(-5px); box-shadow: 0 0 25px rgba(0, 240, 240, 0.4); }
-.team-member-card img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--yellow); margin-bottom: 1rem; }
-.team-member-card h3 { margin: 0.5rem 0 0.25rem; }
-.team-member-card p { margin: 0; color: #aaa; }
+.sticker-bg-yellow {
+  background-color: var(--yellow);
+  color: #121212;
+  font-weight: 600;
+  display: inline-block;
+  padding: 0.5rem 2rem;
+  transform: rotate(1.5deg);
+  border: 2px solid var(--charcoal);
+  box-shadow: 4px 4px 0 var(--charcoal);
+}
+.about-content {
+  max-width: 900px;
+  margin: 2rem auto;
+  text-align: left;
+}
+.about-mission {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+.team-member-card {
+  text-align: center;
+  background: var(--warm-white);
+  border: 2px solid var(--light-taupe);
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 0 15px rgba(0, 240, 240, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.team-member-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(0, 240, 240, 0.4);
+}
+.team-member-card img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--yellow);
+  margin-bottom: 1rem;
+}
+.team-member-card h3 {
+  margin: 0.5rem 0 0.25rem;
+}
+.team-member-card p {
+  margin: 0;
+  color: #aaa;
+}
 
 /* --- SPEAKERS SECTION --- */
-.sticker-bg-pink { background-color: var(--pink); color: #121212; font-weight: 600; display: inline-block; padding: 0.5rem 2rem; transform: rotate(-2deg); border: 2px solid var(--charcoal); box-shadow: 4px 4px 0 var(--charcoal); }
-.speakers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1200px; margin: auto; }
-.speaker-card { background: var(--warm-white); border: 2px solid var(--light-taupe); border-radius: 15px; box-shadow: 6px 6px 0 var(--light-taupe); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.speaker-card:hover { transform: translateY(-5px); box-shadow: 6px 6px 0 var(--dark-orange); }
-.speaker-card img { width: 100%; height: 250px; object-fit: cover; border-top-left-radius: 13px; border-top-right-radius: 13px; border-bottom: 2px solid var(--light-taupe); }
-.speaker-info { padding: 1rem; text-align: left; }
-.speaker-tag { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 5px; margin-bottom: 0.5rem; font-weight: 600; color: #121212; }
-.tag-keynote { background: var(--light-orange); }
-.tag-design { background: var(--pink); }
-.tag-engineering { background: var(--yellow); }
-.tag-product { background: var(--vibrant-purple); color: #fff; }
+.sticker-bg-pink {
+  background-color: var(--pink);
+  color: #121212;
+  font-weight: 600;
+  display: inline-block;
+  padding: 0.5rem 2rem;
+  transform: rotate(-2deg);
+  border: 2px solid var(--charcoal);
+  box-shadow: 4px 4px 0 var(--charcoal);
+}
+.speakers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+.speaker-card {
+  background: var(--warm-white);
+  border: 2px solid var(--light-taupe);
+  border-radius: 15px;
+  box-shadow: 6px 6px 0 var(--light-taupe);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.speaker-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 6px 6px 0 var(--dark-orange);
+}
+.speaker-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-top-left-radius: 13px;
+  border-top-right-radius: 13px;
+  border-bottom: 2px solid var(--light-taupe);
+}
+.speaker-info {
+  padding: 1rem;
+  text-align: left;
+}
+.speaker-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #121212;
+}
+.tag-keynote {
+  background: var(--light-orange);
+}
+.tag-design {
+  background: var(--pink);
+}
+.tag-engineering {
+  background: var(--yellow);
+}
+.tag-product {
+  background: var(--vibrant-purple);
+  color: #fff;
+}
+/* --- ANIMATED FAQ SECTION --- */
 
-/* --- FAQ SECTION --- */
-.faq-section-container { display: flex; align-items: flex-start; gap: 50px; padding: 20px; max-width: 1200px; margin: 40px auto; }
-.faq-title-wrapper { flex: 1; min-width: 350px; padding-top: 20px; position: sticky; top: 120px; cursor: default; }
-.faq-title { font-family: 'Fredoka One', cursive; font-size: 68px; line-height: 1.1; color: var(--charcoal); margin: 0; font-weight: 400; }
-.faq-list { flex: 1.5; max-width: 700px; }
-.faq-item { background-color: var(--vibrant-purple); border: 3px solid var(--charcoal); border-radius: 12px; margin-bottom: 15px; overflow: hidden; }
-.faq-question { padding: 18px 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 500; font-size: 16px; position: relative; color: #fff; }
-.faq-icon { font-size: 28px; font-weight: 400; transition: transform 0.3s ease; }
-.faq-item.open .faq-icon { transform: rotate(45deg); }
-.faq-answer-wrapper { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
-.faq-item.open .faq-answer-wrapper { max-height: 600px; }
-.faq-answer-content { background-color: var(--warm-white); border: 3px solid var(--light-taupe); border-radius: 8px; padding: 20px; line-height: 1.7; margin: 0 20px 20px; color: var(--charcoal); }
+/* --- Keyframes for Animations --- */
+@keyframes slideUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes staggerFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* --- Main Container --- */
+.faq-section-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 50px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+/* --- Animated Title --- */
+.faq-title-wrapper {
+  flex: 1;
+  min-width: 350px;
+  padding-top: 20px;
+  position: sticky;
+  top: 120px;
+  cursor: default;
+}
+
+.faq-title {
+  font-family: "Fredoka One", cursive;
+  font-size: 68px;
+  line-height: 1.1;
+  color: var(--charcoal);
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Animation: Staggered slide-in for title lines */
+.faq-title span {
+  display: block;
+  opacity: 0; /* Start hidden */
+  animation: slideUpFadeIn 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+.faq-title-line-1 {
+  animation-delay: 0.1s;
+}
+.faq-title-line-2 {
+  color: var(--vibrant-purple); /* Make the second line pop */
+  animation-delay: 0.3s;
+}
+
+/* --- Animated FAQ List --- */
+.faq-list {
+  flex: 1.5;
+  max-width: 700px;
+}
+
+.faq-item {
+  background-color: var(--warm-white);
+  border: 2px solid var(--light-taupe);
+  border-radius: 12px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  opacity: 0;
+  animation: staggerFadeIn 0.5s ease-out forwards;
+  
+  /* Make sure box-shadow is included in the transition */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+  transform: translateY(-5px); /* Keeps the lift effect */
+
+  /* UPDATED: Changed the glow color to red and adjusted the spread */
+  box-shadow: 0 0 20px rgba(255, 26, 80, 0.6); /* This is a semi-transparent --gx-red */
+}
+
+/* Animation: Staggering delay for each item */
+.faq-item:nth-child(1) {
+  animation-delay: 0.5s;
+}
+.faq-item:nth-child(2) {
+  animation-delay: 0.6s;
+}
+.faq-item:nth-child(3) {
+  animation-delay: 0.7s;
+}
+.faq-item:nth-child(4) {
+  animation-delay: 0.8s;
+}
+
+.faq-question {
+  padding: 20px 25px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  position: relative;
+  color: var(--charcoal);
+}
+
+.faq-icon {
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--vibrant-purple);
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* --- Enhanced Open/Close Animation --- */
+.faq-item.open {
+  box-shadow: 0 0 15px rgba(255, 26, 80, 0.4);
+}
+
+.faq-answer-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.faq-item.open .faq-answer-wrapper {
+  max-height: 600px; /* Adjust if answers are very long */
+}
+
+.faq-answer-content {
+  padding: 0 25px 25px 25px; /* Adjust padding for a cleaner look */
+  line-height: 1.7;
+  color: var(--gx-text-dim);
+  border-top: 1px solid var(--light-taupe);
+  margin: 0 20px;
+
+  /* Animation: Fade and slide in the answer text AFTER the panel expands */
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition-delay: 0.2s; /* CRITICAL: Delay makes this animation start after the max-height transition */
+}
+
+.faq-item.open .faq-answer-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Add these styles to your index.css file for the FAQ section */
+
+/* 1. First, modify the answer content to be a positioning container and have space for the button */
+.faq-answer-content {
+  /* ... keep all existing styles ... */
+  position: relative; /* This is the anchor for the button */
+  padding-bottom: 70px; /* Add extra space at the bottom */
+}
+
+/* Find and replace these rules in your index.css */
+
+.faq-close-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 25px;
+  
+  background-color: var(--gx-red);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 5;
+  
+  /* MODIFIED: Added box-shadow to the transition for a smooth glow effect */
+  transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.faq-close-btn:hover {
+  filter: brightness(0.9);
+  transform: scale(1.05);
+  
+  /* ADD THIS: The red shadow/glow effect */
+  box-shadow: 0 0 15px var(--gx-red);
+}
+
 
 /* --- MARQUEE --- */
-.marquee { overflow: hidden; padding: 2rem 0; border-top: 2px solid var(--light-taupe); border-bottom: 2px solid var(--light-taupe); background-color: rgba(0,0,0,0.2); }
-.marquee-content { display: flex; animation: scroll 40s linear infinite; }
-.marquee-item { flex-shrink: 0; padding: 0 2rem; font-family: "Fredoka One", cursive; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; color: var(--charcoal); }
-@keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee {
+  overflow: hidden;
+  padding: 2rem 0;
+  border-top: 2px solid var(--light-taupe);
+  border-bottom: 2px solid var(--light-taupe);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.marquee-content {
+  display: flex;
+  animation: scroll 40s linear infinite;
+}
+.marquee-item {
+  flex-shrink: 0;
+  padding: 0 2rem;
+  font-family: "Fredoka One", cursive;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--charcoal);
+}
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
 
 /* --- FOOTER CTA --- */
-.footer-cta { background-color: #000; border-top: 3px solid var(--dark-orange); }
-.footer-cta .main-headline { color: var(--charcoal); -webkit-text-stroke: 2px var(--dark-orange); text-shadow: none; }
-.footer-cta .button-primary { margin-top: 2rem; font-size: 1.5rem; padding: 1.2rem 2.5rem; }
+.footer-cta {
+  background-color: #000;
+  border-top: 3px solid var(--dark-orange);
+}
+.footer-cta .main-headline {
+  color: var(--charcoal);
+  -webkit-text-stroke: 2px var(--dark-orange);
+  text-shadow: none;
+}
+.footer-cta .button-primary {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  padding: 1.2rem 2.5rem;
+}
 
 /* Add these new styles to the end of src/index.css */
 
@@ -149,7 +571,7 @@ section {
 
 /* This creates the dark horizontal band BEHIND the text */
 .hero-headline-container::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 0;
@@ -161,7 +583,7 @@ section {
 }
 
 .gaming-browser-headline {
-  font-family: 'Russo One', sans-serif;
+  font-family: "Russo One", sans-serif;
   color: var(--gx-red); /* Uses the exact red from the header */
   font-size: clamp(3rem, 11vw, 7.5rem);
   text-transform: uppercase;
