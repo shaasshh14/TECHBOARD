@@ -1,13 +1,12 @@
 import Header from "../components/Header.jsx";
-function Contact() {
+import { ContactSection, styles } from "../components/ContactSection";
+
+export const Contact = () => {
   return (
     <div>
       <Header />
-      <div style={{ padding: "2rem" }}>
-        <h1>Contact Page</h1>
-        <p>This is the Contact page content.</p>
-      </div>
+      <style>{styles}</style>
+      <ContactSection />
     </div>
   );
-}
-export default Contact;
+};

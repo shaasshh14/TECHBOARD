@@ -617,3 +617,14 @@ section {
   text-shadow: none;
   -webkit-text-stroke: 0;
 }
+
+/* particle-js css */
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a1d;
+  top: 0;
+  left: 0;
+  z-index: -10; /* keeps it behind content */
+}
