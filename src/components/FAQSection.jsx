@@ -56,6 +56,10 @@ const FAQSection = () => {
         <RobotSection />
       </div> */}
 
+      <div className="absolute left-0 -top-12 w-40 md:w-52 animate-bounce-slow">
+      <RobotSection/>
+      </div>
+
       {/* FAQ content */}
       <div className="faq-section-container flex-1">
         <div className="faq-title-wrapper mb-6">

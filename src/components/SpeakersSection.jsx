@@ -11,9 +11,6 @@ const speakers = [
 const SpeakersSection = () => {
   return (
     <section>
-      <div className="absolute left-0 -top-12 w-40 md:w-52 animate-bounce-slow">
-      <RobotSection/>
-      </div>
       <div>
       <h2 className="section-title"><span className="sticker-bg-pink">MEET THE SPEAKERS</span></h2>
       <div className="speakers-grid">
