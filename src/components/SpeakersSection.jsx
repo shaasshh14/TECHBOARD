@@ -1,5 +1,5 @@
 // src/components/SpeakersSection.jsx
- 
+ import { RobotSection } from "./RobotSection";
 
 const speakers = [
     { name: 'Dr. Nova', tag: 'Keynote', tagClass: 'tag-keynote', img: 'https://via.placeholder.com/280x250' },
@@ -11,6 +11,10 @@ const speakers = [
 const SpeakersSection = () => {
   return (
     <section>
+      <div className="absolute left-0 -top-12 w-40 md:w-52 animate-bounce-slow">
+      <RobotSection/>
+      </div>
+      <div>
       <h2 className="section-title"><span className="sticker-bg-pink">MEET THE SPEAKERS</span></h2>
       <div className="speakers-grid">
         {speakers.map((speaker, index) => (
@@ -22,6 +26,7 @@ const SpeakersSection = () => {
             </div>
           </div>
         ))}
+      </div>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 // src/components/AboutSection.jsx
 import React from 'react';
-
+import { RobotSection } from './RobotSection';
 const teamMembers = [
   { name: 'Alex "Cyber" Ray', role: 'Founder & CEO', img: 'https://via.placeholder.com/150' },
   { name: 'Jenna "Glitch" Ito', role: 'Lead Designer', img: 'https://via.placeholder.com/150' },
@@ -10,6 +10,10 @@ const teamMembers = [
 const AboutSection = () => {
   return (
     <section className="about-page">
+      <div className="m-7 left-0.5 top-0.5 h-1.5">
+      <RobotSection/>
+      </div>
+      <div>
       <h2 className="section-title"><span className="sticker-bg-yellow">ABOUT US</span></h2>
       <div className="about-content">
         <p className="about-mission">
@@ -24,6 +28,7 @@ const AboutSection = () => {
             </div>
           ))}
         </div>
+      </div>
       </div>
     </section>
   );
