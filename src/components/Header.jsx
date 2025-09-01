@@ -80,13 +80,13 @@ const Header = () => {
         </Link>
       </nav>
 
-      <div className="header-cta-right">
-        <Link to="/contact" className="cta-button">
+      <div  className="header-cta-right">
+        <a  href="#contact" className="cta-button">
           <svg className="cta-icon" viewBox="0 0 24 24">
             <path d="M3 12.5V4.779L10.383 3V11.5H3ZM3 13.5H10.383V21L3 19.221V13.5ZM11.383 11.5V3.136L21 4.5V11.5H11.383ZM11.383 13.5H21V19.5L11.383 20.864V13.5Z" />
           </svg>
           <span className="cta-text">Contact Us</span>
-        </Link>
+        </a>
       </div>
     </header>
   );
