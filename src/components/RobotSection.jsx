@@ -19,7 +19,7 @@ export const RobotSection = () => {
       className="robot-spline-container"
       style={{
         height: "30vh",
-        width: "10vw",
+        width: "15vw",
         transform: `translateY(${offsetY}px)`,
       }}
     >
