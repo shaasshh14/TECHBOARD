@@ -10,13 +10,9 @@ const teamMembers = [
 
 // 1. Array of messages for the robot to display
 const robotMessages = [
-  "Scanning for epic gamers...",
-  "Did you know I'm a React component?",
-  "Our team is pretty cool.",
-  "Customization is key!",
-  "Engaging thrusters...",
-  "Remember to stay hydrated!",
-  "Welcome to the About section!",
+  "Mohit Kumar Dhaka",
+  "Mayank Kumar Dhaka",
+  "Afridi",
 ];
 
 const AboutSection = () => {
@@ -76,7 +72,7 @@ const AboutSection = () => {
           isFixed ? 'fixed top-24 z-10' : 'relative'
         }`}
       >
-        <div className="relative w-32 h-32"> {/* Positioning container */}
+        <div className="relative w-32 h-32 -left-28"> {/* Positioning container */}
           <RobotSection />
           
           {/* 4. The message bubble itself */}

@@ -1,21 +1,37 @@
+// src/components/Header.jsx
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <header className="site-header-new">
+    <header className={`site-header-new ${isScrolled ? "scrolled" : ""}`}>
       <div className="header-logo">
         <Link to="/">
-          <img src="/logo.jpg" alt="Site Logo" className="logo-icon" />
+          {/* ADD rounded-full HERE */}
+          <img src="/logo.jpg" alt="Site Logo" className="logo-icon rounded-full" />
         </Link>
       </div>
 
-      <nav
-        className="header-nav-center"
-        // data-aos="fade-down"
-        // data-aos-easing="linear"
-        // data-aos-duration="1500"
-      >
-        {/* Events */}
+      <nav className="header-nav-center">
+        {/* ... (rest of your navigation links) ... */}
         <Link to="/events" className="nav-link has-dropdown">
           <svg className="nav-icon" viewBox="0 0 24 24" fill="none">
             <path
@@ -28,7 +44,6 @@ const Header = () => {
           <span className="nav-text">Events</span>
         </Link>
 
-        {/* Team */}
         <Link to="/team" className="nav-link has-dropdown">
           <svg className="nav-icon" viewBox="0 0 24 24" fill="none">
             <path
@@ -41,7 +56,6 @@ const Header = () => {
           <span className="nav-text">Team</span>
         </Link>
 
-        {/* Gallery */}
         <Link to="/gallery" className="nav-link">
           <svg className="nav-icon" viewBox="0 0 24 24" fill="none">
             <path
@@ -60,7 +74,6 @@ const Header = () => {
           <span className="nav-text">Gallery</span>
         </Link>
 
-        {/* About */}
         <Link to="/" className="nav-link">
           <svg className="nav-icon" viewBox="0 0 24 24" fill="none">
             <path
@@ -80,8 +93,8 @@ const Header = () => {
         </Link>
       </nav>
 
-      <div  className="header-cta-right">
-        <a  href="#contact" className="cta-button">
+      <div className="header-cta-right">
+        <a href="#contact" className="cta-button">
           <svg className="cta-icon" viewBox="0 0 24 24">
             <path d="M3 12.5V4.779L10.383 3V11.5H3ZM3 13.5H10.383V21L3 19.221V13.5ZM11.383 11.5V3.136L21 4.5V11.5H11.383ZM11.383 13.5H21V19.5L11.383 20.864V13.5Z" />
           </svg>

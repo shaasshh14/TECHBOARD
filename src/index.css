@@ -49,12 +49,18 @@ body {
 }
 
 /* --- HEADER CSS (PIXEL-PERFECT OPERA GX REPLICA W/ SVG) --- */
+/* src/index.css */
+
+/* --- HEADER CSS --- */
 .site-header-new {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2.5rem;
-  background-color: var(--gx-background);
+  
+  /* MODIFY THIS: Change background-color to transparent */
+  background-color: transparent;
+
   width: 100%;
   box-sizing: border-box;
   position: fixed;
@@ -63,6 +69,19 @@ body {
   z-index: 1000;
   font-family: "Inter", sans-serif;
   border-bottom: none;
+
+  /* ADD THIS: Smooth transition for the background change */
+  transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+/* ADD THIS NEW RULE: This style applies when you scroll */
+.site-header-new.scrolled {
+  /* Use a semi-transparent version of your old background color */
+  background-color: rgba(26, 26, 29, 0.85); /* 85% opacity of --gx-background */
+  
+  /* This is the magic property for the blur effect! */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* For Safari browser support */
 }
 .site-header-new::after {
   content: none;
