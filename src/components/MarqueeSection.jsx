@@ -1,7 +1,7 @@
 // src/components/MarqueeSection.jsx
 import React from 'react';
 
-const marqueeItems = ["CUSTOMIZATION", "GX CONTROL", "PERFORMANCE", "GAMING BROWSER", "FREE VPN", "AD BLOCKER"];
+const marqueeItems = ["SPONSER A", "SPONSER B", "SPONSER C", "SPONSER D", "SPONSER E", "SPONSER F"];
 
 const MarqueeSection = () => {
   // Duplicate items for a seamless loop

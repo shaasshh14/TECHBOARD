@@ -1,5 +1,5 @@
 // src/components/SpeakersSection.jsx
-import React from 'react';
+ 
 
 const speakers = [
     { name: 'Dr. Nova', tag: 'Keynote', tagClass: 'tag-keynote', img: 'https://via.placeholder.com/280x250' },
