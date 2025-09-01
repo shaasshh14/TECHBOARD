@@ -4,15 +4,13 @@ function Team() {
   return (
     <div>
       <Header />
-      <Spline
-        className="absolute x1:right-[-28%] right-0 top-[-20%] lg:top-0"
-        scene="https://prod.spline.design/AykasHNRalnfTDfs/scene.splinecode"
-      />
 
-      <div style={{ padding: "2rem" }}>
-        <h1>Team Page</h1>
-        <p>This is the Team page content.</p>
-      </div>
+      <section className="h-screen  xl:flex-row flex-col-reverse items-center justify-between lg:px-24 px-10 relative overflow-hidden">
+        <Spline
+          className="absolute xl:right-[-30%] xl:top-[0%] right-0 top-0 w-[600px] h-[600px]"
+          scene="https://prod.spline.design/AykasHNRalnfTDfs/scene.splinecode"
+        />
+      </section>
     </div>
   );
 }

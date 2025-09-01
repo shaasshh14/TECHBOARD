@@ -2,11 +2,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { RobotSection } from './RobotSection';
 
-const teamMembers = [
-  { name: 'Alex "Cyber" Ray', role: 'Founder & CEO', img: 'https://via.placeholder.com/150' },
-  { name: 'Jenna "Glitch" Ito', role: 'Lead Designer', img: 'https://via.placeholder.com/150' },
-  { name: 'Marcus "Forge" Kane', role: 'Lead Engineer', img: 'https://via.placeholder.com/150' },
-];
+// const teamMembers = [
+//   { name: 'Alex "Cyber" Ray', role: 'Founder & CEO', img: 'https://via.placeholder.com/150' },
+//   { name: 'Jenna "Glitch" Ito', role: 'Lead Designer', img: 'https://via.placeholder.com/150' },
+//   { name: 'Marcus "Forge" Kane', role: 'Lead Engineer', img: 'https://via.placeholder.com/150' },
+// ];
 
 // 1. Array of messages for the robot to display
 const robotMessages = [
@@ -94,7 +94,7 @@ const AboutSection = () => {
           <p className="about-mission">
             We are a team of passionate gamers and developers dedicated to creating the best browsing experience for gamers. We believe in speed, customization, and control.
           </p>
-          <div className="team-grid">
+          {/* <div className="team-grid">
             {teamMembers.map((member, index) => (
               <div className="team-member-card" key={index}>
                 <img src={member.img} alt={member.name} />
@@ -102,7 +102,7 @@ const AboutSection = () => {
                 <p>{member.role}</p>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
