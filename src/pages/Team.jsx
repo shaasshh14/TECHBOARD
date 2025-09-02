@@ -1,6 +1,7 @@
 import Header from "../components/Header.jsx";
 import Spline from "@splinetool/react-spline";
 import ParticlesComponent from "../components/Particles.jsx";
+import Footer from "../components/FooterCTA.jsx";
 function Team() {
   return (
     <div>
@@ -13,6 +14,7 @@ function Team() {
           scene="https://prod.spline.design/AykasHNRalnfTDfs/scene.splinecode"
         />
       </section>
+      <Footer/>
     </div>
   );
 }
