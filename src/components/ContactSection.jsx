@@ -35,7 +35,7 @@ export const AnimatedBorderSpan = ({ position, animationClass }) => (
 
 export const ContactSection = () => {
   return (
-    <section id="contact" className="bg-[#1a1a1d] text-white min-h-screen flex items-center justify-center py-16 px-6 font-sans">
+    <section id="contact" className=" text-white min-h-screen flex items-center justify-center py-16 px-6 font-sans bg-transparent">
       <div className="max-w-4xl mx-auto w-full">
         {/* Section Heading */}
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">

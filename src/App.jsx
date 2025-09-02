@@ -11,6 +11,8 @@ import FAQSection from "./components/FAQSection";
 import MarqueeSection from "./components/MarqueeSection";
 import FooterCTA from "./components/FooterCTA";
 import "./index.css";
+import Particles from "@tsparticles/react";
+import ParticlesComponent from "./components/Particles";
 
 function App() {
   useEffect(() => {
@@ -21,6 +23,7 @@ function App() {
   });
   return (
     <div className="App">
+      <ParticlesComponent id="particles"/>
       <Header />
       <main>
         <HeroSection />
@@ -28,7 +31,7 @@ function App() {
         <AboutSection />
         <SpeakersSection />
         <FAQSection />
-        <FooterCTA />
+        <FooterCTA/>
       </main>
     </div>
   );
