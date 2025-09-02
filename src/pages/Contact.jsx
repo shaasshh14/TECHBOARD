@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header.jsx";
 import { ContactSection, styles } from "../components/ContactSection";
 import ParticlesComponent from "../components/Particles.jsx";
+import FooterCTA from "../components/FooterCTA.jsx";
 import Loader from "../components/Loader.jsx";
 
 export const Contact = () => {
@@ -33,6 +34,7 @@ export const Contact = () => {
       <Header />
       <style>{styles}</style>
       <ContactSection />
+      <FooterCTA/>
     </div>
   );
 };
