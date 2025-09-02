@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+ import React, { useEffect, useState } from "react";
 import Header from "../components/Header.jsx";
 import Spline from "@splinetool/react-spline";
 import ParticlesComponent from "../components/Particles.jsx";
@@ -8,7 +8,7 @@ import Loader from "../components/Loader.jsx";
 import city3 from "./city3.jpg";
 import city2 from "./city2.jpg";
 function Team() {
-  const [loading, setLoading] = useState(true);
+   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Hide loader after 5-6 seconds
@@ -27,22 +27,21 @@ function Team() {
       </div>
     );
   }
-
   return (
     <div>
       <ParticlesComponent id="particles" />
       <Header />
 
-      {/* <section className="h-screen  xl:flex-row flex-col-reverse items-center justify-between lg:px-24 px-10 relative overflow-hidden">
+      {/* <section className="h-screen  xl:flex-row flex-col-reverse items-center justify-between lg:px-24 px-mt-40 ml-10 mb-7 rounded-full relative overflow-hidden">
 
 
       </section> */}
 
-      <div class="flex flex-wrap justify-center gap-5 p-5">
-        <ProfileCard
+      <div className="flex flex-wrap justify-center gap-5 p-5">
+        <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Javi A. Torres"
           title="Software Engineer"
-          handle="javicodes"
+          handle="Mayank babu"
           status="Online"
           contactText="Contact Me"
           avatarUrl={city3}
@@ -51,97 +50,97 @@ function Team() {
           enableMobileTilt={false}
           onContactClick={() => console.log("Contact clicked")}
         />
-        <ProfileCard
+         <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Javi A. Torres"
           title="Software Engineer"
-          handle="javicodes"
+          handle="Mayank babu"
           status="Online"
           contactText="Contact Me"
-          avatarUrl={city2}
+          avatarUrl={city3}
           showUserInfo={true}
           enableTilt={true}
           enableMobileTilt={false}
           onContactClick={() => console.log("Contact clicked")}
         />
-        <ProfileCard
+         <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Javi A. Torres"
           title="Software Engineer"
-          handle="javicodes"
+          handle="Mayank babu"
           status="Online"
           contactText="Contact Me"
-          avatarUrl="/path/to/avatar.jpg"
+          avatarUrl={city3}
           showUserInfo={true}
           enableTilt={true}
           enableMobileTilt={false}
           onContactClick={() => console.log("Contact clicked")}
         />
-        <ProfileCard
+         <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Javi A. Torres"
           title="Software Engineer"
-          handle="javicodes"
+          handle="Mayank babu"
           status="Online"
           contactText="Contact Me"
-          avatarUrl="/path/to/avatar.jpg"
+          avatarUrl={city3}
           showUserInfo={true}
           enableTilt={true}
           enableMobileTilt={false}
           onContactClick={() => console.log("Contact clicked")}
         />
-        <ProfileCard
+         <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Javi A. Torres"
           title="Software Engineer"
-          handle="javicodes"
+          handle="Mayank babu"
           status="Online"
           contactText="Contact Me"
-          avatarUrl="/path/to/avatar.jpg"
+          avatarUrl={city3}
           showUserInfo={true}
           enableTilt={true}
           enableMobileTilt={false}
           onContactClick={() => console.log("Contact clicked")}
         />
-        <ProfileCard
+         <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Javi A. Torres"
           title="Software Engineer"
-          handle="javicodes"
+          handle="Mayank babu"
           status="Online"
           contactText="Contact Me"
-          avatarUrl="/path/to/avatar.jpg"
+          avatarUrl={city3}
           showUserInfo={true}
           enableTilt={true}
           enableMobileTilt={false}
           onContactClick={() => console.log("Contact clicked")}
         />
-        <ProfileCard
+         <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Javi A. Torres"
           title="Software Engineer"
-          handle="javicodes"
+          handle="Mayank babu"
           status="Online"
           contactText="Contact Me"
-          avatarUrl="/path/to/avatar.jpg"
+          avatarUrl={city3}
           showUserInfo={true}
           enableTilt={true}
           enableMobileTilt={false}
           onContactClick={() => console.log("Contact clicked")}
         />
-        <ProfileCard
+          <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Javi A. Torres"
           title="Software Engineer"
-          handle="javicodes"
+          handle="Mayank babu"
           status="Online"
           contactText="Contact Me"
-          avatarUrl="/path/to/avatar.jpg"
+          avatarUrl={city3}
           showUserInfo={true}
           enableTilt={true}
           enableMobileTilt={false}
           onContactClick={() => console.log("Contact clicked")}
         />
-        <ProfileCard
+          <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Javi A. Torres"
           title="Software Engineer"
-          handle="javicodes"
+          handle="Mayank babu"
           status="Online"
           contactText="Contact Me"
-          avatarUrl="/path/to/avatar.jpg"
+          avatarUrl={city3}
           showUserInfo={true}
           enableTilt={true}
           enableMobileTilt={false}

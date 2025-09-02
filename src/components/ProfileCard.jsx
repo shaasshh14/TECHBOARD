@@ -244,13 +244,13 @@ const ProfileCardComponent = ({
 
   return (
     <div ref={wrapRef} className={`pc-card-wrapper ${className}`.trim()} style={cardStyle}>
-      <section ref={cardRef} className="pc-card">
+      <section ref={cardRef} className="pc-card h-55">
         <div className="pc-inside">
           <div className="pc-shine" />
           <div className="pc-glare" />
           <div className="pc-content pc-avatar-content">
             <img
-              className="avatar bg-cover h-110" 
+              className="avatar  h-114" 
               src={avatarUrl}
               alt={`${name || 'User'} avatar`}
               loading="lazy"
@@ -279,22 +279,13 @@ const ProfileCardComponent = ({
                     <div className="pc-status">{status}</div>
                   </div>
                 </div>
-                <button
-                  className="pc-contact-btn"
-                  onClick={handleContactClick}
-                  style={{ pointerEvents: 'auto' }}
-                  type="button"
-                  aria-label={`Contact ${name || 'user'}`}
-                >
-                  {contactText}
-                </button>
+             
               </div>
             )}
           </div>
           <div className="pc-content">
             <div className="pc-details">
-              <h3>{name}</h3>
-              <p>{title}</p>
+             
             </div>
           </div>
         </div>
