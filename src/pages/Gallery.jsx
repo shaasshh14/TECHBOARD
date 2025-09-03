@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import VanillaTilt from "vanilla-tilt";
 import ParticlesComponent from "../components/Particles.jsx";
 import Loader from "../components/Loader.jsx";
+import Footer from "../components/FooterCTA.jsx";
 const TrainIntro = ({ images, startRect, onDone, heroScale = 7 }) => {
   const travel = 1200;       
   const heroPop = 820;       
@@ -409,6 +410,7 @@ const Gallery = () => {
           </div>
         )}
       </div>
+      <Footer/>
     </>
   );
 };
