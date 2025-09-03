@@ -41,7 +41,7 @@ function Team() {
         <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Mohit Dhaka"
           title="Software Engineer"
-          handle="Mayank babu"
+          handle="ENTER NAME"
           status="Online"
           contactText="Contact Me"
           avatarUrl={city3}
@@ -53,7 +53,7 @@ function Team() {
          <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Mayank Dhaka"
           title="Software Engineer"
-          handle="Mayank babu"
+          handle="ENTER NAME"
           status="Online"
           contactText="Contact Me"
           avatarUrl={city3}
@@ -65,7 +65,7 @@ function Team() {
          <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Afridi"
           title="Software Engineer"
-          handle="Mayank babu"
+          handle="ENTER NAME"
           status="Online"
           contactText="Contact Me"
           avatarUrl={city3}
@@ -77,7 +77,7 @@ function Team() {
          <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Anuj Kumar Sharma"
           title="Software Engineer"
-          handle="Mayank babu"
+          handle="ENTER NAME"
           status="Online"
           contactText="Contact Me"
           avatarUrl={city3}
@@ -89,7 +89,7 @@ function Team() {
          <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Javi A. Torres"
           title="Software Engineer"
-          handle="Mayank babu"
+          handle="ENTER NAME"
           status="Online"
           contactText="Contact Me"
           avatarUrl={city3}
@@ -101,7 +101,7 @@ function Team() {
          <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Javi A. Torres"
           title="Software Engineer"
-          handle="Mayank babu"
+          handle="ENTER NAME"
           status="Online"
           contactText="Contact Me"
           avatarUrl={city3}
@@ -113,7 +113,7 @@ function Team() {
          <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Javi A. Torres"
           title="Software Engineer"
-          handle="Mayank babu"
+          handle="ENTER NAME"
           status="Online"
           contactText="Contact Me"
           avatarUrl={city3}
@@ -125,7 +125,7 @@ function Team() {
           <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Javi A. Torres"
           title="Software Engineer"
-          handle="Mayank babu"
+          handle="ENTER NAME"
           status="Online"
           contactText="Contact Me"
           avatarUrl={city3}
@@ -137,7 +137,7 @@ function Team() {
           <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
           name="Javi A. Torres"
           title="Software Engineer"
-          handle="Mayank babu"
+          handle="ENTER NAME"
           status="Online"
           contactText="Contact Me"
           avatarUrl={city3}

@@ -212,10 +212,10 @@ const Gallery = () => {
     () => [
       {
         id: "cardUno",
-        title: "COMPETITIVE PROGRAMMING",
+        title: "TECHNICAL AKIRTI",
         icon: "globe-outline",
         bg: "linear-gradient(180deg, var(--gx-red) 0%, var(--vibrant-purple) 100%)",
-        desc: "Contests, algorithms, and speed of thought.",
+        desc: "DSA SE-TE-BE, SOLVEX , and speed of thought.",
         images: [
           "https://images.unsplash.com/photo-1526498460520-4c246339dccb?q=80&w=2070&auto=format&fit=crop",
           "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop",
@@ -227,7 +227,7 @@ const Gallery = () => {
       },
       {
         id: "cardDos",
-        title: "WEB DEVELOPMENT",
+        title: "SOLUTIONS",
         icon: "diamond-outline",
         bg: "linear-gradient(180deg, #00d1ff 0%, var(--gx-red) 100%)",
         desc: "Beautiful UIs, APIs, frameworks, and tools.",
@@ -242,7 +242,7 @@ const Gallery = () => {
       },
       {
         id: "cardTres",
-        title: "ARTIFICIAL INTELLIGENCE",
+        title: "FUN AND EVENTS",
         icon: "rocket-outline",
         bg: "linear-gradient(180deg, var(--vibrant-purple) 0%, #00e9e9 100%)",
         desc: "Models, agents, and the future of automation.",
