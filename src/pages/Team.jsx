@@ -39,7 +39,7 @@ function Team() {
 
       <div className="flex flex-wrap justify-center gap-5 p-5">
         <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
-          name="Javi A. Torres"
+          name="Mohit Dhaka"
           title="Software Engineer"
           handle="Mayank babu"
           status="Online"
@@ -51,7 +51,7 @@ function Team() {
           onContactClick={() => console.log("Contact clicked")}
         />
          <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
-          name="Javi A. Torres"
+          name="Mayank Dhaka"
           title="Software Engineer"
           handle="Mayank babu"
           status="Online"
@@ -63,7 +63,7 @@ function Team() {
           onContactClick={() => console.log("Contact clicked")}
         />
          <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
-          name="Javi A. Torres"
+          name="Afridi"
           title="Software Engineer"
           handle="Mayank babu"
           status="Online"
@@ -75,7 +75,7 @@ function Team() {
           onContactClick={() => console.log("Contact clicked")}
         />
          <ProfileCard className="mt-40 ml-10 mb-7 rounded-full"
-          name="Javi A. Torres"
+          name="Anuj Kumar Sharma"
           title="Software Engineer"
           handle="Mayank babu"
           status="Online"
