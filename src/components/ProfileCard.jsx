@@ -2,6 +2,7 @@ import React, { useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useTilt } from './UseTilt'; // We'll create this custom hook
 import '../ProfileCard.css';
+import { motion } from "framer-motion";
 
 // Default values and constants
 const DEFAULT_AVATAR = 'https://via.placeholder.com/300';
@@ -29,58 +30,63 @@ const ProfileCardComponent = ({
   }), []);
 
   return (
-    <div 
-      ref={cardRef} 
-      className={`pc-card-wrapper ${className}`.trim()} 
-      style={cardStyle}
-      {...wrapperProps} // Props from the hook (event handlers, style)
-    >
-      <section className="pc-card">
-        <div className="pc-inside">
-          {/* These elements are for the holographic effect */}
-          <div className="pc-shine" style={shineStyle} />
-          <div className="pc-glare" style={glareStyle} />
+   <motion.div
+  ref={cardRef}
+  className={`pc-card-wrapper ${className}`.trim()}
+  style={cardStyle}
+  {...wrapperProps}
+  initial={{ opacity: 0, y: 50, scale: 0.9 }} // start hidden
+  whileInView={{ opacity: 1, y: 0, scale: 1 }} // animate in
+  transition={{ duration: 0.8, ease: "easeOut" }}
+  viewport={{ once: false, amount: 0.2 }} // triggers when 20% in view
+>
+  <section className="pc-card">
+    <div className="pc-inside">
+      {/* Holographic effect layers */}
+      <div className="pc-shine" style={shineStyle} />
+      <div className="pc-glare" style={glareStyle} />
 
-          <div className="pc-content">
-            <div className="pc-details">
-              <h3>{name}</h3>
-              <p>{title}</p>
-            </div>
-            
-            <div className="pc-avatar-container">
+      <div className="pc-content">
+        <div className="pc-details">
+          <h3>{name}</h3>
+          <p>{title}</p>
+        </div>
+
+        <div className="pc-avatar-container">
+          <img
+            className="pc-avatar"
+            src={avatarUrl}
+            alt={`${name}'s avatar`}
+            loading="lazy"
+          />
+        </div>
+
+        <div className="pc-user-info-bar">
+          <div className="pc-user-details">
+            <div className="pc-mini-avatar">
               <img
-                className="pc-avatar"
                 src={avatarUrl}
-                alt={`${name}'s avatar`}
+                alt={`${name}'s mini avatar`}
                 loading="lazy"
               />
             </div>
-
-            <div className="pc-user-info-bar">
-              <div className="pc-user-details">
-                <div className="pc-mini-avatar">
-                  <img
-                    src={avatarUrl}
-                    alt={`${name}'s mini avatar`}
-                    loading="lazy"
-                  />
-                </div>
-                <div className="pc-user-text">
-                  <div className="pc-handle">@{handle}</div>
-                  <div className="pc-status">{status}</div>
-                </div>
-              </div>
-              
-              {onContactClick && (
-                <button className="pc-contact-btn" onClick={onContactClick}>
-                  {contactText}
-                </button>
-              )}
+            <div className="pc-user-text">
+              <div className="pc-handle">@{handle}</div>
+              <div className="pc-status">{status}</div>
             </div>
           </div>
+
+          {onContactClick && (
+            <button className="pc-contact-btn" onClick={onContactClick}>
+              {contactText}
+            </button>
+          )}
         </div>
-      </section>
+      </div>
     </div>
+  </section>
+</motion.div>
+
   );
 };
 
