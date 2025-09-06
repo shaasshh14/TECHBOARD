@@ -2,7 +2,7 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
 import UpcomingEvents from "./components/UpcomingEvents";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
@@ -14,14 +14,31 @@ import "./index.css";
 import Particles from "@tsparticles/react";
 import ParticlesComponent from "./components/Particles";
 import AnimatedBackground from "./components/AnimatedBackground";
+import BootLoader from "./components/BootLoader.jsx"; 
+
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     AOS.init({
       duration: 1500,
       once: true,
     });
-  });
+  }, []);
+
+
+  if (loading) {
+   
+    return <BootLoader onComplete={() => setLoading(false)} />;
+  }
+
+  // useEffect(() => {
+  //   AOS.init({
+  //     duration: 1500,
+  //     once: true,
+  //   });
+  // });
   return (
     <div className="App">
       <div className="fixed inset-0 -z-50">
