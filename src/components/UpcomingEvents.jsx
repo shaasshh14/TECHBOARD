@@ -41,7 +41,7 @@ const UpcomingEvents = () => {
 
                 .events-section {
                     font-family: 'Poppins', sans-serif;
-                    background-color: #121212; /* Matches your dark background */
+                    background-color:   /* Matches your dark background */
                     padding: 100px 5%;
                     display: flex;
                     flex-direction: column;

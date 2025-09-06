@@ -1249,3 +1249,17 @@ font-size: 0.85rem;
     background-position: 0% 50%;
   }
 }
+/* @keyframes spin-center {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-center {
+  animation: spin-center 1s linear infinite;
+  transform-origin: center center;  
+} */
+

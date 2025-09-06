@@ -17,11 +17,15 @@ const HeroSection = () => {
   // each child element animation - This defines how each item animates
   const item = {
     hidden: { opacity: 0, y: 90 }, // Start invisible and 90px down
-    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, duration: 0.8 } }, // End visible and at original position
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 80, duration: 0.8 },
+    }, // End visible and at original position
   };
 
   return (
-    <main className="flex lg:mt-20 flex-col lg:flex-row items-center justify-between min-h-[calc(90vh-6rem)] relative bg-black overflow-hidden">
+    <main className="flex lg:mt-20 flex-col lg:flex-row items-center justify-between min-h-[calc(90vh-6rem)] relative  overflow-hidden">
       {/* LEFT SECTION */}
       {/* This is the ANIMATION CONTAINER */}
       <motion.div
@@ -35,7 +39,33 @@ const HeroSection = () => {
           variants={item}
           className="text-purple-400 font-bold text-sm mb-6 tracking-widest uppercase"
         >
-          THIS IS DASH
+          {/* THIS IS DASH */}
+          <div className="flex gap-2 justify-center items-center -ml-80">
+            <div
+              className="this"
+              data-aos="fade-down"
+              data-aos-easing="linear"
+              data-aos-duration="2000"
+            >
+              THIS
+            </div>
+            <div
+              className="this"
+              data-aos="fade-down"
+              data-aos-easing="linear"
+              data-aos-duration="2300"
+            >
+              IS
+            </div>
+            <div
+              className="this"
+              data-aos="fade-down"
+              data-aos-easing="linear"
+              data-aos-duration="2600"
+            >
+              TECHBOARD
+            </div>
+          </div>
         </motion.p>
 
         {/* --- ANIMATED ITEM 2 --- */}
@@ -47,7 +77,11 @@ const HeroSection = () => {
             <span className="relative z-10 bg-lime-300 py-1 sm:py-2 px-4 -skew-x-6 inline-block text-black">
               ALMOST
             </span>
-            <span className="absolute -top-4 -right-4 text-lime-300 text-3xl z-20">
+
+            {/* <span className="absolute -top-4 -right-4 text-lime-300 text-6xl z-20 animate-spin-slow">
+              *
+            </span> */}
+            <span className="absolute -top-4 -right-4 text-lime-300 text-6xl z-20 animate-spin-center">
               *
             </span>
           </span>
