@@ -1,7 +1,7 @@
 // src/App.jsx
 import AOS from "aos";
 import "aos/dist/aos.css";
-
+import UpcomingEvents from "./components/UpcomingEvents";
 import { useEffect } from "react";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
@@ -24,15 +24,15 @@ function App() {
   });
   return (
     <div className="App">
-      <div className="fixed inset-0 -z-10">
-        <AnimatedBackground />
+      <div className="fixed inset-0 -z-50">
+        <AnimatedBackground/>
       </div>
       <Header />
       <main>
         <HeroSection />
         <MarqueeSection />
         <AboutSection />
-        <SpeakersSection />
+        <UpcomingEvents/>
         <FAQSection />
         <FooterCTA/>
       </main>
