@@ -4,6 +4,7 @@ import { ContactSection, styles } from "../components/ContactSection";
 import ParticlesComponent from "../components/Particles.jsx";
 import FooterCTA from "../components/FooterCTA.jsx";
 import Loader from "../components/Loader.jsx";
+import AnimatedBackground from "../components/AnimatedBackground.jsx";
 
 export const Contact = () => {
   // State for loader visibility
@@ -30,7 +31,10 @@ export const Contact = () => {
   // After loading is done, show actual page
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <ParticlesComponent id="particles" />
+      {/* <ParticlesComponent id="particles" /> */}
+      <div className="fixed inset-0 -z-10">
+        <AnimatedBackground />
+      </div>
       <Header />
       <style>{styles}</style>
       <ContactSection />

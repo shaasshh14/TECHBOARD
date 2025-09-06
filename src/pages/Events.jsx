@@ -3,6 +3,7 @@ import Header from "../components/Header.jsx";
 import SpeakersSection from "../components/SpeakersSection.jsx";
 import Footer from "../components/FooterCTA.jsx";
 import Loader from "../components/Loader.jsx";
+import AnimatedBackground from "../components/AnimatedBackground.jsx";
 
 function Events() {
   const [loading, setLoading] = useState(true);
@@ -27,6 +28,9 @@ function Events() {
 
   return (
     <div>
+      <div className="fixed inset-0 -z-10">
+        <AnimatedBackground />
+      </div>
       <Header />
     <SpeakersSection></SpeakersSection>
       <div style={{ padding: "2rem" }}>

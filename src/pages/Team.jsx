@@ -6,6 +6,7 @@ import ProfileCard from "../components/ProfileCard.jsx";
 import Loader from "../components/Loader.jsx";
 import city3 from "./city3.jpg";
 import { motion } from "framer-motion";
+import AnimatedBackground from "../components/AnimatedBackground.jsx";
 
 
 function Team() {
@@ -30,7 +31,9 @@ function Team() {
 
   return (
     <div>
-      <ParticlesComponent id="particles" />
+      <div className="fixed inset-0 -z-10">
+        <AnimatedBackground />
+      </div>
       <Header />
 
       {/* Team Section */}

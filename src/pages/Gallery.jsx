@@ -4,6 +4,7 @@ import VanillaTilt from "vanilla-tilt";
 import ParticlesComponent from "../components/Particles.jsx";
 import Loader from "../components/Loader.jsx";
 import Footer from "../components/FooterCTA.jsx";
+import AnimatedBackground from "../components/AnimatedBackground.jsx";
 const TrainIntro = ({ images, startRect, onDone, heroScale = 7 }) => {
   const travel = 1200;       
   const heroPop = 820;       
@@ -344,7 +345,9 @@ const Gallery = () => {
 
   return (
     <>
-    <ParticlesComponent />
+    <div className="fixed inset-0 -z-10">
+        <AnimatedBackground />
+      </div>
       <Header />
 
 

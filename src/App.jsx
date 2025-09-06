@@ -13,6 +13,7 @@ import FooterCTA from "./components/FooterCTA";
 import "./index.css";
 import Particles from "@tsparticles/react";
 import ParticlesComponent from "./components/Particles";
+import AnimatedBackground from "./components/AnimatedBackground";
 
 function App() {
   useEffect(() => {
@@ -23,7 +24,9 @@ function App() {
   });
   return (
     <div className="App">
-      <ParticlesComponent id="particles"/>
+      <div className="fixed inset-0 -z-10">
+        <AnimatedBackground />
+      </div>
       <Header />
       <main>
         <HeroSection />
