@@ -15,7 +15,7 @@ import Particles from "@tsparticles/react";
 import ParticlesComponent from "./components/Particles";
 import AnimatedBackground from "./components/AnimatedBackground";
 import BootLoader from "./components/BootLoader.jsx"; 
-
+import TechLoader from "./components/Techloader.jsx";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -30,7 +30,7 @@ function App() {
 
   if (loading) {
    
-    return <BootLoader onComplete={() => setLoading(false)} />;
+    return <TechLoader onComplete={() => setLoading(false)} />;
   }
 
   // useEffect(() => {

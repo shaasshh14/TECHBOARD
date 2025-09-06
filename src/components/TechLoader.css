@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Bangers&family=Fredericka+the+Great&family=Indie+Flower&family=Kirang+Haerang&family=Rye&display=swap');
+
+/* Full-screen loader container */
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--base-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* TECH letters container */
+.loki {
+  font-size: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center letters */
+  gap: 2rem; /* Space between letters */
+  flex-wrap: wrap; /* Responsive wrap for small screens */
+}
+
+/* Individual letter styles */
+.letter {
+  text-shadow: 0 0 0.4em #ffffffda, 0 0 0.5em #ffffffda, 0 0 0.25em #ffffffda;
+  mix-blend-mode: screen;
+  transition: font-family 0.3s ease;
+}
+
+/* Progress counter */
+.loader {
+  margin-top: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: opacity 1.5s ease; /* smooth fade-out */
+}
+
+/* Hide loader with fade */
+.loader.hide-loader {
+  opacity: 0;
+  pointer-events: none;
+}
