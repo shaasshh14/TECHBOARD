@@ -1,168 +1,182 @@
-// src/pages/Timeline.jsx
-import React, { useState, useRef, useEffect } from "react";
-import { useSpring, animated } from "@react-spring/web";
-import { useInView } from "react-intersection-observer";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
-// Data for the timeline events
-const timelineEvents = [
+// --- EVENT DATA ---
+const timelineEventsData = [
   {
-    year: "1936",
-    title: "Ski Boots With Laces",
+    year: '2022',
+    title: 'Techboard Founded',
     description:
-      "Hans Wagner's nephew, Sepp Wagner, who is later to become managing director, starts in his uncle's factory and learns the art of handcrafted shoemaking...",
-    image: "https://placehold.co/400x300/4F46E5/ffffff?text=1936",
+      'The Techboard club was established by a group of passionate cadets to foster a culture of technological innovation and collaboration within the college.',
+    images: [
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&q=80',
+      'https://images.unsplash.com/photo-1580894732444-8ec539b7f58a?w=500&q=80',
+    ],
   },
   {
-    year: "1964",
-    title: "High Alpine",
+    year: '2023',
+    title: 'Code Command Hackathon',
     description:
-      "Sepp Wagner produces the first ever ski boot for ski touring - complete with inner boot and buckle closure...",
-    image: "https://placehold.co/400x300/F59E0B/ffffff?text=1964",
+      'Our inaugural 24-hour hackathon challenged cadets to develop solutions for modern military and civic problems, showcasing incredible talent and creativity.',
+    images: [
+      'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500&q=80',
+    ],
   },
   {
-    year: "1996",
-    title: "High-Flyers",
+    year: '2024',
+    title: 'Cybersecurity Workshop',
     description:
-      "Hans-Georg develops the first ever specialist paragliding boot, again with Sepp Gschwendtner...",
-    image: "https://placehold.co/400x300/22C55E/ffffff?text=1996",
-  },
-  {
-    year: "2013",
-    title: "More Toe Room",
-    description:
-      "With its unique Bunion last, Hanwag starts making shoes for people with bunions...",
-    image: "https://placehold.co/400x300/EF4444/ffffff?text=2013",
-  },
-  {
-    year: "2021",
-    title: "Big Birthday",
-    description:
-      "In Hanwag's 100th anniversary year, the company plans to make some 400,000 pairs of boots...",
-    image: "https://placehold.co/400x300/6366F1/ffffff?text=2021",
+      'In collaboration with industry experts, we hosted a hands-on workshop covering the fundamentals of cybersecurity and ethical hacking for all members.',
+    images: [
+      'https://images.unsplash.com/photo-1544890225-2fde0e66ea08?w=500&q=80',
+      'https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?w=500&q=80',
+    ],
   },
 ];
 
-// TimelineCard component
-const TimelineCard = ({ event, isLeft }) => {
-  const [ref, inView] = useInView({
-    triggerOnce: false,
-    threshold: 0.2,
+// --- Animation Variants ---
+const containerVariant = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.2 },
+  },
+};
+
+const itemVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: 'easeOut' },
+  },
+};
+
+// --- Timeline Item Component ---
+const TimelineItem = ({ event, index }) => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
   });
 
-  // animation for each card
-  const props = useSpring({
-    opacity: inView ? 1 : 0,
-    transform: inView
-      ? "translateY(0px) scale(1)"
-      : "translateY(60px) scale(0.95)",
-    config: { mass: 1, tension: 220, friction: 30 },
-    delay: isLeft ? 100 : 200, // stagger left/right
-  });
+  const isOdd = index % 2 !== 0;
 
   return (
-    <div
+    <section
       ref={ref}
-      className={`relative my-8 md:my-16 flex ${
-        isLeft ? "md:justify-start" : "md:justify-end"
-      }`}
+      className="snap-start min-h-screen w-full flex items-center justify-center p-10 relative"
     >
-      <div
-        className={`md:w-1/2 flex items-center ${
-          isLeft ? "md:pr-16" : "md:pl-16"
+      {/* Timeline Dot */}
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={inView ? { scale: 1 } : { scale: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        className="w-5 h-5 bg-white rounded-full absolute left-1/2 -translate-x-1/2 z-10 shadow-lg"
+      />
+
+      {/* Event Content */}
+      <motion.div
+        variants={containerVariant}
+        initial="hidden"
+        animate={inView ? 'visible' : 'hidden'}
+        className={`w-full max-w-5xl mx-auto flex items-center z-20 ${
+          isOdd ? 'flex-row-reverse' : 'flex-row'
         }`}
       >
-        <animated.div
-          style={props}
-          className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 w-full"
-        >
+        {/* Text Section */}
+        <div className="w-1/2 flex justify-center">
           <div
-            className={`flex flex-col ${
-              isLeft ? "md:flex-row" : "md:flex-row-reverse"
-            } items-center`}
+            className={`w-full max-w-sm ${
+              isOdd ? 'text-left' : 'text-right'
+            }`}
           >
-            <div className="w-full md:w-1/2 p-2">
-              <img
-                src={event.image}
-                alt={event.title}
-                className="w-full h-auto rounded-lg mb-4 md:mb-0 transform hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div className="w-full md:w-1/2 p-2">
-              <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-2">
-                {event.title}
-              </h3>
-              <p className="text-sm md:text-base text-gray-600">
-                {event.description}
-              </p>
-            </div>
+            <motion.h3
+              variants={itemVariant}
+              className="text-4xl font-bold text-white mb-4"
+            >
+              {event.title}
+            </motion.h3>
+            <motion.p
+              variants={itemVariant}
+              className="text-gray-300 mb-6 leading-relaxed"
+            >
+              {event.description}
+            </motion.p>
+            <motion.div
+              variants={itemVariant}
+              className={`flex flex-wrap gap-4 ${
+                isOdd ? 'justify-start' : 'justify-end'
+              }`}
+            >
+              {event.images.map((img, i) => (
+                <img
+                  key={i}
+                  src={img}
+                  alt={`${event.title} ${i + 1}`}
+                  className="w-40 h-auto rounded-md shadow-lg border-4 border-white/20"
+                />
+              ))}
+            </motion.div>
           </div>
-        </animated.div>
-      </div>
-      {/* Red dot in center line */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-red-600 z-10"></div>
-    </div>
-  );
-};
-
-// Main Timeline component
-const Timeline = () => {
-  const [lineHeight, setLineHeight] = useState(0);
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (containerRef.current) {
-        const top = containerRef.current.getBoundingClientRect().top;
-        const totalHeight = containerRef.current.clientHeight;
-        const scrollPosition = window.innerHeight - top;
-        const progress = (scrollPosition / totalHeight) * 100;
-        setLineHeight(Math.min(Math.max(0, progress), 100));
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return (
-    <div className="min-h-screen font-sans">
-      <div className="container mx-auto py-12 md:py-16 px-4 md:px-0">
-        <h1 className="text-3xl md:text-5xl font-extrabold text-center  mb-8 md:mb-16">
-          100 Years of Hanwag
-        </h1>
-        <div
-          ref={containerRef}
-          className="relative md:flex md:flex-col items-center"
-        >
-          {/* Static gray line */}
-          <div className="hidden md:block absolute left-1/2 w-1 bg-red-200 h-full transform -translate-x-1/2 z-0"></div>
-          {/* Animated red line */}
-          <div
-            className="hidden md:block absolute left-1/2 w-1 bg-red-600 transform -translate-x-1/2 z-10 transition-all duration-300"
-            style={{ height: `${lineHeight}%` }}
-          ></div>
-
-          {timelineEvents.map((event, index) => (
-            <div key={index} className="relative w-full">
-              {/* Year labels */}
-              <div
-                className={`absolute hidden md:block top-1/2 -translate-y-1/2 text-7xl font-bold text-gray-300 transition-all duration-500 ${
-                  index % 2 === 0
-                    ? "left-1/2 -translate-x-[200px]"
-                    : "right-1/2 translate-x-[200px]"
-                }`}
-              >
-                {event.year}
-              </div>
-              <TimelineCard event={event} isLeft={index % 2 === 0} />
-            </div>
-          ))}
         </div>
+
+        {/* Year Section */}
+        <div className="w-1/2 flex justify-center">
+          <motion.div
+            variants={itemVariant}
+            className="text-8xl font-black text-white/20"
+          >
+            {event.year}
+          </motion.div>
+        </div>
+      </motion.div>
+    </section>
+  );
+};
+
+// --- Intro Section ---
+const IntroSection = () => (
+  <section className="snap-start min-h-screen flex flex-col items-center justify-center text-center p-8 bg-[#121212] text-white">
+    <h1 className="text-6xl sm:text-8xl font-extrabold tracking-wider">
+      Techboard Persents
+    </h1>
+    <p className="text-xl mt-4 opacity-80">
+      A Chronicle of Our Milestones and Achievements
+    </p>
+    <div className="mt-20 animate-bounce">
+      <svg
+        className="w-10 h-10 text-white"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </section>
+);
+
+// --- Main Events Page ---
+const Events = () => {
+  return (
+    <div className="bg-[#121212] font-serif h-screen w-full snap-y snap-mandatory overflow-y-scroll">
+      <IntroSection />
+
+      {/* Timeline Container */}
+      <div className="relative">
+        {/* Continuous Timeline Line */}
+        <div className="absolute top-0 left-1/2 w-1 -translate-x-1/2 h-full bg-white/20 z-0" />
+
+        {/* Render Timeline Events */}
+        {timelineEventsData.map((event, index) => (
+          <TimelineItem key={index} event={event} index={index} />
+        ))}
       </div>
     </div>
   );
 };
 
-export default Timeline;
+export default Events;
