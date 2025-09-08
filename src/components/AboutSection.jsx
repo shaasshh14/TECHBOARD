@@ -1,4 +1,3 @@
-// src/components/AboutSection.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { RobotSection } from "./RobotSection";
@@ -63,7 +62,7 @@ const AboutSection = () => {
           border-[#3a86ff] shadow-[0_0_25px_#3a86ff] 
           p-3 mt-6 md:p-5 
           grid gap-4
-          grid-cols-2 grid-rows-[80px_80px_auto_80px]
+          grid-cols-2 grid-rows-[auto_auto_auto_auto]
           md:grid-cols-[120px_1fr_1fr_120px] md:grid-rows-[120px_1fr_1fr_120px]
         "
       >
