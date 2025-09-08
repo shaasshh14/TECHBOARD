@@ -44,7 +44,7 @@ const Footer = () => {
               <div className="flex space-x-3">
                 {/* LinkedIn */}
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/company/ait-technical-board/posts/?feedView=all"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 bg-[#1a1a26] rounded-lg hover:bg-[#0077b5] transition"
@@ -64,7 +64,7 @@ const Footer = () => {
 
                 {/* Instagram */}
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/aittechnicalboard?igsh=dHdqejY2cWR0Njly"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 bg-[#1a1a26] rounded-lg hover:bg-pink-500 transition"
