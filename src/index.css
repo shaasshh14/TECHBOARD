@@ -442,6 +442,7 @@ section {
   padding: 20px;
   max-width: 1200px;
   margin: 40px auto;
+  background-color: transparent;
 }
 
 /* --- Title Wrapper --- */

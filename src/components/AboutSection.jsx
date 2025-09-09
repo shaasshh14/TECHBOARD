@@ -3,32 +3,32 @@ import { motion } from "framer-motion";
 import { RobotSection } from "./RobotSection";
 
 const AboutSection = () => {
-  const [isFixed, setIsFixed] = useState(false);
-  const sectionRef = useRef(null);
+  // const [isFixed, setIsFixed] = useState(false);
+  // const sectionRef = useRef(null);
 
-  // Sticky Robot logic
-  useEffect(() => {
-    const handleScroll = () => {
-      if (sectionRef.current) {
-        const triggerPoint = sectionRef.current.offsetTop;
-        const navbarHeightBuffer = 80;
-        if (window.scrollY > triggerPoint - navbarHeightBuffer) {
-          setIsFixed(true);
-        } else {
-          setIsFixed(false);
-        }
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // // Sticky Robot logic
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (sectionRef.current) {
+  //       const triggerPoint = sectionRef.current.offsetTop;
+  //       const navbarHeightBuffer = 80;
+  //       if (window.scrollY > triggerPoint - navbarHeightBuffer) {
+  //         setIsFixed(true);
+  //       } else {
+  //         setIsFixed(false);
+  //       }
+  //     }
+  //   };
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
 
   return (
     <div
       className="w-full flex flex-col items-center justify-center px-4 py-10 relative"
-      ref={sectionRef}
+      // ref={sectionRef}
     >
-      {/* Sticky Robot */}
+      {/* Sticky Robot
       <div
         className={`transition-all duration-300 ${
           isFixed ? "fixed top-24 left-6 z-20" : "absolute -left-16 top-10"
@@ -37,7 +37,7 @@ const AboutSection = () => {
         <div className="relative w-28 h-28 md:w-32 md:h-32">
           <RobotSection />
         </div>
-      </div>
+      </div> */}
 
       {/* Animated Heading */}
       <motion.h1
