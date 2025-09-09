@@ -53,7 +53,7 @@ const HeroSection = () => {
         >
           <span className="relative inline-block">
             <span className="relative z-10 bg-lime-300 py-1 sm:py-2 px-4 -skew-x-6 inline-block text-black rounded">
-              ALMOST
+              TECHBOARD
             </span>
             <span className="absolute -top-4 -right-4 text-lime-300 text-6xl z-20 animate-spin-center">
               *
@@ -63,7 +63,7 @@ const HeroSection = () => {
           <br />
           <span className="text-slate-300">BEST TECH</span>
           <br />
-          <span className="text-slate-300">COMPANY</span>
+          <span className="text-slate-300">CLUB EVER</span>
         </motion.h1>
       </motion.div>
        

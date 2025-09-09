@@ -1,8 +1,11 @@
+// src/pages/Timeline.jsx
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-// --- EVENT DATA ---
+// ===============================
+// Timeline Events Data
+// ===============================
 const timelineEventsData = [
   {
     year: "2022",
@@ -35,7 +38,9 @@ const timelineEventsData = [
   },
 ];
 
-// --- Animation Variants ---
+// ===============================
+// Animation Variants
+// ===============================
 const containerVariant = {
   hidden: {},
   visible: {
@@ -44,19 +49,21 @@ const containerVariant = {
 };
 
 const itemVariant = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 30 }, // starts slightly below with opacity 0
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { duration: 0.6, ease: "easeOut" },
   },
 };
 
-// --- Timeline Item Component ---
+// ===============================
+// Timeline Item Component
+// ===============================
 const TimelineItem = ({ event, index }) => {
   const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.5,
+    triggerOnce: false, // ❗ allows repeated animation
+    threshold: 0.3, // triggers when 30% of item is visible
   });
 
   const isOdd = index % 2 !== 0;
@@ -69,7 +76,7 @@ const TimelineItem = ({ event, index }) => {
       {/* Timeline Compass Point */}
       <motion.div
         initial={{ scale: 0 }}
-        animate={inView ? { scale: 1 } : { scale: 0 }}
+        animate={inView ? { scale: 1 } : { scale: 0 }} // Grows when visible, shrinks when hidden
         transition={{ duration: 0.5, delay: 0.3 }}
         className="absolute left-1/2 -translate-x-1/2 z-20"
       >
@@ -84,7 +91,7 @@ const TimelineItem = ({ event, index }) => {
       <motion.div
         variants={containerVariant}
         initial="hidden"
-        animate={inView ? "visible" : "hidden"}
+        animate={inView ? "visible" : "hidden"} // Animate in and out continuously
         className={`w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center z-20 ${
           isOdd ? "md:flex-row-reverse" : ""
         }`}
@@ -140,7 +147,9 @@ const TimelineItem = ({ event, index }) => {
   );
 };
 
-// --- Intro Section ---
+// ===============================
+// Intro Section Component
+// ===============================
 const IntroSection = () => (
   <section className="snap-start min-h-screen flex flex-col items-center justify-center text-center p-8 bg-[#121212] text-white">
     <h1 className="text-4xl sm:text-6xl md:text-8xl font-extrabold tracking-wider">
@@ -165,9 +174,13 @@ const IntroSection = () => (
   </section>
 );
 
-// --- Main Events Page ---
+// ===============================
+// Main Timeline Component
+// ===============================
 const Timeline = () => {
   const containerRef = useRef(null);
+
+  // Scroll progress for the vertical progress bar
   const { scrollYProgress } = useScroll({
     container: containerRef,
   });
@@ -179,20 +192,21 @@ const Timeline = () => {
       ref={containerRef}
       className="bg-[#121212] font-serif h-screen w-full snap-y snap-mandatory overflow-y-scroll relative"
     >
+      {/* Intro Section */}
       <IntroSection />
 
-      {/* Elementor-style Timeline Container */}
+      {/* Timeline Container */}
       <div className="relative">
-        {/* Static Timeline Background */}
-        <div className="elementor-element elementor-element-81e3cc7 e-con-full dm-bar-container e-flex e-con e-child absolute top-0 left-1/2 -translate-x-1/2 w-1 h-full bg-white/10 z-0">
+        {/* Vertical Timeline Line */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-full bg-white/10 z-0">
           {/* Progress Fill */}
           <motion.div
             style={{ height: lineHeight }}
-            className="elementor-element elementor-element-aef7743 e-con-full dm-progress-bar e-flex e-con e-child absolute top-0 left-0 w-full bg-white z-10 origin-top"
+            className="absolute top-0 left-0 w-full bg-white z-10 origin-top"
           />
         </div>
 
-        {/* Render Timeline Events */}
+        {/* Render Timeline Items */}
         {timelineEventsData.map((event, index) => (
           <TimelineItem key={index} event={event} index={index} />
         ))}
