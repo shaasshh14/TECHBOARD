@@ -1,23 +1,19 @@
+ 
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header.jsx";
-import ParticlesComponent from "../components/Particles.jsx";
 import Footer from "../components/FooterCTA.jsx";
-import ProfileCard from "../components/ProfileCard.jsx";
 import Loader from "../components/Loader.jsx";
-import city3 from "./city3.jpg";
-import { motion } from "framer-motion";
 import AnimatedBackground from "../components/AnimatedBackground.jsx";
-
+import NewProfileCard from "./NewProfileCard.jsx"; // ✅ NEW CARD
+import { motion } from "framer-motion";
 
 function Team() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Hide loader after 1.5s
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1500);
-
     return () => clearTimeout(timer);
   }, []);
 
@@ -31,130 +27,27 @@ function Team() {
 
   return (
     <div>
+      {/* Background */}
       <div className="fixed inset-0 -z-10">
         <AnimatedBackground />
       </div>
+
       <Header />
 
       {/* Team Section */}
-      <section className="px-6 py-16 ">
-         <motion.h1
-    className="second mb-20 font-extrabold"
-    initial={{ opacity: 0, y: 50 }}         // start hidden
-    whileInView={{ opacity: 1, y: 0 }}      // animate when in view
-    transition={{ duration: 1, ease: "easeOut" }}
-    viewport={{ once: false, amount: 0.3 }} // animate again if scrolled back
-  >
-    TEAM MEMBERS
-  </motion.h1>
-        <div
-          className=" 
-            grid 
-            gap-8
-            sm:grid-cols-1 
-            md:grid-cols-2 
-            lg:grid-cols-3 
-            xl:grid-cols-4
-            justify-items-center
-          "
+      <section className="px-6 py-16">
+         <div className="animated-heading-container">
+        <motion.div
+          className="heading-wrapper"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          viewport={{ once: false, amount: 0.3 }}
         >
-          <ProfileCard
-            name="Mohit Dhaka"
-            title="Software Engineer"
-            handle="ENTER NAME"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl={city3}
-            enableTilt={true}
-            onContactClick={() => console.log("Contact clicked")}
-          />
-          <ProfileCard
-            name="Mayank Dhaka"
-            title="Software Engineer"
-            handle="ENTER NAME"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl={city3}
-            enableTilt={true}
-            onContactClick={() => console.log("Contact clicked")}
-          />
-          <ProfileCard
-            name="Afridi"
-            title="Software Engineer"
-            handle="ENTER NAME"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl={city3}
-            enableTilt={true}
-            onContactClick={() => console.log("Contact clicked")}
-          />
-          <ProfileCard
-            name="Anuj Kumar Sharma"
-            title="Software Engineer"
-            handle="ENTER NAME"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl={city3}
-            enableTilt={true}
-            onContactClick={() => console.log("Contact clicked")}
-          />
-          <ProfileCard
-            name="Mohit Dhaka"
-            title="Software Engineer"
-            handle="ENTER NAME"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl={city3}
-            enableTilt={true}
-            onContactClick={() => console.log("Contact clicked")}
-          />
-          <ProfileCard
-            name="Mohit Dhaka"
-            title="Software Engineer"
-            handle="ENTER NAME"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl={city3}
-            enableTilt={true}
-            onContactClick={() => console.log("Contact clicked")}
-          />
-          <ProfileCard
-            name="Mohit Dhaka"
-            title="Software Engineer"
-            handle="ENTER NAME"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl={city3}
-            enableTilt={true}
-            onContactClick={() => console.log("Contact clicked")}
-          />
-          <ProfileCard
-            name="Mohit Dhaka"
-            title="Software Engineer"
-            handle="ENTER NAME"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl={city3}
-            enableTilt={true}
-            onContactClick={() => console.log("Contact clicked")}
-          />
-          {/* Add more cards here */}
-        </div>
-      </section>
+          <h1>TEAM MEMBERS</h1>
+        </motion.div>
+      </div>
 
-
-  {/* SE;S */}
-
-    <section className="px-6 py-16 ">
-      <motion.h1
-    className="second mb-20 font-extrabold"
-    initial={{ opacity: 0, y: 50 }}         // start hidden
-    whileInView={{ opacity: 1, y: 0 }}      // animate when in view
-    transition={{ duration: 1, ease: "easeOut" }}
-    viewport={{ once: false, amount: 0.3 }} // animate again if scrolled back
-  >
-    TEAM MEMBERS
-  </motion.h1>
         <div
           className="
             grid 
@@ -166,90 +59,148 @@ function Team() {
             justify-items-center
           "
         >
-          <ProfileCard
+          <NewProfileCard
             name="Mohit Dhaka"
             title="Software Engineer"
-            handle="ENTER NAME"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl={city3}
-            enableTilt={true}
-            onContactClick={() => console.log("Contact clicked")}
+            description="Passionate about coding and solving problems. Always learning!"
+            imageUrl="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
           />
-          <ProfileCard
+
+          <NewProfileCard
             name="Mayank Dhaka"
             title="Software Engineer"
-            handle="ENTER NAME"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl={city3}
-            enableTilt={true}
-            onContactClick={() => console.log("Contact clicked")}
+            description="Focused on web development and hackathons. Loves building products."
+            imageUrl="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
           />
-          <ProfileCard
+
+          <NewProfileCard
             name="Afridi"
             title="Software Engineer"
-            handle="ENTER NAME"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl={city3}
-            enableTilt={true}
-            onContactClick={() => console.log("Contact clicked")}
+            description="Dedicated to DSA, competitive programming, and aiming for Google."
+            imageUrl="https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg"
           />
-          <ProfileCard
+
+          <NewProfileCard
             name="Anuj Kumar Sharma"
             title="Software Engineer"
-            handle="ENTER NAME"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl={city3}
-            enableTilt={true}
-            onContactClick={() => console.log("Contact clicked")}
+            description="Enjoys problem-solving, system design, and teamwork."
+            imageUrl="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg"
           />
-          <ProfileCard
-            name="Mohit Dhaka"
-            title="Software Engineer"
-            handle="ENTER NAME"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl={city3}
-            enableTilt={true}
-            onContactClick={() => console.log("Contact clicked")}
+
+          {/* Extra cards */}
+          <NewProfileCard
+            name="Ravi Kumar"
+            title="Frontend Developer"
+            description="Creative designer and developer who loves UI/UX."
+            imageUrl="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg"
           />
-          <ProfileCard
-            name="Mohit Dhaka"
-            title="Software Engineer"
-            handle="ENTER NAME"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl={city3}
-            enableTilt={true}
-            onContactClick={() => console.log("Contact clicked")}
+
+          <NewProfileCard
+            name="Simran Kaur"
+            title="Backend Developer"
+            description="Specializes in APIs, databases, and scalable systems."
+            imageUrl="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
           />
-          <ProfileCard
-            name="Mohit Dhaka"
-            title="Software Engineer"
-            handle="ENTER NAME"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl={city3}
-            enableTilt={true}
-            onContactClick={() => console.log("Contact clicked")}
+
+          <NewProfileCard
+            name="Priya Sharma"
+            title="Fullstack Developer"
+            description="Enjoys working on both frontend and backend with equal passion."
+            imageUrl="https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg"
           />
-          <ProfileCard
-            name="Mohit Dhaka"
-            title="Software Engineer"
-            handle="ENTER NAME"
-            status="Online"
-            contactText="Contact Me"
-            avatarUrl={city3}
-            enableTilt={true}
-            onContactClick={() => console.log("Contact clicked")}
+
+          <NewProfileCard
+            name="Rahul Mehta"
+            title="AI/ML Engineer"
+            description="Exploring machine learning and building intelligent applications."
+            imageUrl="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg"
           />
-          {/* Add more cards here */}
         </div>
       </section>
+      
 
+  <section className="px-6 py-16">
+           <div className="animated-heading-container">
+        <motion.div
+          className="heading-wrapper"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          viewport={{ once: false, amount: 0.3 }}
+        >
+          <h1>DEVELOPER TEAM </h1>
+        </motion.div>
+      </div>
+
+        <div
+          className="
+            grid 
+            gap-8
+            sm:grid-cols-1 
+            md:grid-cols-2 
+            lg:grid-cols-3 
+            xl:grid-cols-4
+            justify-items-center
+          "
+        >
+          <NewProfileCard
+            name="Mohit Dhaka"
+            title="Software Engineer"
+            description="Passionate about coding and solving problems. Always learning!"
+            imageUrl="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
+          />
+
+          <NewProfileCard
+            name="Mayank Dhaka"
+            title="Software Engineer"
+            description="Focused on web development and hackathons. Loves building products."
+            imageUrl="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+          />
+
+          <NewProfileCard
+            name="Afridi"
+            title="Software Engineer"
+            description="Dedicated to DSA, competitive programming, and aiming for Google."
+            imageUrl="https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg"
+          />
+
+          <NewProfileCard
+            name="Anuj Kumar Sharma"
+            title="Software Engineer"
+            description="Enjoys problem-solving, system design, and teamwork."
+            imageUrl="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg"
+          />
+
+          {/* Extra cards */}
+          <NewProfileCard
+            name="Ravi Kumar"
+            title="Frontend Developer"
+            description="Creative designer and developer who loves UI/UX."
+            imageUrl="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg"
+          />
+
+          <NewProfileCard
+            name="Simran Kaur"
+            title="Backend Developer"
+            description="Specializes in APIs, databases, and scalable systems."
+            imageUrl="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+          />
+
+          <NewProfileCard
+            name="Priya Sharma"
+            title="Fullstack Developer"
+            description="Enjoys working on both frontend and backend with equal passion."
+            imageUrl="https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg"
+          />
+
+          <NewProfileCard
+            name="Rahul Mehta"
+            title="AI/ML Engineer"
+            description="Exploring machine learning and building intelligent applications."
+            imageUrl="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg"
+          />
+        </div>
+      </section>
 
       <Footer />
     </div>
