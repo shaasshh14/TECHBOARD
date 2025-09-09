@@ -6,10 +6,16 @@ import Footer from "../components/FooterCTA.jsx";
 import Loader from "../components/Loader.jsx";
 import AnimatedBackground from "../components/AnimatedBackground.jsx";
 import Timeline from "./Timeline.jsx";
+import AOS from "aos";
 
 function Events() {
   const [loading, setLoading] = useState(true);
-
+  useEffect(() => {
+    AOS.init({
+      duration: 1500,
+      once: true,
+    });
+  }, []);
   useEffect(() => {
     // Hide loader after ~1.5s
     const timer = setTimeout(() => {

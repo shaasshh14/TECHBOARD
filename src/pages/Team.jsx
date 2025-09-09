@@ -1,4 +1,3 @@
- 
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header.jsx";
 import Footer from "../components/FooterCTA.jsx";
@@ -6,9 +5,17 @@ import Loader from "../components/Loader.jsx";
 import AnimatedBackground from "../components/AnimatedBackground.jsx";
 import NewProfileCard from "./NewProfileCard.jsx"; // ✅ NEW CARD
 import { motion } from "framer-motion";
+import AOS from "aos";
 
 function Team() {
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1500,
+      once: true,
+    });
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -31,22 +38,21 @@ function Team() {
       <div className="fixed inset-0 -z-10">
         <AnimatedBackground />
       </div>
-
       <Header />
 
       {/* Team Section */}
       <section className="px-6 py-16">
-         <div className="animated-heading-container">
-        <motion.div
-          className="heading-wrapper"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          viewport={{ once: false, amount: 0.3 }}
-        >
-          <h1>TEAM MEMBERS</h1>
-        </motion.div>
-      </div>
+        <div className="animated-heading-container">
+          <motion.div
+            className="heading-wrapper"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            viewport={{ once: false, amount: 0.3 }}
+          >
+            <h1>TEAM MEMBERS</h1>
+          </motion.div>
+        </div>
 
         <div
           className="
@@ -117,20 +123,19 @@ function Team() {
           />
         </div>
       </section>
-      
 
-  <section className="px-6 py-16">
-           <div className="animated-heading-container">
-        <motion.div
-          className="heading-wrapper"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          viewport={{ once: false, amount: 0.3 }}
-        >
-          <h1>DEVELOPER TEAM </h1>
-        </motion.div>
-      </div>
+      <section className="px-6 py-16">
+        <div className="animated-heading-container">
+          <motion.div
+            className="heading-wrapper"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            viewport={{ once: false, amount: 0.3 }}
+          >
+            <h1>DEVELOPER TEAM </h1>
+          </motion.div>
+        </div>
 
         <div
           className="

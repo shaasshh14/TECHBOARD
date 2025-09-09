@@ -5,11 +5,13 @@ import ParticlesComponent from "../components/Particles.jsx";
 import Loader from "../components/Loader.jsx";
 import Footer from "../components/FooterCTA.jsx";
 import AnimatedBackground from "../components/AnimatedBackground.jsx";
+import AOS from "aos";
+
 const TrainIntro = ({ images, startRect, onDone, heroScale = 7 }) => {
-  const travel = 1200;       
-  const heroPop = 820;       
-  const streamStep = 110;    
-  const buffer = 320;        
+  const travel = 1200;
+  const heroPop = 820;
+  const streamStep = 110;
+  const buffer = 320;
 
   const [fading, setFading] = useState(false);
 
@@ -17,7 +19,6 @@ const TrainIntro = ({ images, startRect, onDone, heroScale = 7 }) => {
     const total =
       Math.max(travel + heroPop, (images.length - 1) * streamStep + travel) +
       buffer;
-
 
     const tFade = setTimeout(() => setFading(true), total - 260);
     const tDone = setTimeout(onDone, total);
@@ -30,15 +31,13 @@ const TrainIntro = ({ images, startRect, onDone, heroScale = 7 }) => {
   const vw = typeof window !== "undefined" ? window.innerWidth : 1280;
   const vh = typeof window !== "undefined" ? window.innerHeight : 800;
 
-
   const thumbH = Math.round(Math.min(60, Math.max(44, vw * 0.07)));
   const thumbW = Math.round((16 / 9) * thumbH);
   const gap = Math.round(Math.min(16, Math.max(8, vw * 0.022)));
 
-
   const totalW = images.length * thumbW + (images.length - 1) * gap;
   const navStartX = (vw - totalW) / 2 + thumbW / 2;
-  const endY = vh - (thumbH + 30); 
+  const endY = vh - (thumbH + 30);
 
   const startX = startRect.left + startRect.width / 2;
   const startY = startRect.top + startRect.height / 2;
@@ -63,10 +62,9 @@ const TrainIntro = ({ images, startRect, onDone, heroScale = 7 }) => {
       endX,
       endY,
       thumbW,
-      thumbH
+      thumbH,
     };
   });
-
 
   const dx = centerX - (clones[0]?.endX ?? centerX);
   const dy = centerY - (clones[0]?.endY ?? centerY);
@@ -85,10 +83,11 @@ const TrainIntro = ({ images, startRect, onDone, heroScale = 7 }) => {
               width: `${c.thumbW}px`,
               height: `${c.thumbH}px`,
               "--path": `path('${c.pathStr}')`,
-              animationDelay: i === 0 ? `0ms, ${travel + 100}ms` : `${c.delay}ms`,
+              animationDelay:
+                i === 0 ? `0ms, ${travel + 100}ms` : `${c.delay}ms`,
               "--hero-dx": `${dx}px`,
               "--hero-dy": `${dy}px`,
-              "--hero-scale": heroScale
+              "--hero-scale": heroScale,
             }}
           />
         ))}
@@ -97,8 +96,13 @@ const TrainIntro = ({ images, startRect, onDone, heroScale = 7 }) => {
   );
 };
 
-
-const ImageSlider = ({ images, onExit, otherCards, onLaunchOther, transitioning }) => {
+const ImageSlider = ({
+  images,
+  onExit,
+  otherCards,
+  onLaunchOther,
+  transitioning,
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isClarifying, setIsClarifying] = useState(false);
 
@@ -135,13 +139,18 @@ const ImageSlider = ({ images, onExit, otherCards, onLaunchOther, transitioning 
   }, [images]);
 
   return (
-    <div className={`image-slider-view ${transitioning ? "is-transitioning" : ""}`}>
+    <div
+      className={`image-slider-view ${transitioning ? "is-transitioning" : ""}`}
+    >
       {otherCards?.[0] && (
         <button
           className="edge-card left-edge"
           title={otherCards[0].title}
           onClick={(e) =>
-            onLaunchOther(otherCards[0].id, e.currentTarget.getBoundingClientRect())
+            onLaunchOther(
+              otherCards[0].id,
+              e.currentTarget.getBoundingClientRect()
+            )
           }
           style={{ backgroundImage: `url(${otherCards[0].images[0]})` }}
           aria-label={`Open ${otherCards[0].title}`}
@@ -152,7 +161,10 @@ const ImageSlider = ({ images, onExit, otherCards, onLaunchOther, transitioning 
           className="edge-card right-edge"
           title={otherCards[1].title}
           onClick={(e) =>
-            onLaunchOther(otherCards[1].id, e.currentTarget.getBoundingClientRect())
+            onLaunchOther(
+              otherCards[1].id,
+              e.currentTarget.getBoundingClientRect()
+            )
           }
           style={{ backgroundImage: `url(${otherCards[1].images[0]})` }}
           aria-label={`Open ${otherCards[1].title}`}
@@ -164,7 +176,10 @@ const ImageSlider = ({ images, onExit, otherCards, onLaunchOther, transitioning 
       </button>
 
       <section className="slider__content">
-        <div className="slider-nav-area left" onClick={() => showSlide(currentIndex - 1)}>
+        <div
+          className="slider-nav-area left"
+          onClick={() => showSlide(currentIndex - 1)}
+        >
           <div className="nav-arrow">‹</div>
         </div>
 
@@ -176,7 +191,10 @@ const ImageSlider = ({ images, onExit, otherCards, onLaunchOther, transitioning 
           />
         </main>
 
-        <div className="slider-nav-area right" onClick={() => showSlide(currentIndex + 1)}>
+        <div
+          className="slider-nav-area right"
+          onClick={() => showSlide(currentIndex + 1)}
+        >
           <div className="nav-arrow">›</div>
         </div>
       </section>
@@ -189,7 +207,11 @@ const ImageSlider = ({ images, onExit, otherCards, onLaunchOther, transitioning 
             aria-selected={currentIndex === index}
             onClick={() => showSlide(index)}
           >
-            <img className="thumbnail" src={imgSrc} alt={`Thumbnail ${index + 1}`} />
+            <img
+              className="thumbnail"
+              src={imgSrc}
+              alt={`Thumbnail ${index + 1}`}
+            />
           </button>
         ))}
       </nav>
@@ -197,18 +219,20 @@ const ImageSlider = ({ images, onExit, otherCards, onLaunchOther, transitioning 
   );
 };
 
-
 const Gallery = () => {
-  
   const [selectedCardId, setSelectedCardId] = useState(null);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1500,
+      once: true,
+    });
+  }, []);
 
   const cardRefs = useRef({});
 
-
   const [train, setTrain] = useState(null);
   const [transitioning, setTransitioning] = useState(false);
-
 
   const cards = useMemo(
     () => [
@@ -224,8 +248,8 @@ const Gallery = () => {
           "https://images.unsplash.com/photo-1550063873-ab792950096b?q=80&w=2070&auto=format&fit=crop",
           "https://images.unsplash.com/photo-1517694712202-1428bc38a5a5?q=80&w=2070&auto=format&fit=crop",
           "https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=1931&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1571171637578-41bc2155f41f?q=80&w=2070&auto=format&fit=crop"
-        ]
+          "https://images.unsplash.com/photo-1571171637578-41bc2155f41f?q=80&w=2070&auto=format&fit=crop",
+        ],
       },
       {
         id: "cardDos",
@@ -239,8 +263,8 @@ const Gallery = () => {
           "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
           "https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?q=80&w=2070&auto=format&fit=crop",
           "https://images.unsplash.com/photo-1522252234503-e356532cafd5?q=80&w=1925&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1618335829737-2228915674e0?q=80&w=1948&auto=format&fit=crop"
-        ]
+          "https://images.unsplash.com/photo-1618335829737-2228915674e0?q=80&w=1948&auto=format&fit=crop",
+        ],
       },
       {
         id: "cardTres",
@@ -254,9 +278,9 @@ const Gallery = () => {
           "https://images.unsplash.com/photo-1620712943543-2858200f7225?q=80&w=2070&auto=format&fit=crop",
           "https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=2070&auto=format&fit=crop",
           "https://plus.unsplash.com/premium_photo-1683121710572-7723bd2e235d?q=80&w=2070&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1535378620166-273708d44e4c?q=80&w=1935&auto=format&fit=crop"
-        ]
-      }
+          "https://images.unsplash.com/photo-1535378620166-273708d44e4c?q=80&w=1935&auto=format&fit=crop",
+        ],
+      },
     ],
     []
   );
@@ -283,7 +307,6 @@ const Gallery = () => {
     triggerTrainTo(card.id, rect);
   };
 
-
   useEffect(() => {
     if (selectedCardId) return;
     const els = cards.map((card) => cardRefs.current[card.id]).filter(Boolean);
@@ -301,7 +324,7 @@ const Gallery = () => {
           perspective: 1400,
           scale: 1.01,
           gyroscope: false,
-          reset: true
+          reset: true,
         });
       }
     });
@@ -320,13 +343,14 @@ const Gallery = () => {
     if (!train || train.id === card.id) return "";
     const others = cards.filter((c) => c.id !== train.id);
     const idx = others.findIndex((c) => c.id === card.id);
-    return idx === 0 ? "edge-card left-edge initial-circle" : "edge-card right-edge initial-circle";
+    return idx === 0
+      ? "edge-card left-edge initial-circle"
+      : "edge-card right-edge initial-circle";
   };
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1500);
@@ -335,23 +359,25 @@ const Gallery = () => {
   }, []);
 
   if (loading) {
-
     return (
       <div className="flex items-center justify-center min-h-screen bg-black">
-        <Loader/>
+        <Loader />
       </div>
     );
   }
 
   return (
     <>
-    <div className="fixed inset-0 -z-10">
+      <div className="fixed inset-0 -z-10">
         <AnimatedBackground />
       </div>
       <Header />
 
-
-      <div className={`gallery-v2-container ${selectedCardId ? "gallery-v2-active" : ""}`}>
+      <div
+        className={`gallery-v2-container ${
+          selectedCardId ? "gallery-v2-active" : ""
+        }`}
+      >
         {!selectedCardId && (
           <div className={`gallery-initial-view ${train ? "launching" : ""}`}>
             {cards.map((card) => {
@@ -363,15 +389,15 @@ const Gallery = () => {
                   ref={(el) => {
                     cardRefs.current[card.id] = el;
                   }}
-                  className={`initial-card card-neo tilt-enabled ${isLaunching ? "is-launching" : ""} ${circleClass}`}
+                  className={`initial-card card-neo tilt-enabled ${
+                    isLaunching ? "is-launching" : ""
+                  } ${circleClass}`}
                   onClick={(e) => {
                     if (train) return;
                     handleCardClick(card, e);
                   }}
-
                   style={{ "--card-grad": card.bg }}
                 >
-
                   <div className="icon-scoop">
                     <div className="icon-badge">
                       <ion-icon name={card.icon}></ion-icon>
@@ -402,7 +428,11 @@ const Gallery = () => {
         )}
 
         {selectedCardId && selectedCardData && (
-          <div className={`gallery-main-view ${transitioning ? "transitioning" : ""} anuj`}>
+          <div
+            className={`gallery-main-view ${
+              transitioning ? "transitioning" : ""
+            } anuj`}
+          >
             <ImageSlider
               images={selectedCardData.images}
               onExit={() => setSelectedCardId(null)}
@@ -413,7 +443,7 @@ const Gallery = () => {
           </div>
         )}
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
