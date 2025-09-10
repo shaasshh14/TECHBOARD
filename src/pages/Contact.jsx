@@ -5,11 +5,19 @@ import ParticlesComponent from "../components/Particles.jsx";
 import FooterCTA from "../components/FooterCTA.jsx";
 import Loader from "../components/Loader.jsx";
 import AnimatedBackground from "../components/AnimatedBackground.jsx";
+import AOS from "aos";
 
 export const Contact = () => {
   // State for loader visibility
   const [loading, setLoading] = useState(true);
-
+ 
+   
+  useEffect(() => {
+    AOS.init({
+      duration: 1500,
+      once: true,
+    });
+  }, []);
   useEffect(() => {
     // Hide loader after 5-6 seconds
     const timer = setTimeout(() => {
