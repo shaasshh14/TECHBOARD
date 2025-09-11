@@ -69,10 +69,17 @@ body {
 }
 
 .site-header-new.scrolled {
-  background-color: rgba(26, 26, 29, 0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(26, 26, 29, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  max-width: 100%;           /* reduce width (you can adjust: 80%, 70% etc.) */
+  margin: 0 auto;           /* center it horizontally */
+  /* border-radius: 25px;      */
+  height: 10%;
+  padding: 0.8rem 2rem;     /*adjust padding so it looks balanced*/
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25); /* optional depth */
 }
+
 
 .header-logo {
   flex-shrink: 0; /* Prevents the logo from shrinking */
