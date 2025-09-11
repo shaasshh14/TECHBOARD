@@ -43,7 +43,9 @@ function Events() {
 
       <Header />
 
-      <Timeline />
+    <div className="hello mt-20">
+         <Timeline  />
+    </div>
 
       <Footer />
     </div>

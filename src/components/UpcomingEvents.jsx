@@ -58,7 +58,7 @@ const UpcomingEvents = () => {
 
         .events-section {
           font-family: 'Poppins', sans-serif;
-          background-color: #121212;
+
           padding: 100px 5%;
           display: flex;
           flex-direction: column;
@@ -226,3 +226,5 @@ const UpcomingEvents = () => {
 };
 
 export default UpcomingEvents;
+
+
