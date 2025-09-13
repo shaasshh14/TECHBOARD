@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
-import { RobotSection } from "./RobotSection";
+import React from "react";
 
 const UpcomingEvents = () => {
   const events = [
@@ -32,25 +31,6 @@ const UpcomingEvents = () => {
     },
   ];
 
-  const sectionRef = useRef(null);
-  const [positions, setPositions] = useState({ sectionTop: 0, sectionHeight: 0 });
-
-  // Get section position + height
-  useEffect(() => {
-    const updatePositions = () => {
-      if (sectionRef.current) {
-        setPositions({
-          sectionTop: sectionRef.current.offsetTop,
-          sectionHeight: sectionRef.current.offsetHeight,
-        });
-      }
-    };
-
-    updatePositions();
-    window.addEventListener("resize", updatePositions);
-    return () => window.removeEventListener("resize", updatePositions);
-  }, []);
-
   return (
     <>
       <style>{`
@@ -58,13 +38,11 @@ const UpcomingEvents = () => {
 
         .events-section {
           font-family: 'Poppins', sans-serif;
-
           padding: 100px 5%;
           display: flex;
           flex-direction: column;
           align-items: center;
           overflow: hidden;
-          position: relative; /* important for robot absolute inside */
         }
 
         .section-header {
@@ -185,15 +163,7 @@ const UpcomingEvents = () => {
         }
       `}</style>
 
-      <section className="events-section" ref={sectionRef}>
-        {/* Robot: absolute inside section */}
-        <div className="absolute top-10 -left-5 z-20">
-          <RobotSection
-            sectionTop={positions.sectionTop}
-            sectionHeight={positions.sectionHeight}
-          />
-        </div>
-
+      <section className="events-section">
         <div className="section-header">
           <h1>
             Upcoming <span>Events</span>
@@ -226,5 +196,3 @@ const UpcomingEvents = () => {
 };
 
 export default UpcomingEvents;
-
-

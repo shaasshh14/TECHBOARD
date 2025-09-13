@@ -1,41 +1,49 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import emailjs from "emailjs-com";
 
-// The CSS for the border animation is included here as a style tag.
-// In a larger React project, this would typically go into a separate CSS file.
-export const styles = `
-  @keyframes animate-border-top {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-  }
-  @keyframes animate-border-right {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); }
-  }
-  @keyframes animate-border-bottom {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-  }
-  @keyframes animate-border-left {
-    0% { transform: translateY(100%); }
-    100% { transform: translateY(-100%); }
-  }
-
-  .animated-border .border-line-top { animation: animate-border-top 2s linear infinite; }
-  .animated-border .border-line-right { animation: animate-border-right 2s linear infinite; animation-delay: 1s; }
-  .animated-border .border-line-bottom { animation: animate-border-bottom 2s linear infinite; }
-  .animated-border .border-line-left { animation: animate-border-left 2s linear infinite; animation-delay: 1s; }
-`;
-
+// Animated border stuff you already have
+export const styles = `...`; // keep your existing styles
 export const AnimatedBorderSpan = ({ position, animationClass }) => (
   <span
     className={`absolute ${position} block w-full h-[2px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent ${animationClass}`}
   ></span>
 );
 
-
 export const ContactSection = () => {
+  const form = useRef();
+  const [isSending, setIsSending] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setIsSending(true);
+
+    emailjs
+      .sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        form.current,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
+      .then(
+        () => {
+          setIsSending(false);
+          setStatusMessage("✅ Message sent successfully!");
+          form.current.reset();
+        },
+        (error) => {
+          setIsSending(false);
+          setStatusMessage("❌ Failed to send. Please try again later.");
+          console.error(error);
+        }
+      );
+  };
+
   return (
-    <section id="contact" className=" text-white min-h-screen flex items-center justify-center py-16 px-6 font-sans bg-transparent">
+    <section
+      id="contact"
+      className="text-white min-h-screen flex items-center justify-center py-16 px-6 font-sans bg-transparent"
+    >
       <div className="max-w-4xl mx-auto w-full">
         {/* Section Heading */}
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
@@ -49,19 +57,30 @@ export const ContactSection = () => {
         <div className="relative bg-[#2a2a2d] rounded-2xl shadow-2xl p-px overflow-hidden animated-border">
           {/* Animated lines */}
           <AnimatedBorderSpan position="top-0 left-0" animationClass="border-line-top" />
-          <AnimatedBorderSpan position="top-0 right-0 transform rotate-90 origin-top-right" animationClass="border-line-right" />
+          <AnimatedBorderSpan
+            position="top-0 right-0 transform rotate-90 origin-top-right"
+            animationClass="border-line-right"
+          />
           <AnimatedBorderSpan position="bottom-0 right-0" animationClass="border-line-bottom" />
-          <AnimatedBorderSpan position="bottom-0 left-0 transform -rotate-90 origin-bottom-left" animationClass="border-line-left" />
+          <AnimatedBorderSpan
+            position="bottom-0 left-0 transform -rotate-90 origin-bottom-left"
+            animationClass="border-line-left"
+          />
 
           {/* Contact Form */}
-          <form className="relative bg-[#222225] p-8 md:p-12 rounded-[15px] space-y-8 z-10">
-            {/* Name Input with Floating Label */}
+          <form
+            ref={form}
+            onSubmit={sendEmail}
+            className="relative bg-[#222225] p-8 md:p-12 rounded-[15px] space-y-8 z-10"
+          >
+            {/* Name Input */}
             <div className="relative">
               <input
                 type="text"
+                name="user_name"
                 id="name"
                 className="block w-full px-4 py-3 rounded-lg bg-transparent border-2 border-gray-600 focus:border-indigo-500 text-white outline-none peer transition-all duration-300"
-                placeholder=" " 
+                placeholder=" "
                 required
               />
               <label
@@ -74,10 +93,11 @@ export const ContactSection = () => {
               </label>
             </div>
 
-            {/* Email Input with Floating Label */}
+            {/* Email Input */}
             <div className="relative">
               <input
                 type="email"
+                name="user_email"
                 id="email"
                 className="block w-full px-4 py-3 rounded-lg bg-transparent border-2 border-gray-600 focus:border-indigo-500 text-white outline-none peer transition-all duration-300"
                 placeholder=" "
@@ -93,9 +113,10 @@ export const ContactSection = () => {
               </label>
             </div>
 
-            {/* Message Textarea with Floating Label */}
+            {/* Message Textarea */}
             <div className="relative">
               <textarea
+                name="message"
                 id="message"
                 rows="5"
                 className="block w-full px-4 py-3 rounded-lg bg-transparent border-2 border-gray-600 focus:border-indigo-500 text-white outline-none peer transition-all duration-300 resize-none"
@@ -112,12 +133,19 @@ export const ContactSection = () => {
               </label>
             </div>
 
+            {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 ease-in-out text-white font-bold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50"
+              disabled={isSending}
+              className="w-full bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 ease-in-out text-white font-bold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 disabled:opacity-50"
             >
-              Send Message
+              {isSending ? "Sending..." : "Send Message"}
             </button>
+
+            {/* Status message */}
+            {statusMessage && (
+              <p className="text-center text-sm mt-4 text-gray-300">{statusMessage}</p>
+            )}
           </form>
         </div>
       </div>
