@@ -1,8 +1,40 @@
+import { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import Spline from "@splinetool/react-spline";
 
 const HeroSection = () => {
-  // This orchestrates the animation
+  const fullText = "THIS IS TECHBOARD";
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const typingSpeed = 150; // milliseconds
+  const deletingSpeed = 75; // milliseconds
+  const pauseTime = 1500; // milliseconds
+
+  useEffect(() => {
+    let ticker = setInterval(() => {
+      tick();
+    }, isDeleting ? deletingSpeed : typingSpeed);
+
+    return () => clearInterval(ticker);
+  }, [displayedText, isDeleting, loopNum]);
+
+  const tick = () => {
+    const text = fullText;
+    const updatedText = isDeleting
+      ? text.substring(0, displayedText.length - 1)
+      : text.substring(0, displayedText.length + 1);
+
+    setDisplayedText(updatedText);
+
+    if (!isDeleting && updatedText === text) {
+      setTimeout(() => setIsDeleting(true), pauseTime);
+    } else if (isDeleting && updatedText === "") {
+      setIsDeleting(false);
+      setLoopNum(loopNum + 1);
+    }
+  };
+
   const container = {
     hidden: { opacity: 0 },
     visible: {
@@ -14,7 +46,6 @@ const HeroSection = () => {
     },
   };
 
-  // This defines how each item animates
   const item = {
     hidden: { opacity: 0, y: 90 },
     visible: {
@@ -26,9 +57,6 @@ const HeroSection = () => {
 
   return (
     <main className="flex flex-col lg:flex-row items-center justify-center min-h-[calc(90vh-6rem)] relative overflow-hidden text-center lg:text-left pt-16">
-      {/* This div contains the text content. It will appear above the spline
-          on mobile and to the left of it on large screens.
-      */}
       <motion.div
         className="max-w-2xl px-6 lg:px-0 lg:ml-[8%] z-10 w-full lg:w-1/2 mt-8 lg:mt-0"
         variants={container}
@@ -39,14 +67,11 @@ const HeroSection = () => {
           variants={item}
           className="text-purple-400 font-bold text-sm mb-6 tracking-widest uppercase"
         >
-          {/* The flex container is now styled to match the "ALMOST" text */}
-          <div className="flex gap-2 justify-center lg:justify-start items-center relative z-10   py-1 sm:py-2 px-4 -skew-x-6   rounded">
-            <div>THIS</div>
-            <div>IS</div>
-            <div>TECHBOARD</div>
+          <div className="flex gap-2 justify-center lg:justify-start items-center relative z-10 py-1 sm:py-2 px-4 -skew-x-6 rounded">
+            {displayedText}
           </div>
         </motion.p>
-
+        
         <motion.h1
           variants={item}
           className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-slate-100"
@@ -67,11 +92,6 @@ const HeroSection = () => {
         </motion.h1>
       </motion.div>
        
-      {/* This div contains the Spline component. It is placed second in the code
-          so that it appears below the text content on mobile devices.
-          The `lg:flex-row` on the parent container ensures it appears on the right
-          on large screens. The `h-[50vh]` class gives it a fixed height on mobile to prevent layout shifts.
-      */}
       <div className="w-full h-[50vh] mt-8 lg:w-1/2 lg:h-auto flex items-center justify-center">
         <Spline
           className="w-full h-full"
