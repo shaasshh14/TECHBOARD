@@ -1,6 +1,6 @@
-// tailwind.config.js
-
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin');
+
 export default {
   content: [
     "./index.html",
@@ -8,8 +8,8 @@ export default {
   ],
   theme: {
     extend: {
+      // --- Your existing customizations are preserved ---
       colors: {
-        // Added the precise lime green for the highlight
         'lime-highlight': '#DFFF1C',
       },
       keyframes: {
@@ -33,5 +33,20 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    // --- Added a plugin for 3D transform utilities ---
+    plugin(function({ addUtilities }) {
+      addUtilities({
+        '.perspective-1000': {
+          'perspective': '1000px',
+        },
+        '.transform-style-3d': {
+          'transform-style': 'preserve-3d',
+        },
+        '.backface-hidden': {
+          'backface-visibility': 'hidden',
+        },
+      })
+    })
+  ],
 }
