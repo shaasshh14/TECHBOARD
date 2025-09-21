@@ -1173,50 +1173,46 @@ transition: opacity 220ms ease;
 }
 .initial-card.card-neo:hover::after { opacity: 0.75; }
 
+/* src/index.css */
 .icon-scoop {
-position: absolute;
-top: 0;
-left: 50%;
-transform: translateX(-50%);
-width: 150px;
-height: 124px;
-background: #000;
-border-bottom-left-radius: 110px;
-border-bottom-right-radius: 110px;
-box-shadow: 0 12px 0 rgba(0, 0, 0, 0.35), inset 0 -8px 0 rgba(255, 255, 255, 0.12);
-z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 124px;
+  background: #171615; /* Changed from #000 */
+  border-bottom-left-radius: 110px;
+  border-bottom-right-radius: 110px;
+  box-shadow: 0 12px 0 rgba(0, 0, 0, 0.35), inset 0 -8px 0 rgba(255, 255, 255, 0.12);
+  z-index: 2;
 }
 .icon-scoop::before,
 .icon-scoop::after {
-content: "";
-position: absolute;
-top: 0;
-width: 56px;
-height: 56px;
-background: transparent;
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 56px;
+  height: 56px;
+  background: transparent;
 }
-.icon-scoop::before { left: -56px; border-top-right-radius: 56px; box-shadow: 18px -18px 0 18px #000; }
-.icon-scoop::after { right: -56px; border-top-left-radius: 56px; box-shadow: -18px -18px 0 18px #000; }
+.icon-scoop::before { left: -56px; border-top-right-radius: 56px; box-shadow: 18px -18px 0 18px #171615; } /* Changed from #000 */
+.icon-scoop::after { right: -56px; border-top-left-radius: 56px; box-shadow: -18px -18px 0 18px #171615; } /* Changed from #000 */
 
 .icon-badge {
-position: absolute;
-top: -22px;
-left: 50%;
-transform: translateX(-50%);
-width: 100px;
-height: 100px;
-border-radius: 9999px;
-background: #111;
-border: 8px solid #fff;
-box-shadow: 0 12px 14px rgba(0, 0, 0, 0.45), 0 10px 0 rgba(0, 0, 0, 0.35);
-display: grid;
-place-items: center;
-z-index: 3;
-}
-.icon-badge ion-icon {
-color: #fff;
-font-size: clamp(2.2rem, 4.5vw, 3.2rem);
---ionicon-stroke-width: 22px;
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 9999px;
+  background: #121212; /* Changed from #111 */
+  border: 8px solid #fff;
+  box-shadow: 0 12px 14px rgba(0, 0, 0, 0.45), 0 10px 0 rgba(0, 0, 0, 0.35);
+  display: grid;
+  place-items: center;
+  z-index: 3;
 }
 
 .initial-card.card-neo .content {

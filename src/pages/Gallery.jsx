@@ -7,10 +7,12 @@ import Footer from "../components/FooterCTA.jsx";
 import AnimatedBackground from "../components/AnimatedBackground.jsx";
 import AOS from "aos";
 
+// src/pages/Gallery.jsx
+
 const TrainIntro = ({ images, startRect, onDone, heroScale = 7 }) => {
-  const travel = 1200;
+  const travel = 1500; // Changed from 1200
   const heroPop = 820;
-  const streamStep = 110;
+  const streamStep = 150; // Changed from 110
   const buffer = 320;
 
   const [fading, setFading] = useState(false);
@@ -308,37 +310,18 @@ const Gallery = () => {
   };
 
   useEffect(() => {
-    if (selectedCardId) return;
-    const els = cards.map((card) => cardRefs.current[card.id]).filter(Boolean);
-    const isMobile =
-      typeof window !== "undefined" &&
-      window.matchMedia("(max-width: 768px)").matches;
+    // Store current refs for cleanup
+    const currentRefs = { ...cardRefs.current };
 
-    els.forEach((el) => {
-      if (!el.vanillaTilt) {
-        VanillaTilt.init(el, {
-          max: isMobile ? 6 : 10,
-          speed: 300,
-          glare: true,
-          "max-glare": 0.15,
-          perspective: 1400,
-          scale: 1.01,
-          gyroscope: false,
-          reset: true,
-        });
-      }
-    });
-
+    // Cleanup function for when component unmounts or selectedCardId changes
     return () => {
-      els.forEach((el) => {
+      Object.values(currentRefs).forEach((el) => {
         if (el?.vanillaTilt) {
           el.vanillaTilt.destroy();
-          el.style.transform = "";
         }
       });
     };
-  }, [selectedCardId, cards]);
-
+  }, [selectedCardId]);
   const getEdgeClassFor = (card) => {
     if (!train || train.id === card.id) return "";
     const others = cards.filter((c) => c.id !== train.id);
@@ -387,7 +370,25 @@ const Gallery = () => {
                 <div
                   key={card.id}
                   ref={(el) => {
-                    cardRefs.current[card.id] = el;
+                    if (el) {
+                      cardRefs.current[card.id] = el;
+                      // Initialize tilt immediately when element is mounted
+                      const isMobile =
+                        window.matchMedia("(max-width: 768px)").matches;
+                      if (!el.vanillaTilt) {
+                        VanillaTilt.init(el, {
+                          max: isMobile ? 6 : 10,
+                          speed: 300,
+                          glare: true,
+                          "max-glare": 0.15,
+                          perspective: 1400,
+                          scale: 1.01,
+                          gyroscope: false,
+                          reverse: false,
+                          reset: true,
+                        });
+                      }
+                    }
                   }}
                   className={`initial-card card-neo tilt-enabled ${
                     isLaunching ? "is-launching" : ""
