@@ -5,6 +5,9 @@
 /* --- GLOBAL STYLES & FONTS (OPERA GX THEME) --- */
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
+
+/* ... keep the rest of your file content ... */
 
 :root {
   /* --- Opera GX Color Palette --- */
@@ -1394,3 +1397,11 @@ font-size: 0.85rem;
   transform-origin: center center;  
 } */
 
+/* Custom scrollbar utility */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
