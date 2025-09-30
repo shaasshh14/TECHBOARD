@@ -36,16 +36,6 @@ body {
   margin: 0;
   font-family: "Inter", sans-serif;
   background-color: var(--base-bg);
-  background-image: radial-gradient(
-      circle at top left,
-      rgba(255, 27, 27, 0.2),
-      transparent 35%
-    ),
-    radial-gradient(
-      circle at bottom right,
-      rgba(0, 240, 240, 0.2),
-      transparent 35%
-    );
   background-attachment: fixed;
   color: var(--charcoal);
   overflow-x: hidden;
