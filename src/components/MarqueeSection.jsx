@@ -1,10 +1,15 @@
-// src/components/MarqueeSection.jsx
-import React from 'react';
+import React from "react";
 
-const marqueeItems = ["SPONSER A", "SPONSER B", "SPONSER C", "SPONSER D", "SPONSER E", "SPONSER F"];
+const marqueeItems = [
+  { name: "Mastercard", logoUrl: "./Sponserlogos/master.png" },
+  { name: "RedBull", logoUrl: "./Sponserlogos/redbull.png" },
+  { name: "Mastercard", logoUrl: "./Sponserlogos/master.png" },
+  { name: "Pepsi", logoUrl: "./Sponserlogos/pepsi.png" },
+  { name: "RedBull", logoUrl: "./Sponserlogos/redbull.png" },
+  { name: "Pepsi", logoUrl: "./Sponserlogos/pepsi.png" },
+];
 
 const MarqueeSection = () => {
-  // Duplicate items for a seamless loop
   const content = [...marqueeItems, ...marqueeItems];
 
   return (
@@ -13,7 +18,12 @@ const MarqueeSection = () => {
         <div className="marquee-content">
           {content.map((item, index) => (
             <div className="marquee-item" key={index}>
-              {item}
+              <img
+                src={item.logoUrl}
+                alt={`${item.name} Logo`}
+                style={{ height: "30px", marginRight: "10px" }}
+              />
+              <span className="marquee-item-name">{item.name}</span>
             </div>
           ))}
         </div>

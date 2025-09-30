@@ -10,7 +10,7 @@ const AnimatedBackground = () => {
   };
 
   const draw = (p5) => {
-    p5.background(20);
+    p5.background('#121212');
     const gridSize = 60; 
     const highlightRange = 2;
 
