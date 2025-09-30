@@ -11,10 +11,43 @@ import AOS from "aos";
 
 // src/pages/Gallery.jsx
 
+const FrameStyles = () => (
+  <style>{`
+    .canvas-card-frame {
+      --frame-color-dark: #1a1d24;
+      --frame-color-light: #4a4e5a;
+      padding: 12px; /* Thickness of the frame */
+      border-radius: 20px;
+      background: linear-gradient(145deg, var(--frame-color-light), var(--frame-color-dark));
+      box-shadow: 10px 10px 20px #121418, -10px -10px 20px #2c3038;
+      position: relative;
+    }
+
+    .canvas-card-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      /* Inset shadow to make the canvas look sunken */
+      box-shadow: inset 5px 5px 10px #121418, inset -5px -5px 10px #2c3038;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .canvas-card-frame canvas {
+        /* Ensure canvas fits inside the inner container */
+        width: 100%;
+        height: 100%;
+    }
+  `}</style>
+);
+
+
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// START: New CanvasCard Component based on your provided code
+// START: CanvasCard Component
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-const CanvasCard = ({ onClick, className, style }) => {
+const CanvasCard = ({ title, desc, onClick, className, style }) => {
   const canvasRef = useRef(null);
   const animationFrameId = useRef(null);
   const internalClickHandler = useRef(() => {});
@@ -232,6 +265,25 @@ const CanvasCard = ({ onClick, className, style }) => {
       ctx.arcTo(x, y, x + radius, y, radius);
       ctx.closePath();
     }
+    
+    // Helper function to wrap text
+    function wrapText(context, text, x, y, maxWidth, lineHeight) {
+        const words = text.split(' ');
+        let line = '';
+        for(let n = 0; n < words.length; n++) {
+            const testLine = line + words[n] + ' ';
+            const metrics = context.measureText(testLine);
+            const testWidth = metrics.width;
+            if (testWidth > maxWidth && n > 0) {
+                context.fillText(line, x, y);
+                line = words[n] + ' ';
+                y += lineHeight;
+            } else {
+                line = testLine;
+            }
+        }
+        context.fillText(line, x, y);
+    }
 
     function drawClickEffects() {
       for (let i = clickEffects.length - 1; i >= 0; i--) {
@@ -314,7 +366,7 @@ const CanvasCard = ({ onClick, className, style }) => {
         shiftedX + card.width,
         shiftedY + card.height
       );
-      gradient.addColorStop(0, "#1a1a1a");
+      gradient.addColorStop(0, "#2a2a2a");
       gradient.addColorStop(1, "#0c0c0c");
       ctx.fillStyle = gradient;
       ctx.fillRect(shiftedX, shiftedY, card.width, card.height);
@@ -352,28 +404,39 @@ const CanvasCard = ({ onClick, className, style }) => {
         ctx.fill();
       }
       ctx.restore();
-      ctx.strokeStyle = "#333";
-      ctx.lineWidth = 2;
-      roundedRect(
-        shiftedX,
-        shiftedY,
-        card.width,
-        card.height,
-        card.cornerRadius
-      );
+
+      // =========== MODIFICATION START ============
+      // --- START: New 3D Border Effect ---
+
+      // 1. Draw a dark "shadow" border offset down and to the right
+      ctx.strokeStyle = 'rgba(48, 25, 52, 0.7)'; // Dark Purple shadow color
+      ctx.lineWidth = 3;
+      roundedRect(shiftedX + 1, shiftedY + 1, card.width, card.height, card.cornerRadius);
       ctx.stroke();
+
+      // 2. Draw a light "highlight" border offset up and to the left
+      ctx.strokeStyle = 'rgba(0, 255, 255, 0.3)'; // Light Cyan highlight color
+      ctx.lineWidth = 2;
+      roundedRect(shiftedX - 1, shiftedY - 1, card.width, card.height, card.cornerRadius);
+      ctx.stroke();
+
+      // --- END: New 3D Border Effect ---
+      // ============= MODIFICATION END ==============
+
+      const centerX = shiftedX + card.width / 2;
+
+      // Draw Title from props
       ctx.fillStyle = "#fff";
-      ctx.font = "bold 24px Arial";
+      ctx.font = "bold 20px Arial";
       ctx.textAlign = "center";
-      ctx.fillText("SOLUTIONS", shiftedX + card.width / 2, shiftedY + 50);
-      const centerX = shiftedX + card.width / 2,
-        centerY = shiftedY + card.height / 2;
+      ctx.fillText(title.toUpperCase(), centerX, shiftedY + 50);
+
+      // Draw Description from props
       ctx.fillStyle = "#ccc";
       ctx.font = "16px Arial";
       ctx.textAlign = "center";
-      ctx.fillText("Move your cursor to", centerX, centerY + 100);
-      ctx.fillText("control the glow effect", centerX, centerY + 125);
-      ctx.fillText("Click to activate magic!", centerX, centerY + 150);
+      wrapText(ctx, desc, centerX, shiftedY + card.height / 2 + 40, card.width - 60, 22);
+
       ctx.fillStyle = "#888";
       ctx.font = "12px Arial";
       ctx.fillText(
@@ -419,7 +482,7 @@ const CanvasCard = ({ onClick, className, style }) => {
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, []);
+  }, [title, desc]); // Add title and desc to dependency array
 
   const handleWrapperClick = (e) => {
     if (internalClickHandler.current) {
@@ -433,23 +496,17 @@ const CanvasCard = ({ onClick, className, style }) => {
   return (
     <div
       onClick={handleWrapperClick}
-      className={className}
-      style={{
-        ...style,
-        width: "280px",
-        height: "410px",
-        cursor: "pointer",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+      className={`${className} canvas-card-frame`}
+      style={style}
     >
-      <canvas ref={canvasRef} />
+      <div className="canvas-card-inner">
+        <canvas ref={canvasRef} />
+      </div>
     </div>
   );
 };
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// END: New CanvasCard Component
+// END: CanvasCard Component
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 const TrainIntro = ({ images, startRect, onDone, heroScale = 7 }) => {
@@ -691,7 +748,7 @@ const Gallery = () => {
       },
       {
         id: "cardElevate",
-        title: "TECH ELEVATE",
+        title: "Fun & Games",
         icon: "rocket-outline",
         desc: "An innovation showcase for software and hardware creators to pitch ideas and present prototypes.",
         images: [
@@ -747,6 +804,7 @@ const Gallery = () => {
 
   return (
     <>
+      <FrameStyles />
       <div className="fixed inset-0 -z-10">
         <AnimatedBackground />
       </div>
@@ -775,7 +833,6 @@ const Gallery = () => {
                     if (!train) handleCardClick(card, e);
                   }}
                   style={{ "--star-color": color }}
-                  // Passing these props for completeness, though the canvas draws its own content
                   title={card.title}
                   desc={card.desc}
                   icon={card.icon}
