@@ -1,8 +1,29 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useAnimate,
+  useMotionValueEvent,
+} from "framer-motion";
 import Header from "../components/Header";
 import Footer from "../components/FooterCTA";
 import AnimatedBackground from "../components/AnimatedBackground";
+import ScrollIndicator from "../components/ScrollIndicator";
+
+// Utility function to limit how often a function can be called
+const throttle = (func, delay) => {
+  let lastCall = 0;
+  return (...args) => {
+    const now = new Date().getTime();
+    if (now - lastCall < delay) {
+      return;
+    }
+    lastCall = now;
+    return func(...args);
+  };
+};
+
 // --- Data with working images ---
 const cases = [
   {
@@ -90,7 +111,7 @@ const cases = [
     description:
       "A beekeeper uses his hives to pass secret messages for a spy ring.",
     image:
-      "https://images.pexels.com/photos/1192609/pexels-photo-1192609.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://media.istockphoto.com/id/462333727/photo/smiling-man-with-hand-in-hair.jpg?s=2048x2048&w=is&k=20&c=0KeXC-tQhGZ9U3-WlxJ579-yVEA1CTqZzyTNEg_p4fE=",
     rotation: 1,
   },
   {
@@ -120,8 +141,34 @@ const desktopPositions = {
   10: { top: "20%", left: "122%" },
 };
 
-const CaseClue = ({ caseData, isDesktop, setPinRef }) => {
+const CaseClue = ({ caseData, isDesktop, setPinRef, scrollXProgress }) => {
   const position = isDesktop ? desktopPositions[caseData.id] : {};
+  const [scope, animate] = useAnimate();
+
+  const throttledShake = useCallback(
+    throttle(() => {
+      animate(
+        ".shake-number",
+        { rotate: [0, -2.5, 2.5, -2.5, 0] },
+        { duration: 0.4, ease: "easeInOut" }
+      );
+      animate(
+        ".shake-description",
+        { rotate: [0, 1.5, -1.5, 1.5, 0] },
+        { duration: 0.4, ease: "easeInOut" }
+      );
+    }, 300),
+    [animate]
+  );
+
+  if (isDesktop && scrollXProgress) {
+    useMotionValueEvent(scrollXProgress, "change", (latest) => {
+      if (latest > 0) {
+        throttledShake();
+      }
+    });
+  }
+
   return (
     <motion.div
       className={
@@ -148,6 +195,7 @@ const CaseClue = ({ caseData, isDesktop, setPinRef }) => {
         className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 z-20"
       ></div>
       <div
+        ref={scope}
         className="transition-transform duration-300 ease-in-out group-hover:scale-105"
         style={{ transform: `rotate(${caseData.rotation}deg)` }}
       >
@@ -161,16 +209,10 @@ const CaseClue = ({ caseData, isDesktop, setPinRef }) => {
                 className="w-full h-auto object-cover"
               />
             </div>
-            <div
-              className="bg-yellow-200 p-2 text-center text-4xl font-bold text-gray-800 shadow-md w-[80px] -mt-5 z-10"
-              style={{ transform: `rotate(${(Math.random() - 0.5) * 8}deg)` }}
-            >
+            <div className="shake-number bg-yellow-200 p-2 text-center text-4xl font-bold text-gray-800 shadow-md w-[80px] -mt-5 z-10">
               {caseData.caseNumber}
             </div>
-            <div
-              className="bg-gray-200 p-3 shadow-sm text-gray-700 leading-relaxed w-[90%] text-center -mt-2"
-              style={{ transform: `rotate(${(Math.random() - 0.5) * 6}deg)` }}
-            >
+            <div className="shake-description bg-gray-200 p-3 shadow-sm text-gray-700 leading-relaxed w-[90%] text-center -mt-2">
               <h3 className="text-lg font-bold mb-1 text-red-700">
                 {caseData.title}
               </h3>
@@ -188,11 +230,22 @@ const Events = () => {
   const pinRefs = useRef({});
   const [svgPath, setSvgPath] = useState("");
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+  const [hasScrolled, setHasScrolled] = useState(false);
+
   const { scrollXProgress } = useScroll({ container: scrollRef });
   const pathLength = useSpring(scrollXProgress, {
     stiffness: 400,
     damping: 90,
   });
+
+  const handleScroll = () => {
+    if (scrollRef.current && scrollRef.current.scrollLeft > 10 && !hasScrolled) {
+      setHasScrolled(true);
+    }
+    if (isDesktop) {
+      calculatePath();
+    }
+  };
 
   const calculatePath = useCallback(() => {
     if (!isDesktop || Object.keys(pinRefs.current).length < cases.length)
@@ -267,9 +320,10 @@ const Events = () => {
       <main className="w-full min-h-screen pt-28 pb-16 px-4 flex flex-col items-center justify-center overflow-x-hidden">
         <div
           ref={scrollRef}
-          onScroll={isDesktop ? calculatePath : undefined}
+          onScroll={handleScroll}
           className="relative w-full max-w-7xl mx-auto lg:h-[600px] h-auto lg:overflow-x-scroll lg:overflow-y-hidden scrollbar-hide"
         >
+          {!hasScrolled && <ScrollIndicator />}
           <div
             className="relative w-full h-full"
             style={
@@ -284,6 +338,7 @@ const Events = () => {
                   caseData={caseData}
                   isDesktop={false}
                   setPinRef={setPinRef}
+                  scrollXProgress={null}
                 />
               ))}
             </div>
@@ -304,13 +359,14 @@ const Events = () => {
                   caseData={caseData}
                   isDesktop={true}
                   setPinRef={setPinRef}
+                  scrollXProgress={scrollXProgress}
                 />
               ))}
             </div>
           </div>
         </div>
 
-        {/* --- NEW --- Custom Scrollbar for Desktop */}
+        {/* --- Custom Scrollbar for Desktop --- */}
         <div className="hidden lg:block w-full max-w-7xl mx-auto mt-8 h-2">
           <div className="h-full bg-gray-800/50 rounded-full">
             <motion.div

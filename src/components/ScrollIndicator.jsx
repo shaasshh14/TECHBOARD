@@ -1,16 +1,17 @@
-// ScrollIndicator.jsx
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 const ScrollIndicator = () => {
   return (
     <motion.div
-      className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center text-white z-50"
-      animate={{ y: [0, 10, 0] }}
+      className="absolute top-1/2 right-4 -translate-y-1/2 flex-col items-center text-white z-50 hidden lg:flex"
+      animate={{ x: [0, 10, 0] }}
       transition={{ duration: 1.5, repeat: Infinity }}
     >
-      <p className="text-sm opacity-80 mb-2">Scroll to turn page</p>
-      <ChevronDown className="w-6 h-6 opacity-80" />
+      <p className="text-sm opacity-80 mb-2 [writing-mode:vertical-rl]">
+        Scroll for more
+      </p>
+      <ChevronRight className="w-8 h-8 opacity-80" />
     </motion.div>
   );
 };
