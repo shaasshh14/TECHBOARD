@@ -288,26 +288,30 @@ const Events = () => {
     setSvgPath(pathData);
   }, [isDesktop]);
 
-  useEffect(() => {
-    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
+ useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+      // Recalculate path on resize
+      calculatePath();
+    };
     window.addEventListener("resize", handleResize);
 
     const observer = new ResizeObserver(calculatePath);
-    if (scrollRef.current) observer.observe(scrollRef.current);
-
-    const timer = setTimeout(calculatePath, 500);
-
+    const currentScrollRef = scrollRef.current; // Capture ref value
+    if (currentScrollRef) observer.observe(currentScrollRef);
+    
     return () => {
       window.removeEventListener("resize", handleResize);
-      if (scrollRef.current) observer.unobserve(scrollRef.current);
-      clearTimeout(timer);
+      if (currentScrollRef) observer.unobserve(currentScrollRef);
     };
   }, [calculatePath]);
 
   const setPinRef = (id, el) => {
-    pinRefs.current[id] = el;
-    if (Object.keys(pinRefs.current).length === cases.length) {
-      calculatePath();
+    if (el) {
+      pinRefs.current[id] = el;
+      if (Object.keys(pinRefs.current).length === cases.length) {
+        calculatePath();
+      }
     }
   };
 
