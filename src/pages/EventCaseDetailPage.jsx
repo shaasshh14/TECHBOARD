@@ -15,8 +15,7 @@ const cases = [
     { id: 6, title: "The Sunken Locket", description: "A diver discovers a locket in a shipwreck, containing a mysterious portrait.", image: "https://images.pexels.com/photos/761543/pexels-photo-761543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
     { id: 7, title: "The Gilded Cage", description: "A prized songbird, the key to a conspiracy, has been stolen.", image: "https://images.pexels.com/photos/131723/pexels-photo-131723.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
     { id: 8, title: "The Counterfeit Smile", description: "A famous painting is replaced by a forgery, with a hidden message.", image: "https://images.pexels.com/photos/1183992/pexels-photo-1183992.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 9, title: "Beekeeper's Secret", description: "A beekeeper uses his hives to pass secret messages for a spy ring.", image: "https://media.istockphoto.com/id/462333727/photo/smiling-man-with-hand-in-hair.jpg?s=2048x2048&w=is&k=20&c=0KeXC-tQhGZ9U3-WlxJ579-yVEA1CTqZzyTNEg_p4fE=" },
-    { id: 10, title: "The Final Curtain", description: "The entire conspiracy is set to be revealed on opening night.", image: "https://images.pexels.com/photos/33129/popcorn-movie-party-entertainment.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+
 ];
 
 // Helper to convert title to a URL-friendly slug
