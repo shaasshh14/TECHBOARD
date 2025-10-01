@@ -734,7 +734,7 @@ const Gallery = () => {
       },
       {
         id: "cardSolutions",
-        title: "SOLUTIONS '23",
+        title: "SOLUTION",
         icon: "car-sport-outline",
         desc: "Featuring 'Rusty Wheels,' the thrilling RC racing competition. Build, customize, and race to victory!",
         images: [
