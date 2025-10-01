@@ -1,36 +1,40 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+const events = [
+  {
+    id: "web3-metaverse",
+    date: "OCT 08 2025",
+    title: "Web3 & The Metaverse",
+    location: "Virtual Conference",
+    description:
+      "Explore the future of the decentralized web and immersive digital experiences with industry pioneers.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1641353989282-2b8a4a2a4b3f?q=80&w=2070&auto=format&fit=crop",
+  },
+  {
+    id: "ai-in-design",
+    date: "NOV 15 2025",
+    title: "AI in Design Summit",
+    location: "San Francisco, CA",
+    description:
+      "A deep dive into how artificial intelligence is revolutionizing the creative process for designers.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=2070&auto=format&fit=crop",
+  },
+  {
+    id: "robotics-expo",
+    date: "DEC 02 2025",
+    title: "Future of Robotics Expo",
+    location: "Tokyo, Japan",
+    description:
+      "Witness the latest breakthroughs in automation and robotics from leading global innovators.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1581092580497-c3a25d43907c?q=80&w=2070&auto=format&fit=crop",
+  },
+];
 
 const UpcomingEvents = () => {
-  const events = [
-    {
-      date: "OCT 08 2025",
-      title: "Web3 & The Metaverse",
-      location: "Virtual Conference",
-      description:
-        "Explore the future of the decentralized web and immersive digital experiences with industry pioneers.",
-      imageUrl:
-        "https://images.unsplash.com/photo-1641353989282-2b8a4a2a4b3f?q=80&w=2070&auto=format&fit=crop",
-    },
-    {
-      date: "NOV 15 2025",
-      title: "AI in Design Summit",
-      location: "San Francisco, CA",
-      description:
-        "A deep dive into how artificial intelligence is revolutionizing the creative process for designers.",
-      imageUrl:
-        "https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=2070&auto=format&fit=crop",
-    },
-    {
-      date: "DEC 02 2025",
-      title: "Future of Robotics Expo",
-      location: "Tokyo, Japan",
-      description:
-        "Witness the latest breakthroughs in automation and robotics from leading global innovators.",
-      imageUrl:
-        "https://images.unsplash.com/photo-1581092580497-c3a25d43907c?q=80&w=2070&auto=format&fit=crop",
-    },
-  ];
-
   return (
     <>
       <style>{`
@@ -86,6 +90,10 @@ const UpcomingEvents = () => {
           }
         }
 
+        .event-card-link {
+            text-decoration: none;
+        }
+
         .event-card {
           background: rgba(255, 255, 255, 0.05);
           border: 1px solid rgba(100, 180, 255, 0.2);
@@ -96,6 +104,9 @@ const UpcomingEvents = () => {
           opacity: 0;
           transform: translateY(40px);
           animation: fadeInUp 0.8s ease-out forwards;
+          height: 100%; /* Make card fill the link height */
+          display: flex;
+          flex-direction: column;
         }
 
         .event-card:nth-child(1) { animation-delay: 0.3s; }
@@ -126,6 +137,7 @@ const UpcomingEvents = () => {
 
         .card-content {
           padding: 25px;
+          flex-grow: 1; /* Allow content to grow */
         }
         
         .event-date {
@@ -173,21 +185,23 @@ const UpcomingEvents = () => {
 
         <div className="events-container">
           {events.map((event, index) => (
-            <div key={index} className="event-card">
-              <div className="card-image-container">
-                <img
-                  src={event.imageUrl}
-                  alt={event.title}
-                  className="card-image"
-                />
+            <Link to={`/event/${event.id}`} key={index} className="event-card-link">
+              <div className="event-card">
+                <div className="card-image-container">
+                  <img
+                    src={event.imageUrl}
+                    alt={event.title}
+                    className="card-image"
+                  />
+                </div>
+                <div className="card-content">
+                  <p className="event-date">{event.date}</p>
+                  <h3 className="event-title">{event.title}</h3>
+                  <p className="event-location">{event.location}</p>
+                  <p className="event-description">{event.description}</p>
+                </div>
               </div>
-              <div className="card-content">
-                <p className="event-date">{event.date}</p>
-                <h3 className="event-title">{event.title}</h3>
-                <p className="event-location">{event.location}</p>
-                <p className="event-description">{event.description}</p>
-              </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>

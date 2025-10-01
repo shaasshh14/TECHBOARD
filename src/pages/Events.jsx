@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom"; // Import Link
 import {
   motion,
   useScroll,
@@ -24,106 +25,17 @@ const throttle = (func, delay) => {
   };
 };
 
-// --- Data with working images ---
+// Data with working images
 const cases = [
-  {
-    id: 1,
-    caseNumber: "#1",
-    title: "The Crimson Quill",
-    description:
-      "Cryptic letters signed with crimson ink appear across the city.",
-    image:
-      "https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    rotation: -3,
-  },
-  {
-    id: 2,
-    caseNumber: "#2",
-    title: "Echoes of the Past",
-    description:
-      "An old photograph surfaces, holding a clue to a decades-old mystery.",
-    image:
-      "https://images.pexels.com/photos/935949/pexels-photo-935949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    rotation: 2,
-  },
-  {
-    id: 3,
-    caseNumber: "#3",
-    title: "The Silent Witness",
-    description:
-      "The only witness is a parrot who speaks only in riddles. Time to decipher.",
-    image:
-      "https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    rotation: 1,
-  },
-  {
-    id: 4,
-    caseNumber: "#4",
-    title: "The Midnight Cipher",
-    description:
-      "A coded message, intercepted at midnight, points to a secret society.",
-    image:
-      "https://images.pexels.com/photos/2117283/pexels-photo-2117283.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    rotation: -2,
-  },
-  {
-    id: 5,
-    caseNumber: "#5",
-    title: "Phantom's Fortune",
-    description: "A rumored treasure is hidden within a haunted opera house.",
-    image:
-      "https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    rotation: 3,
-  },
-  {
-    id: 6,
-    caseNumber: "#6",
-    title: "The Sunken Locket",
-    description:
-      "A diver discovers a locket in a shipwreck, containing a mysterious portrait.",
-    image:
-      "https://images.pexels.com/photos/761543/pexels-photo-761543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    rotation: -1,
-  },
-  {
-    id: 7,
-    caseNumber: "#7",
-    title: "The Gilded Cage",
-    description: "A prized songbird, the key to a conspiracy, has been stolen.",
-    image:
-      "https://images.pexels.com/photos/131723/pexels-photo-131723.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    rotation: 2,
-  },
-  {
-    id: 8,
-    caseNumber: "#8",
-    title: "The Counterfeit Smile",
-    description:
-      "A famous painting is replaced by a forgery, with a hidden message.",
-    image:
-      "https://images.pexels.com/photos/1183992/pexels-photo-1183992.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    rotation: -4,
-  },
-  {
-    id: 9,
-    caseNumber: "#9",
-    title: "Beekeeper's Secret",
-    description:
-      "A beekeeper uses his hives to pass secret messages for a spy ring.",
-    image:
-      "https://media.istockphoto.com/id/462333727/photo/smiling-man-with-hand-in-hair.jpg?s=2048x2048&w=is&k=20&c=0KeXC-tQhGZ9U3-WlxJ579-yVEA1CTqZzyTNEg_p4fE=",
-    rotation: 1,
-  },
-  {
-    id: 10,
-    caseNumber: "#10",
-    title: "The Final Curtain",
-    description:
-      "The entire conspiracy is set to be revealed on opening night.",
-    image:
-      "https://images.pexels.com/photos/33129/popcorn-movie-party-entertainment.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    rotation: 3,
-  },
+    { id: 1, caseNumber: "#1", title: "The Crimson Quill", description: "Cryptic letters signed with crimson ink appear across the city.", image: "https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", rotation: -3 },
+    { id: 2, caseNumber: "#2", title: "Echoes of the Past", description: "An old photograph surfaces, holding a clue to a decades-old mystery.", image: "https://images.pexels.com/photos/935949/pexels-photo-935949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", rotation: 2 },
+    { id: 3, caseNumber: "#3", title: "The Silent Witness", description: "The only witness is a parrot who speaks only in riddles. Time to decipher.", image: "https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", rotation: 1 },
+    { id: 4, caseNumber: "#4", title: "The Midnight Cipher", description: "A coded message, intercepted at midnight, points to a secret society.", image: "https://images.pexels.com/photos/2117283/pexels-photo-2117283.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", rotation: -2 },
+    { id: 5, caseNumber: "#5", title: "Phantom's Fortune", description: "A rumored treasure is hidden within a haunted opera house.", image: "https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", rotation: 3 },
+    { id: 6, caseNumber: "#6", title: "The Sunken Locket", description: "A diver discovers a locket in a shipwreck, containing a mysterious portrait.", image: "https://images.pexels.com/photos/761543/pexels-photo-761543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", rotation: -1 },
+    { id: 7, caseNumber: "#7", title: "The Gilded Cage", description: "A prized songbird, the key to a conspiracy, has been stolen.", image: "https://images.pexels.com/photos/131723/pexels-photo-131723.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", rotation: 2 },
+    { id: 8, caseNumber: "#8", title: "The Counterfeit Smile", description: "A famous painting is replaced by a forgery, with a hidden message.", image: "https://images.pexels.com/photos/1183992/pexels-photo-1183992.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", rotation: -4 },
+   
 ];
 
 const DESKTOP_TRACK_WIDTH_PERCENT = 250;
@@ -137,9 +49,12 @@ const desktopPositions = {
   6: { top: "15%", left: "70%" },
   7: { top: "50%", left: "83%" },
   8: { top: "10%", left: "96%" },
-  9: { top: "55%", left: "109%" },
-  10: { top: "20%", left: "122%" },
+
 };
+
+// Helper to convert title to a URL-friendly slug
+const slugify = (text) => text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+
 
 const CaseClue = ({ caseData, isDesktop, setPinRef, scrollXProgress }) => {
   const position = isDesktop ? desktopPositions[caseData.id] : {};
@@ -170,61 +85,64 @@ const CaseClue = ({ caseData, isDesktop, setPinRef, scrollXProgress }) => {
   }
 
   return (
-    <motion.div
-      className={
-        isDesktop
-          ? "absolute z-10 cursor-pointer group w-[250px]"
-          : "relative w-[90%] max-w-[320px] z-10"
-      }
-      style={
-        isDesktop
-          ? {
-              top: position.top,
-              left: position.left,
-              transform: `translateX(-50%)`,
-            }
-          : {}
-      }
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.6 }}
-    >
-      <div
-        ref={(el) => setPinRef(caseData.id, el)}
-        className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 z-20"
-      ></div>
-      <div
-        ref={scope}
-        className="transition-transform duration-300 ease-in-out group-hover:scale-105"
-        style={{ transform: `rotate(${caseData.rotation}deg)` }}
-      >
-        <div className="relative">
-          <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-red-600 rounded-full border-2 border-red-800 shadow-lg after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-2 after:h-2 after:bg-white/30 after:rounded-full"></div>
-          <div className="flex flex-col items-center">
-            <div className="bg-white p-2.5 shadow-lg border border-gray-200 w-full">
-              <img
-                src={caseData.image}
-                alt={caseData.title}
-                className="w-full h-auto object-cover"
-              />
+    <Link to={`/event-case/${slugify(caseData.title)}`}>
+        <motion.div
+        className={
+            isDesktop
+            ? "absolute z-10 cursor-pointer group w-[250px]"
+            : "relative w-[90%] max-w-[320px] z-10"
+        }
+        style={
+            isDesktop
+            ? {
+                top: position.top,
+                left: position.left,
+                transform: `translateX(-50%)`,
+                }
+            : {}
+        }
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
+        >
+        <div
+            ref={(el) => setPinRef(caseData.id, el)}
+            className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 z-20"
+        ></div>
+        <div
+            ref={scope}
+            className="transition-transform duration-300 ease-in-out group-hover:scale-105"
+            style={{ transform: `rotate(${caseData.rotation}deg)` }}
+        >
+            <div className="relative">
+            <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-red-600 rounded-full border-2 border-red-800 shadow-lg after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-2 after:h-2 after:bg-white/30 after:rounded-full"></div>
+            <div className="flex flex-col items-center">
+                <div className="bg-white p-2.5 shadow-lg border border-gray-200 w-full">
+                <img
+                    src={caseData.image}
+                    alt={caseData.title}
+                    className="w-full h-auto object-cover"
+                />
+                </div>
+                <div className="shake-number bg-yellow-200 p-2 text-center text-4xl font-bold text-gray-800 shadow-md w-[80px] -mt-5 z-10">
+                {caseData.caseNumber}
+                </div>
+                <div className="shake-description bg-gray-200 p-3 shadow-sm text-gray-700 leading-relaxed w-[90%] text-center -mt-2">
+                <h3 className="text-lg font-bold mb-1 text-red-700">
+                    {caseData.title}
+                </h3>
+                <p className="text-sm">{caseData.description}</p>
+                </div>
             </div>
-            <div className="shake-number bg-yellow-200 p-2 text-center text-4xl font-bold text-gray-800 shadow-md w-[80px] -mt-5 z-10">
-              {caseData.caseNumber}
             </div>
-            <div className="shake-description bg-gray-200 p-3 shadow-sm text-gray-700 leading-relaxed w-[90%] text-center -mt-2">
-              <h3 className="text-lg font-bold mb-1 text-red-700">
-                {caseData.title}
-              </h3>
-              <p className="text-sm">{caseData.description}</p>
-            </div>
-          </div>
         </div>
-      </div>
-    </motion.div>
+        </motion.div>
+    </Link>
   );
 };
 
+// ... (The rest of the Events component remains the same)
 const Events = () => {
   const scrollRef = useRef(null);
   const pinRefs = useRef({});
