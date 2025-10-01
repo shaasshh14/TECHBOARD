@@ -31,7 +31,7 @@ function App() {
       const timer = setTimeout(() => {
         setLoading(false);
         sessionStorage.setItem("hasLoaded", "true");
-      }, 2000); // 2 seconds, adjust if needed
+      }, 4000); // 2 seconds, adjust if needed
       return () => clearTimeout(timer);
     }
   }, [loading]);

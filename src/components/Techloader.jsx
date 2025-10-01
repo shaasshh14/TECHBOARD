@@ -12,7 +12,7 @@ const fonts = [
 ];
 
 const TechLoader = ({ onComplete }) => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1); // Start from 1
   const lettersRef = useRef([]);
   const loaderRef = useRef(null);
   const containerRef = useRef(null);
@@ -29,14 +29,15 @@ const TechLoader = ({ onComplete }) => {
       });
       rollCount++;
       if (rollCount > 20) clearInterval(rollInterval); // slightly more rolls
-    }, 400);
+    }, 500);
 
     return () => clearInterval(rollInterval);
   }, []);
 
   // Loader counter animation + upward animation
   useEffect(() => {
-    let loaderCount = 0;
+    let loaderCount = 1; // Start from 1
+    setCount(loaderCount);
     const loaderInterval = setInterval(() => {
       loaderCount++;
       setCount(loaderCount);
@@ -63,7 +64,7 @@ const TechLoader = ({ onComplete }) => {
           });
         }
       }
-    }, 50);
+    }, 35); // ~3.5s duration
 
     return () => clearInterval(loaderInterval);
   }, [onComplete]);
@@ -71,7 +72,7 @@ const TechLoader = ({ onComplete }) => {
   return (
     <div className="loader-container" ref={containerRef}>
       <h2 className="loki">
-        {["T", "E", "C", "H","B","O","A","R","D"].map((char, i) => (
+        {["T", "E", "C", "H", "B", "O", "A", "R", "D"].map((char, i) => (
           <p
             key={i}
             className="letter"
@@ -83,7 +84,7 @@ const TechLoader = ({ onComplete }) => {
       </h2>
 
       <div className="loader" ref={loaderRef}>
-        {count}%
+        {count > 100 ? 100 : count}%
       </div>
     </div>
   );
