@@ -114,6 +114,7 @@
   margin: 0;
   background: linear-gradient(180deg, #fff, #b8b8d8);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .pc-details p {

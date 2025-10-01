@@ -1,13 +1,8 @@
-/* src/index.css */
-/* Add this line at the top of src/index.css */
 @import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
-/* --- GLOBAL STYLES & FONTS (OPERA GX THEME) --- */
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
-
-/* ... keep the rest of your file content ... */
 
 :root {
   /* --- Opera GX Color Palette --- */
@@ -1465,6 +1460,7 @@ section {
   );
   background-size: 400% 400%;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 
   /* Animation */
@@ -1504,4 +1500,53 @@ section {
 .scrollbar-hide {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient-move {
+  background: linear-gradient(120deg, #1a1a2e, #0f3460, #5f2c82, #49a09d, #a4508b, #5f0a87);
+  background-size: 300% 300%;
+  animation: gradient-move 8s ease-in-out infinite;
+}
+
+/* --- SPACE THEME ENHANCEMENTS --- */
+.space-bg-main {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -50;
+  background: radial-gradient(ellipse at 60% 40%, rgba(60,70,100,0.18) 0%, rgba(10,12,20,0.85) 60%, #090a13 100%);
+  /* Faint cloudy Milky Way */
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+.space-vignette {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -40;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 60%, #05060a 100%);
+  opacity: 0.7;
+}
+
+/* Optionally, tweak star layers for more density and subtlety */
+.stars-bg, .stars-bg2, .stars-bg3 {
+  opacity: 0.7;
+  filter: blur(0.2px);
+}
+.stars-bg2 {
+  opacity: 0.5;
+  filter: blur(0.4px);
+}
+.stars-bg3 {
+  opacity: 0.35;
+  filter: blur(0.7px);
 }
