@@ -41,7 +41,7 @@ const FAQItem = ({ faq, index, toggleFAQ }) => {
       {/* Question Section */}
       <div className="faq-question">
         {faq.question}
-        <div className="faq-icon">{faq.open ? "-" : "+"}</div>
+        <div className="faq-icon" style={{ color: "#FF1A50" }}>{faq.open ? "-" : "+"}</div>
       </div>
 
       {/* Answer Section */}
@@ -84,13 +84,13 @@ const FAQSection = () => {
         <div className="faq-title-wrapper mb-6">
           {/* Desktop View */}
           <h2 className="hidden md:block faq-title text-3xl md:text-4xl font-bold">
-            <span className="block text-pink-500">Frequently Asked</span>
+            <span className="block " style={{color:"#FF1A50"}}>Frequently Asked</span>
             <span className="block text-white">Questions</span>
           </h2>
 
           {/* Mobile & Tablet View */}
           <h2 className="block md:hidden text-center text-3xl sm:text-4xl font-bold leading-tight">
-            <span className="block text-pink-500">Frequently Asked</span>
+            <span className="block " style={{color:"#FF1A50"}}>Frequently Asked</span>
             <span className="block text-white">Questions</span>
           </h2>
         </div>

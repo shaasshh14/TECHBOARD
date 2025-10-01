@@ -1,24 +1,22 @@
-// src/App.jsx
 import AOS from "aos";
 import "aos/dist/aos.css";
 import UpcomingEvents from "./components/UpcomingEvents";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
-import SpeakersSection from "./components/SpeakersSection";
 import FAQSection from "./components/FAQSection";
 import MarqueeSection from "./components/MarqueeSection";
 import FooterCTA from "./components/FooterCTA";
 import "./index.css";
-import Particles from "@tsparticles/react";
-import ParticlesComponent from "./components/Particles";
 import AnimatedBackground from "./components/AnimatedBackground";
-import BootLoader from "./components/BootLoader.jsx"; 
 import TechLoader from "./components/Techloader.jsx";
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => {
+    // Show loader only if not shown in this session
+    return !sessionStorage.getItem("hasLoaded");
+  });
 
   useEffect(() => {
     AOS.init({
@@ -27,31 +25,34 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    if (loading) {
+      // Hide loader after animation (adjust time as needed)
+      const timer = setTimeout(() => {
+        setLoading(false);
+        sessionStorage.setItem("hasLoaded", "true");
+      }, 2000); // 2 seconds, adjust if needed
+      return () => clearTimeout(timer);
+    }
+  }, [loading]);
 
   if (loading) {
-   
-    return <TechLoader onComplete={() => setLoading(false)} />;
+    return <TechLoader />;
   }
 
-  // useEffect(() => {
-  //   AOS.init({
-  //     duration: 1500,
-  //     once: true,
-  //   });
-  // });
   return (
     <div className="App">
       <div className="fixed inset-0 -z-50">
-        <AnimatedBackground/>
+        <AnimatedBackground />
       </div>
       <Header />
       <main>
         <HeroSection />
         <MarqueeSection />
         <AboutSection />
-        <UpcomingEvents/>
+        <UpcomingEvents />
         <FAQSection />
-        <FooterCTA/>
+        <FooterCTA />
       </main>
     </div>
   );

@@ -9,8 +9,7 @@ import Team from "./pages/Team.jsx";
 import Home from "./pages/Home.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import About from "./pages/About.jsx";
-import EventDetailPage from "./pages/EventDetailPage.jsx"; 
-import EventCaseDetailPage from "./pages/EventCaseDetailPage.jsx"; // Import the new case detail page
+import EventDetail from "./pages/EventDetail.jsx"; // <-- Add this import
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -19,9 +18,8 @@ const router = createBrowserRouter([
   { path: "/team", element: <Team /> },
   { path: "/home", element: <Home /> },
   { path: "/about", element: <About /> },
-  { path: "/contact", element: <Contact/> },
-  { path: "/event/:eventId", element: <EventDetailPage /> },
-  { path: "/event-case/:caseSlug", element: <EventCaseDetailPage /> } // Add the new route for cases
+  { path: "/contact", element: <Contact /> },
+  { path: "/event/:id", element: <EventDetail /> }, // <-- Add this new route
 ]);
 
 createRoot(document.getElementById("root")).render(

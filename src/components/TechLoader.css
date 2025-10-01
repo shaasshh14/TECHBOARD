@@ -38,7 +38,7 @@
   font-size: 2rem;
   font-weight: bold;
   color: #fff;
-  background: rgba(0, 0, 0, 0.4);
+  /* background: rgba(0, 0, 0, 0.4); */
   padding: 6px 14px;
   border-radius: 6px;
   transition: opacity 1.5s ease; /* smooth fade-out */

@@ -71,7 +71,7 @@ const TechLoader = ({ onComplete }) => {
   return (
     <div className="loader-container" ref={containerRef}>
       <h2 className="loki">
-        {["T", "E", "C", "H"].map((char, i) => (
+        {["T", "E", "C", "H","B","O","A","R","D"].map((char, i) => (
           <p
             key={i}
             className="letter"
