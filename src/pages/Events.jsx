@@ -7,6 +7,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { Link } from "react-router-dom";
+import Loader from "../components/Loader.jsx";
 import Header from "../components/Header";
 import Footer from "../components/FooterCTA";
 import AnimatedBackground from "../components/AnimatedBackground";
@@ -169,6 +170,20 @@ const CaseClue = ({ caseData, isDesktop, setPinRef, scrollXProgress }) => {
         throttledShake();
       }
     });
+  }
+
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-black">
+        <Loader />
+      </div>
+    );
   }
 
   return (
