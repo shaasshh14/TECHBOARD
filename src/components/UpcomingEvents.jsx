@@ -22,16 +22,6 @@ const events = [
     imageUrl:
       "https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=2070&auto=format&fit=crop",
   },
-  {
-    id: "robotics-expo",
-    date: "DEC 02 2025",
-    title: "Future of Robotics Expo",
-    location: "Tokyo, Japan",
-    description:
-      "Witness the latest breakthroughs in automation and robotics from leading global innovators.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1581092580497-c3a25d43907c?q=80&w=2070&auto=format&fit=crop",
-  },
 ];
 
 const UpcomingEvents = () => {
@@ -78,20 +68,16 @@ const UpcomingEvents = () => {
 
         .events-container {
           display: grid;
-          grid-template-columns: 1fr;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
           gap: 40px;
+          justify-content: center; /* Center cards horizontally */
           width: 100%;
-          max-width: 1200px;
-        }
-
-        @media (min-width: 992px) {
-          .events-container {
-            grid-template-columns: repeat(3, 1fr);
-          }
+          max-width: 1000px; /* keeps layout tighter */
+          margin: 0 auto;
         }
 
         .event-card-link {
-            text-decoration: none;
+          text-decoration: none;
         }
 
         .event-card {
@@ -104,14 +90,13 @@ const UpcomingEvents = () => {
           opacity: 0;
           transform: translateY(40px);
           animation: fadeInUp 0.8s ease-out forwards;
-          height: 100%; /* Make card fill the link height */
+          height: 100%;
           display: flex;
           flex-direction: column;
         }
 
         .event-card:nth-child(1) { animation-delay: 0.3s; }
         .event-card:nth-child(2) { animation-delay: 0.5s; }
-        .event-card:nth-child(3) { animation-delay: 0.7s; }
 
         .event-card:hover {
           transform: translateY(-10px);
@@ -120,7 +105,7 @@ const UpcomingEvents = () => {
 
         .card-image-container {
           width: 100%;
-          height: 220px;
+          height: 310px;
           overflow: hidden;
         }
 
@@ -137,7 +122,7 @@ const UpcomingEvents = () => {
 
         .card-content {
           padding: 25px;
-          flex-grow: 1; /* Allow content to grow */
+          flex-grow: 1;
         }
         
         .event-date {
