@@ -265,19 +265,6 @@ const Events = () => {
     damping: 90,
   });
 
-  const handleScroll = () => {
-    if (
-      scrollRef.current &&
-      scrollRef.current.scrollLeft > 10 &&
-      !hasScrolled
-    ) {
-      setHasScrolled(true);
-    }
-    if (isDesktop) {
-      calculatePath();
-    }
-  };
-
   const calculatePath = useCallback(() => {
     if (!isDesktop || Object.keys(pinRefs.current).length < cases.length)
       return;
@@ -319,6 +306,31 @@ const Events = () => {
     setSvgPath(pathData);
   }, [isDesktop]);
 
+  const handleScroll = () => {
+    if (
+      scrollRef.current &&
+      scrollRef.current.scrollLeft > 10 &&
+      !hasScrolled
+    ) {
+      setHasScrolled(true);
+    }
+    // THE FIX: Schedule path calculation for the next animation frame
+    window.requestAnimationFrame(calculatePath);
+  };
+
+  useEffect(() => {
+    const element = scrollRef.current;
+    if (element) {
+      const onWheel = (e) => {
+        if (e.deltaY === 0) return;
+        e.preventDefault();
+        element.scrollLeft += e.deltaY * 1.8;
+      };
+      element.addEventListener("wheel", onWheel);
+      return () => element.removeEventListener("wheel", onWheel);
+    }
+  }, []);
+
   useEffect(() => {
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 1024);
@@ -329,6 +341,9 @@ const Events = () => {
     const observer = new ResizeObserver(calculatePath);
     const currentScrollRef = scrollRef.current;
     if (currentScrollRef) observer.observe(currentScrollRef);
+
+    // Initial calculation
+    calculatePath();
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -379,7 +394,6 @@ const Events = () => {
             <div className="hidden lg:block absolute top-0 left-0 w-full h-full">
               <svg className="absolute top-0 left-0 w-full h-full overflow-visible z-10 pointer-events-none">
                 <motion.path
-                  key={svgPath}
                   d={svgPath}
                   fill="none"
                   stroke="#e74c3c"
