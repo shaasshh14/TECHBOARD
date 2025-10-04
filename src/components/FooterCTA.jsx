@@ -1,19 +1,14 @@
-// src/components/Footer.jsx
 import React from "react";
 
 const Footer = () => {
   return (
-    <footer id="contact" className="bg-[#0d0d14] text-gray-300 py-6"> 
-      {/* ↓ reduced py-12 → py-6 */}
+    <footer id="contact" className="bg-[#0d0d14] text-gray-300 py-6 relative"> 
       <div className="max-w-7xl mx-auto px-6">
-        {/* ↓ reduced px-28 → px-6 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* --- NEW SECRETARY CONTACT SECTION --- */}
           <div>
             <h3 className="font-semibold text-white mb-2">Secretary Contact</h3>
-            {/* ↓ reduced mb-4 → mb-2 */}
             <p className="text-sm leading-relaxed mb-2">
-              <span className="font-medium">Secretary:</span> John Doe
+              <span className="font-medium">Secretary:</span> Shashank Tiwari & Sneha
             </p>
             <p className="text-sm leading-relaxed mb-2">
               <span className="font-medium">Mobile:</span> +91 98765 43210
@@ -29,7 +24,6 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* --- ABOUT SECTION --- */}
           <div>
             <h3 className="font-semibold text-white mb-2">About Techboard</h3>
             <p className="text-sm leading-relaxed mb-2">
@@ -37,10 +31,7 @@ const Footer = () => {
               learn, and collaborate with passionate peers.
             </p>
 
-            {/* Social Icons + Small Logo */}
             <div className="flex items-center justify-between mt-4">
-              {/* ↓ reduced mt-6 → mt-4 */}
-              {/* Social Icons Group */}
               <div className="flex space-x-3">
                 {/* LinkedIn */}
                 <a
@@ -54,8 +45,7 @@ const Footer = () => {
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
-                    className="w-4 h-4" 
-                    // ↓ reduced w-5 h-5 → w-4 h-4
+                    className="w-4 h-4"
                   >
                     <title>LinkedIn</title>
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" />
@@ -101,16 +91,19 @@ const Footer = () => {
                 </a>
               </div>
 
-              {/* Small Logo */}
               <img
                 src="/logo.jpg"
                 alt="Techboard Club Small Logo"
-                className="w-16 h-auto rounded-full" 
-                // ↓ reduced w-24 → w-16
+                className="w-16 h-auto rounded-full"
               />
             </div>
           </div>
         </div>
+      </div>
+
+      {/* --- Bottom Fade Line with Love Message --- */}
+      <div className="mt-6 border-t border-gray-700 pt-3 text-center text-sm text-gray-400">
+        Made with <span className="text-red-500">❤️</span> and support by Techboard
       </div>
     </footer>
   );
