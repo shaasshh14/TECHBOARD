@@ -43,7 +43,6 @@ const FrameStyles = () => (
   `}</style>
 );
 
-
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // START: CanvasCard Component
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -265,24 +264,24 @@ const CanvasCard = ({ title, desc, onClick, className, style }) => {
       ctx.arcTo(x, y, x + radius, y, radius);
       ctx.closePath();
     }
-    
+
     // Helper function to wrap text
     function wrapText(context, text, x, y, maxWidth, lineHeight) {
-        const words = text.split(' ');
-        let line = '';
-        for(let n = 0; n < words.length; n++) {
-            const testLine = line + words[n] + ' ';
-            const metrics = context.measureText(testLine);
-            const testWidth = metrics.width;
-            if (testWidth > maxWidth && n > 0) {
-                context.fillText(line, x, y);
-                line = words[n] + ' ';
-                y += lineHeight;
-            } else {
-                line = testLine;
-            }
+      const words = text.split(" ");
+      let line = "";
+      for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + " ";
+        const metrics = context.measureText(testLine);
+        const testWidth = metrics.width;
+        if (testWidth > maxWidth && n > 0) {
+          context.fillText(line, x, y);
+          line = words[n] + " ";
+          y += lineHeight;
+        } else {
+          line = testLine;
         }
-        context.fillText(line, x, y);
+      }
+      context.fillText(line, x, y);
     }
 
     function drawClickEffects() {
@@ -409,15 +408,27 @@ const CanvasCard = ({ title, desc, onClick, className, style }) => {
       // --- START: New 3D Border Effect ---
 
       // 1. Draw a dark "shadow" border offset down and to the right
-      ctx.strokeStyle = 'rgba(48, 25, 52, 0.7)'; // Dark Purple shadow color
+      ctx.strokeStyle = "rgba(48, 25, 52, 0.7)"; // Dark Purple shadow color
       ctx.lineWidth = 3;
-      roundedRect(shiftedX + 1, shiftedY + 1, card.width, card.height, card.cornerRadius);
+      roundedRect(
+        shiftedX + 1,
+        shiftedY + 1,
+        card.width,
+        card.height,
+        card.cornerRadius
+      );
       ctx.stroke();
 
       // 2. Draw a light "highlight" border offset up and to the left
-      ctx.strokeStyle = 'rgba(0, 255, 255, 0.3)'; // Light Cyan highlight color
+      ctx.strokeStyle = "rgba(0, 255, 255, 0.3)"; // Light Cyan highlight color
       ctx.lineWidth = 2;
-      roundedRect(shiftedX - 1, shiftedY - 1, card.width, card.height, card.cornerRadius);
+      roundedRect(
+        shiftedX - 1,
+        shiftedY - 1,
+        card.width,
+        card.height,
+        card.cornerRadius
+      );
       ctx.stroke();
 
       // --- END: New 3D Border Effect ---
@@ -435,7 +446,14 @@ const CanvasCard = ({ title, desc, onClick, className, style }) => {
       ctx.fillStyle = "#ccc";
       ctx.font = "16px Arial";
       ctx.textAlign = "center";
-      wrapText(ctx, desc, centerX, shiftedY + card.height / 2 + 40, card.width - 60, 22);
+      wrapText(
+        ctx,
+        desc,
+        centerX,
+        shiftedY + card.height / 2 + 40,
+        card.width - 60,
+        22
+      );
 
       ctx.fillStyle = "#888";
       ctx.font = "12px Arial";
@@ -724,12 +742,18 @@ const Gallery = () => {
         icon: "apps-outline",
         desc: "A mega tech-fest with coding battles, robotics, hackathons, and gaming tournaments.",
         images: [
-          "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1535223289827-42f1e9919769?q=80&w=1887&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1581092921462-2052b57abe14?q=80&w=2070&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1535223289827-42f1e9919769?q=80&w=1887&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1581092921462-2052b57abe14?q=80&w=2070&auto=format&fit=crop",
+          "TECHAAKRITI/p1.jpg",
+          "TECHAAKRITI/p2.jpg",
+          "TECHAAKRITI/p3.jpg",
+          "TECHAAKRITI/p23.jpg",
+          "TECHAAKRITI/p24.jpg",
+          "TECHAAKRITI/p21.jpg",
+          "TECHAAKRITI/p13.jpg",
+          "TECHAAKRITI/p14.jpg",
+          "TECHAAKRITI/p5.jpg",
+          "TECHAAKRITI/p6.jpg",
+          "TECHAAKRITI/p20.jpg",
+          "TECHAAKRITI/p19.jpg",
         ],
       },
       {
