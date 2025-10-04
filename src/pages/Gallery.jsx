@@ -43,7 +43,6 @@ const FrameStyles = () => (
   `}</style>
 );
 
-
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // START: CanvasCard Component
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -265,24 +264,24 @@ const CanvasCard = ({ title, desc, onClick, className, style }) => {
       ctx.arcTo(x, y, x + radius, y, radius);
       ctx.closePath();
     }
-    
+
     // Helper function to wrap text
     function wrapText(context, text, x, y, maxWidth, lineHeight) {
-        const words = text.split(' ');
-        let line = '';
-        for(let n = 0; n < words.length; n++) {
-            const testLine = line + words[n] + ' ';
-            const metrics = context.measureText(testLine);
-            const testWidth = metrics.width;
-            if (testWidth > maxWidth && n > 0) {
-                context.fillText(line, x, y);
-                line = words[n] + ' ';
-                y += lineHeight;
-            } else {
-                line = testLine;
-            }
+      const words = text.split(" ");
+      let line = "";
+      for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + " ";
+        const metrics = context.measureText(testLine);
+        const testWidth = metrics.width;
+        if (testWidth > maxWidth && n > 0) {
+          context.fillText(line, x, y);
+          line = words[n] + " ";
+          y += lineHeight;
+        } else {
+          line = testLine;
         }
-        context.fillText(line, x, y);
+      }
+      context.fillText(line, x, y);
     }
 
     function drawClickEffects() {
@@ -409,15 +408,27 @@ const CanvasCard = ({ title, desc, onClick, className, style }) => {
       // --- START: New 3D Border Effect ---
 
       // 1. Draw a dark "shadow" border offset down and to the right
-      ctx.strokeStyle = 'rgba(48, 25, 52, 0.7)'; // Dark Purple shadow color
+      ctx.strokeStyle = "rgba(48, 25, 52, 0.7)"; // Dark Purple shadow color
       ctx.lineWidth = 3;
-      roundedRect(shiftedX + 1, shiftedY + 1, card.width, card.height, card.cornerRadius);
+      roundedRect(
+        shiftedX + 1,
+        shiftedY + 1,
+        card.width,
+        card.height,
+        card.cornerRadius
+      );
       ctx.stroke();
 
       // 2. Draw a light "highlight" border offset up and to the left
-      ctx.strokeStyle = 'rgba(0, 255, 255, 0.3)'; // Light Cyan highlight color
+      ctx.strokeStyle = "rgba(0, 255, 255, 0.3)"; // Light Cyan highlight color
       ctx.lineWidth = 2;
-      roundedRect(shiftedX - 1, shiftedY - 1, card.width, card.height, card.cornerRadius);
+      roundedRect(
+        shiftedX - 1,
+        shiftedY - 1,
+        card.width,
+        card.height,
+        card.cornerRadius
+      );
       ctx.stroke();
 
       // --- END: New 3D Border Effect ---
@@ -435,7 +446,14 @@ const CanvasCard = ({ title, desc, onClick, className, style }) => {
       ctx.fillStyle = "#ccc";
       ctx.font = "16px Arial";
       ctx.textAlign = "center";
-      wrapText(ctx, desc, centerX, shiftedY + card.height / 2 + 40, card.width - 60, 22);
+      wrapText(
+        ctx,
+        desc,
+        centerX,
+        shiftedY + card.height / 2 + 40,
+        card.width - 60,
+        22
+      );
 
       ctx.fillStyle = "#888";
       ctx.font = "12px Arial";
@@ -724,17 +742,18 @@ const Gallery = () => {
         icon: "apps-outline",
         desc: "A mega tech-fest with coding battles, robotics, hackathons, and gaming tournaments.",
         images: [
-          "/gallery-images/ta9.jpg",
-          "/gallery-images/ta10.jpg",
-          "/gallery-images/ta3.jpg",
-          "/gallery-images/ta1.jpg",
-          "/gallery-images/ta2.jpg",
-          "/gallery-images/ta4.jpg",
-          "/gallery-images/ta5.jpg",
-          "/gallery-images/ta6.jpg",
-          "/gallery-images/ta7.jpg",
-          "/gallery-images/ta8.jpg",
-          
+          "TECHAAKRITI/p1.jpg",
+          "TECHAAKRITI/p2.jpg",
+          "TECHAAKRITI/p3.jpg",
+          "TECHAAKRITI/p23.jpg",
+          "TECHAAKRITI/p24.jpg",
+          "TECHAAKRITI/p21.jpg",
+          "TECHAAKRITI/p13.jpg",
+          "TECHAAKRITI/p14.jpg",
+          "TECHAAKRITI/p5.jpg",
+          "TECHAAKRITI/p6.jpg",
+          "TECHAAKRITI/p20.jpg",
+          "TECHAAKRITI/p19.jpg",
         ],
       },
       {
@@ -743,16 +762,18 @@ const Gallery = () => {
         icon: "car-sport-outline",
         desc: "Featuring 'Rusty Wheels,' the thrilling RC racing competition. Build, customize, and race to victory!",
         images: [
-          "/gallery-images/sol1.jpg",
-          "/gallery-images/sol2.jpg",
-          "/gallery-images/sol3.jpg",
-          "/gallery-images/sol4.jpg",
-          "/gallery-images/sol5.jpg",
-          "/gallery-images/sol6.jpg",
-          "/gallery-images/sol7.jpg",
-          "/gallery-images/sol8.jpg",
-          "/gallery-images/sol9.jpg",
-          "/gallery-images/sol10.jpg",
+          "SOLUTIONS/x1.jpg",
+          "SOLUTIONS/x2.jpg",
+          "SOLUTIONS/x3.jpg",
+          "SOLUTIONS/x13.jpg",
+          "SOLUTIONS/x4.jpg",
+          "SOLUTIONS/x5.jpg",
+          "SOLUTIONS/x7.jpg",
+          "SOLUTIONS/x6.jpg",
+          "SOLUTIONS/x8.jpg",
+          "SOLUTIONS/x9.jpg",
+
+          "SOLUTIONS/x11.jpg",
         ],
       },
       {

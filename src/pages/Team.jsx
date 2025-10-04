@@ -56,10 +56,10 @@ function Team() {
 
         <div
           className="
-    flex 
-    flex-wrap 
-    justify-center
-  "
+            flex 
+            flex-wrap 
+            justify-center
+          "
         >
           <NewProfileCard
             name="SHASHANK TIWARI"

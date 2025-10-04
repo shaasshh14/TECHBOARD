@@ -152,7 +152,9 @@ const CaseClue = ({ caseData, isDesktop, setPinRef, scrollXProgress }) => {
       }
     });
   }
-
+  
+  // Note: This loader logic is based on a timer, not actual content loading.
+  // This is fine for now but could be improved later.
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1500);
@@ -232,7 +234,6 @@ const Events = () => {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
   const [hasScrolled, setHasScrolled] = useState(false);
 
-  // --- AOS Initialization ---
   useEffect(() => {
     AOS.init({
       duration: 1500,
@@ -245,19 +246,6 @@ const Events = () => {
     stiffness: 400,
     damping: 90,
   });
-
-  const handleScroll = () => {
-    if (
-      scrollRef.current &&
-      scrollRef.current.scrollLeft > 10 &&
-      !hasScrolled
-    ) {
-      setHasScrolled(true);
-    }
-    if (isDesktop) {
-      calculatePath();
-    }
-  };
 
   const calculatePath = useCallback(() => {
     if (!isDesktop || Object.keys(pinRefs.current).length < cases.length)
@@ -300,6 +288,32 @@ const Events = () => {
     setSvgPath(pathData);
   }, [isDesktop]);
 
+  const handleScroll = () => {
+    if (
+      scrollRef.current &&
+      scrollRef.current.scrollLeft > 10 &&
+      !hasScrolled
+    ) {
+      setHasScrolled(true);
+    }
+    window.requestAnimationFrame(calculatePath);
+  };
+
+  // --- CHANGED: Added isDesktop check to this effect ---
+  useEffect(() => {
+    const element = scrollRef.current;
+    // Only add the wheel listener on desktop
+    if (element && isDesktop) {
+      const onWheel = (e) => {
+        if (e.deltaY === 0) return;
+        e.preventDefault();
+        element.scrollLeft += e.deltaY * 1.8;
+      };
+      element.addEventListener("wheel", onWheel);
+      return () => element.removeEventListener("wheel", onWheel);
+    }
+  }, [isDesktop]); // Dependency array ensures this runs when isDesktop changes
+
   useEffect(() => {
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 1024);
@@ -310,6 +324,8 @@ const Events = () => {
     const observer = new ResizeObserver(calculatePath);
     const currentScrollRef = scrollRef.current;
     if (currentScrollRef) observer.observe(currentScrollRef);
+
+    calculatePath();
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -338,14 +354,18 @@ const Events = () => {
           onScroll={handleScroll}
           className="relative w-full max-w-7xl mx-auto lg:h-[600px] h-auto lg:overflow-x-scroll lg:overflow-y-hidden scrollbar-hide"
         >
-          {!hasScrolled && <ScrollIndicator />}
+          {!hasScrolled && isDesktop && <ScrollIndicator />}
           <div
-            className="relative w-full h-full"
+            // --- MAIN FIX: Changed h-full to lg:h-full ---
+            // This ensures height is 100% only on large screens.
+            // On mobile, height will be determined by its content.
+            className="relative w-full lg:h-full"
             style={
               isDesktop ? { width: `${DESKTOP_TRACK_WIDTH_PERCENT}%` } : {}
             }
           >
-            <div className="lg:hidden relative w-full h-auto flex flex-col items-center gap-y-32">
+            {/* Mobile Layout: A standard vertical flex column */}
+            <div className="lg:hidden relative w-full flex flex-col items-center gap-y-32 pt-8 pb-16">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-full bg-red-800/50 z-0"></div>
               {cases.map((caseData) => (
                 <CaseClue
@@ -357,10 +377,10 @@ const Events = () => {
                 />
               ))}
             </div>
+            {/* Desktop Layout: Absolutely positioned items */}
             <div className="hidden lg:block absolute top-0 left-0 w-full h-full">
               <svg className="absolute top-0 left-0 w-full h-full overflow-visible z-10 pointer-events-none">
                 <motion.path
-                  key={svgPath}
                   d={svgPath}
                   fill="none"
                   stroke="#e74c3c"
@@ -380,15 +400,17 @@ const Events = () => {
             </div>
           </div>
         </div>
-
-        <div className="hidden lg:block w-full max-w-7xl mx-auto mt-8 h-2">
-          <div className="h-full bg-gray-800/50 rounded-full">
-            <motion.div
-              className="h-full bg-red-600 rounded-full"
-              style={{ scaleX: scrollXProgress, transformOrigin: "left" }}
-            />
+        {/* Progress bar only for desktop view */}
+        {isDesktop && (
+          <div className="hidden lg:block w-full max-w-7xl mx-auto mt-8 h-2">
+            <div className="h-full bg-gray-800/50 rounded-full">
+              <motion.div
+                className="h-full bg-red-600 rounded-full"
+                style={{ scaleX: scrollXProgress, transformOrigin: "left" }}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </main>
       <Footer />
     </div>

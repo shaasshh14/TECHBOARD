@@ -47,7 +47,7 @@ export const ContactSection = () => {
       <div className="max-w-4xl mx-auto w-full">
         {/* Section Heading */}
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-          Contact <span className="text-indigo-500">Us</span>
+          Contact <span className="text-[#FF1A50]">Us</span>
         </h2>
         <p className="text-center text-gray-400 mb-12 max-w-lg mx-auto">
           Have questions or want to collaborate? Fill out the form below and we’ll get back to you shortly.
@@ -137,7 +137,7 @@ export const ContactSection = () => {
             <button
               type="submit"
               disabled={isSending}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 ease-in-out text-white font-bold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 disabled:opacity-50"
+              className="w-full bg-[#FF1A50] hover:bg-indigo-700 transition-all duration-300 ease-in-out text-white font-bold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 disabled:opacity-50"
             >
               {isSending ? "Sending..." : "Send Message"}
             </button>
