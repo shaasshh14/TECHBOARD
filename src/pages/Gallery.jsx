@@ -772,6 +772,7 @@ const Gallery = () => {
           "SOLUTIONS/x8.jpg",
           "SOLUTIONS/x9.jpg",
           "SOLUTIONS/x10.jpg",
+          "SOLUTIONS/x12.jpg",
           "SOLUTIONS/x11.jpg",
         ],
       },
