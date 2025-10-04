@@ -7,7 +7,7 @@ import Loader from "../components/Loader.jsx";
 
 // Data for the cases, which should be consistent with Events.jsx
 const cases = [
-    { id: 1, title: "The Crimson Quill", description: "Cryptic letters signed with crimson ink appear across the city.", image: "https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+    { id: 1, title: "The Crimson Quill", description: "Cryptic letters signed with crimson ink appear across the city.", image: "/event-images/e1.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
     { id: 2, title: "Echoes of the Past", description: "An old photograph surfaces, holding a clue to a decades-old mystery.", image: "https://images.pexels.com/photos/935949/pexels-photo-935949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
     { id: 3, title: "The Silent Witness", description: "The only witness is a parrot who speaks only in riddles. Time to decipher.", image: "https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
     { id: 4, title: "The Midnight Cipher", description: "A coded message, intercepted at midnight, points to a secret society.", image: "https://images.pexels.com/photos/2117283/pexels-photo-2117283.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },

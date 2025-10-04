@@ -13,7 +13,7 @@ const cases = [
     description:
       "Cryptic letters signed with crimson ink appear across the city.",
     image:
-      "https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+     "/event-images/e1.png",
     rotation: -3,
   },
   {
@@ -23,7 +23,7 @@ const cases = [
     description:
       "An old photograph surfaces, holding a clue to a decades-old mystery.",
     image:
-      "https://images.pexels.com/photos/935949/pexels-photo-935949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "/event-images/e2.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: 2,
   },
   {
@@ -33,7 +33,7 @@ const cases = [
     description:
       "The only witness is a parrot who speaks only in riddles. Time to decipher.",
     image:
-      "https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "/event-images/e3.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: 1,
   },
   {
@@ -43,7 +43,7 @@ const cases = [
     description:
       "A coded message, intercepted at midnight, points to a secret society.",
     image:
-      "https://images.pexels.com/photos/2117283/pexels-photo-2117283.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "/event-images/e4.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: -2,
   },
   {
@@ -52,7 +52,7 @@ const cases = [
     title: "Phantom's Fortune",
     description: "A rumored treasure is hidden within a haunted opera house.",
     image:
-      "https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "/event-images/e5.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: 3,
   },
   {
@@ -62,7 +62,7 @@ const cases = [
     description:
       "A diver discovers a locket in a shipwreck, containing a mysterious portrait.",
     image:
-      "https://images.pexels.com/photos/761543/pexels-photo-761543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "/event-images/e6.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: -1,
   },
   {
@@ -71,7 +71,7 @@ const cases = [
     title: "The Gilded Cage",
     description: "A prized songbird, the key to a conspiracy, has been stolen.",
     image:
-      "https://images.pexels.com/photos/131723/pexels-photo-131723.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "/event-images/e7.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: 2,
   },
   {
@@ -81,29 +81,10 @@ const cases = [
     description:
       "A famous painting is replaced by a forgery, with a hidden message.",
     image:
-      "https://images.pexels.com/photos/1183992/pexels-photo-1183992.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "/event-images/e8.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: -4,
   },
-  {
-    id: 9,
-    caseNumber: "#9",
-    title: "Beekeeper's Secret",
-    description:
-      "A beekeeper uses his hives to pass secret messages for a spy ring.",
-    image:
-      "https://media.istockphoto.com/id/462333727/photo/smiling-man-with-hand-in-hair.jpg?s=2048x2048&w=is&k=20&c=0KeXC-tQhGZ9U3-WlxJ579-yVEA1CTqZzyTNEg_p4fE=",
-    rotation: 1,
-  },
-  {
-    id: 10,
-    caseNumber: "#10",
-    title: "The Final Curtain",
-    description:
-      "The entire conspiracy is set to be revealed on opening night.",
-    image:
-      "https://images.pexels.com/photos/33129/popcorn-movie-party-entertainment.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    rotation: 3,
-  },
+  
 ];
 
 

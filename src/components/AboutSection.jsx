@@ -99,22 +99,22 @@ const AboutSection = () => {
         {[
           {
             pos: "top-3 left-3",
-            src: "https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg",
+            src: "/home-images/h1.jpg",
             alt: "Top Left",
           },
           {
             pos: "top-3 right-3",
-            src: "https://images.pexels.com/photos/2102416/pexels-photo-2102416.jpeg",
+            src: "/home-images/h2.jpg",
             alt: "Top Right",
           },
           {
             pos: "bottom-3 left-3",
-            src: "https://images.pexels.com/photos/5439152/pexels-photo-5439152.jpeg",
+            src: "/home-images/h3.jpg",
             alt: "Bottom Left",
           },
           {
             pos: "bottom-3 right-3",
-            src: "https://images.pexels.com/photos/1181345/pexels-photo-1181345.jpeg",
+            src: "/home-images/h4.jpg",
             alt: "Bottom Right",
           },
         ].map((img, i) => (
