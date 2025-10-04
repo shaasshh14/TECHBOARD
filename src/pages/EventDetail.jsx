@@ -6,14 +6,15 @@ import AnimatedBackground from "../components/AnimatedBackground";
 
 // Data array remains the same
 const cases = [
-    {
+  {
     id: 1,
     caseNumber: "#1",
     title: "The Crimson Quill",
     description:
       "Cryptic letters signed with crimson ink appear across the city.",
-    image:
-     "/event-images/e1.png",
+    image: "/event-images/e1.png",
+    coverImage:
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
     rotation: -3,
   },
   {
@@ -22,8 +23,9 @@ const cases = [
     title: "Echoes of the Past",
     description:
       "An old photograph surfaces, holding a clue to a decades-old mystery.",
-    image:
-      "/event-images/e2.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image: "/event-images/e2.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    coverImage:
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
     rotation: 2,
   },
   {
@@ -32,8 +34,9 @@ const cases = [
     title: "The Silent Witness",
     description:
       "The only witness is a parrot who speaks only in riddles. Time to decipher.",
-    image:
-      "/event-images/e3.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image: "/event-images/e3.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    coverImage:
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
     rotation: 1,
   },
   {
@@ -42,8 +45,9 @@ const cases = [
     title: "The Midnight Cipher",
     description:
       "A coded message, intercepted at midnight, points to a secret society.",
-    image:
-      "/event-images/e4.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image: "/event-images/e4.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    coverImage:
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
     rotation: -2,
   },
   {
@@ -51,8 +55,9 @@ const cases = [
     caseNumber: "#5",
     title: "Phantom's Fortune",
     description: "A rumored treasure is hidden within a haunted opera house.",
-    image:
-      "/event-images/e5.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image: "/event-images/e5.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    coverImage:
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
     rotation: 3,
   },
   {
@@ -61,8 +66,9 @@ const cases = [
     title: "The Sunken Locket",
     description:
       "A diver discovers a locket in a shipwreck, containing a mysterious portrait.",
-    image:
-      "/event-images/e6.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image: "/event-images/e6.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    coverImage:
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
     rotation: -1,
   },
   {
@@ -70,8 +76,9 @@ const cases = [
     caseNumber: "#7",
     title: "The Gilded Cage",
     description: "A prized songbird, the key to a conspiracy, has been stolen.",
-    image:
-      "/event-images/e7.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image: "/event-images/e7.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    coverImage:
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
     rotation: 2,
   },
   {
@@ -80,13 +87,12 @@ const cases = [
     title: "The Counterfeit Smile",
     description:
       "A famous painting is replaced by a forgery, with a hidden message.",
-    image:
-      "/event-images/e8.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image: "/event-images/e8.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    coverImage:
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
     rotation: -4,
   },
-  
 ];
-
 
 // A small component for the "Other Events" cards in the sidebar
 const OtherEventCard = ({ event }) => {
@@ -94,7 +100,7 @@ const OtherEventCard = ({ event }) => {
     <Link to={`/event/${event.id}`} className="block group">
       <div className="bg-gray-800/50 hover:bg-gray-800/80 p-3 rounded-lg border border-gray-700 transition-all duration-300 flex items-center gap-4">
         <img
-          src={event.image}
+          src={event.coverImage}
           alt={event.title}
           className="w-20 h-16 object-cover rounded-md"
         />
@@ -121,11 +127,16 @@ const EventDetail = () => {
     // Fallback for when an event is not found
     return (
       <div className="font-['Special_Elite',_cursive]">
-        <div className="fixed inset-0 -z-10"><AnimatedBackground /></div>
+        <div className="fixed inset-0 -z-10">
+          <AnimatedBackground />
+        </div>
         <Header />
         <main className="w-full min-h-screen pt-28 pb-16 px-4 flex flex-col items-center justify-center text-white">
           <h2 className="text-3xl">Event not found! 🧐</h2>
-          <Link to="/events" className="mt-4 text-red-400 hover:text-red-600 transition-colors">
+          <Link
+            to="/events"
+            className="mt-4 text-red-400 hover:text-red-600 transition-colors"
+          >
             Go back to all events
           </Link>
         </main>
@@ -136,13 +147,14 @@ const EventDetail = () => {
 
   return (
     <div className="font-['Special_Elite',_cursive] text-white">
-      <div className="fixed inset-0 -z-10"><AnimatedBackground /></div>
+      <div className="fixed inset-0 -z-10">
+        <AnimatedBackground />
+      </div>
       <Header />
       <main className="w-full min-h-screen pt-28 pb-16 px-4 md:px-8">
         {/* This is the main rectangular page container */}
         <div className="max-w-7xl mx-auto bg-[#1a1a1a]/80 backdrop-blur-sm p-6 md:p-8 rounded-xl shadow-2xl border border-gray-700">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
             {/* Section 1: Main Event Details (takes up 2/3 of the space on large screens) */}
             <div className="lg:col-span-2">
               <img
@@ -150,18 +162,36 @@ const EventDetail = () => {
                 alt={event.title}
                 className="w-full h-auto max-h-[400px] object-cover rounded-lg shadow-lg mb-6"
               />
-              <span className="text-yellow-400 text-2xl font-bold">{event.caseNumber}</span>
-              <h1 className="text-5xl lg:text-6xl font-bold text-red-500 my-2">{event.title}</h1>
+              <span className="text-yellow-400 text-2xl font-bold">
+                {event.caseNumber}
+              </span>
+              <h1 className="text-5xl lg:text-6xl font-bold text-red-500 my-2">
+                {event.title}
+              </h1>
               <p className="text-xl text-gray-300 mt-4 leading-relaxed border-l-4 border-red-500 pl-4">
                 {event.description}
               </p>
-              
+
               {/* Additional Details Section */}
               <div className="mt-8 border-t border-gray-700 pt-6 space-y-4">
-                 <h3 className="text-2xl text-yellow-400 font-bold">Event Intel</h3>
-                 <p className="text-gray-400"><strong className="text-gray-200">Date & Time:</strong> October 25, 2025, 8:00 PM IST</p>
-                 <p className="text-gray-400"><strong className="text-gray-200">Location:</strong> The Old Warehouse, Sector 7</p>
-                 <p className="text-gray-400"><strong className="text-gray-200">Rules of Engagement:</strong> Trust no one. Bring your wits. Standard detective gear permitted.</p>
+                <h3 className="text-2xl text-yellow-400 font-bold">
+                  Event Intel
+                </h3>
+                <p className="text-gray-400">
+                  <strong className="text-gray-200">Date & Time:</strong>{" "}
+                  October 25, 2025, 8:00 PM IST
+                </p>
+                <p className="text-gray-400">
+                  <strong className="text-gray-200">Location:</strong> The Old
+                  Warehouse, Sector 7
+                </p>
+                <p className="text-gray-400">
+                  <strong className="text-gray-200">
+                    Rules of Engagement:
+                  </strong>{" "}
+                  Trust no one. Bring your wits. Standard detective gear
+                  permitted.
+                </p>
               </div>
 
               <div className="text-left mt-12">
@@ -169,8 +199,17 @@ const EventDetail = () => {
                   to="/events"
                   className="inline-flex items-center bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-300"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 mr-2"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                   Back to All Events
                 </Link>
@@ -190,7 +229,6 @@ const EventDetail = () => {
                 </div>
               </div>
             </div>
-            
           </div>
         </div>
       </main>

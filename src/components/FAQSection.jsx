@@ -5,24 +5,24 @@ import { RobotSection } from "./RobotSection"; // Optional robot section
 // FAQ data
 const faqData = [
   {
-    question: "What is Opera GX?",
+    question: "What is the Tech Board?",
     answer:
-      "Opera GX is a special version of the Opera browser built specifically to complement gaming. The browser includes unique features to help you get the most out of both gaming and browsing.",
+      "The Tech Board is our college’s official technical community that organizes and manages all tech-related events, workshops, and competitions.",
   },
   {
-    question: "Is Opera GX free?",
+    question: "What does the Tech Board do?",
     answer:
-      "Yes, Opera GX is completely free. You can download it from the official website and use all of its features without any cost.",
+      "We host coding contests, gaming tournaments, hackathons, and technical festivals while representing our college at inter-college and national-level tech events.",
   },
   {
-    question: "What are GX Control features?",
+    question: "Who can join the Tech Board?",
     answer:
-      "GX Control is a key feature that lets you set limits on how much RAM, CPU, and network usage your browser uses. This ensures your browser doesn't interfere with your gaming performance.",
+      "Any student passionate about technology, innovation, or event management can join by participating in our selection or recruitment drives.",
   },
   {
-    question: "Can I customize the look?",
+    question: "Why should I join the Tech Board?",
     answer:
-      "Absolutely. Opera GX offers deep customization with themes, colors, wallpapers, and Razer Chroma integration to match your gaming setup.",
+      "Being part of the Tech Board helps you learn new skills, collaborate with talented peers, and gain real-world exposure to the tech community.",
   },
 ];
 

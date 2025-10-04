@@ -9,7 +9,8 @@ import Team from "./pages/Team.jsx";
 import Home from "./pages/Home.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import About from "./pages/About.jsx";
-import EventDetail from "./pages/EventDetail.jsx"; // <-- Add this import
+import EventDetail from "./pages/EventDetail.jsx";
+import VideoPage from "./pages/VideoPage.jsx"; // 1. Import the new VideoPage component
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -19,7 +20,8 @@ const router = createBrowserRouter([
   { path: "/home", element: <Home /> },
   { path: "/about", element: <About /> },
   { path: "/contact", element: <Contact /> },
-  { path: "/event/:id", element: <EventDetail /> }, // <-- Add this new route
+  { path: "/event/:id", element: <EventDetail /> },
+  { path: "/watch-recap", element: <VideoPage /> }, // 2. Add the new route for the video page
 ]);
 
 createRoot(document.getElementById("root")).render(

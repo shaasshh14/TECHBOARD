@@ -27,46 +27,50 @@ const throttle = (func, delay) => {
   };
 };
 
-// --- Data with working images ---
+// --- UPDATED DATA: New random images for 'coverImage' ---
 const cases = [
   {
     id: 1,
     caseNumber: "#1",
     title: "The Crimson Quill",
-    description:
-      "Cryptic letters signed with crimson ink appear across the city.",
-    image:
-      "/event-images/e1.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    description: "Cryptic letters signed with crimson ink appear across the city.",
+    // New random cover image
+    coverImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+    // Inside image remains the same
+    detailImage: "/event-images/e1_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: -3,
   },
   {
     id: 2,
     caseNumber: "#2",
     title: "Echoes of the Past",
-    description:
-      "An old photograph surfaces, holding a clue to a decades-old mystery.",
-    image:
-      "/event-images/e2.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    description: "An old photograph surfaces, holding a clue to a decades-old mystery.",
+    // New random cover image
+    coverImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+    // Inside image remains the same
+    detailImage: "/event-images/e2_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: 2,
   },
   {
     id: 3,
     caseNumber: "#3",
     title: "The Silent Witness",
-    description:
-      "The only witness is a parrot who speaks only in riddles. Time to decipher.",
-    image:
-      "/event-images/e3.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    description: "The only witness is a parrot who speaks only in riddles. Time to decipher.",
+    // New random cover image
+    coverImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+    // Inside image remains the same
+    detailImage: "/event-images/e3_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: 1,
   },
   {
     id: 4,
     caseNumber: "#4",
     title: "The Midnight Cipher",
-    description:
-      "A coded message, intercepted at midnight, points to a secret society.",
-    image:
-      "/event-images/e4.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    description: "A coded message, intercepted at midnight, points to a secret society.",
+    // New random cover image
+   coverImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+    // Inside image remains the same
+    detailImage: "/event-images/e4_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: -2,
   },
   {
@@ -74,18 +78,21 @@ const cases = [
     caseNumber: "#5",
     title: "Phantom's Fortune",
     description: "A rumored treasure is hidden within a haunted opera house.",
-    image:
-      "/event-images/e5.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    // New random cover image
+    coverImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+    // Inside image remains the same
+    detailImage: "/event-images/e5_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: 3,
   },
   {
     id: 6,
     caseNumber: "#6",
     title: "The Sunken Locket",
-    description:
-      "A diver discovers a locket in a shipwreck, containing a mysterious portrait.",
-    image:
-      "/event-images/e6.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    description: "A diver discovers a locket in a shipwreck, containing a mysterious portrait.",
+    // New random cover image
+    coverImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+    // Inside image remains the same
+    detailImage: "/event-images/e6_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: -1,
   },
   {
@@ -93,21 +100,23 @@ const cases = [
     caseNumber: "#7",
     title: "The Gilded Cage",
     description: "A prized songbird, the key to a conspiracy, has been stolen.",
-    image:
-      "/event-images/e7.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    // New random cover image
+    coverImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+    // Inside image remains the same
+    detailImage: "/event-images/e7_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: 2,
   },
   {
     id: 8,
     caseNumber: "#8",
     title: "The Counterfeit Smile",
-    description:
-      "A famous painting is replaced by a forgery, with a hidden message.",
-    image:
-      "/event-images/e8.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    description: "A famous painting is replaced by a forgery, with a hidden message.",
+    // New random cover image
+    coverImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+    // Inside image remains the same
+    detailImage: "/event-images/e8_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: -4,
   },
-  
 ];
 
 const DESKTOP_TRACK_WIDTH_PERCENT = 250;
@@ -153,8 +162,6 @@ const CaseClue = ({ caseData, isDesktop, setPinRef, scrollXProgress }) => {
     });
   }
   
-  // Note: This loader logic is based on a timer, not actual content loading.
-  // This is fine for now but could be improved later.
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1500);
@@ -205,7 +212,7 @@ const CaseClue = ({ caseData, isDesktop, setPinRef, scrollXProgress }) => {
             <div className="flex flex-col items-center">
               <div className="bg-white p-2.5 shadow-lg border border-gray-200 w-full">
                 <img
-                  src={caseData.image}
+                  src={caseData.coverImage}
                   alt={caseData.title}
                   className="w-full h-auto object-cover"
                 />
@@ -299,10 +306,8 @@ const Events = () => {
     window.requestAnimationFrame(calculatePath);
   };
 
-  // --- CHANGED: Added isDesktop check to this effect ---
   useEffect(() => {
     const element = scrollRef.current;
-    // Only add the wheel listener on desktop
     if (element && isDesktop) {
       const onWheel = (e) => {
         if (e.deltaY === 0) return;
@@ -312,7 +317,7 @@ const Events = () => {
       element.addEventListener("wheel", onWheel);
       return () => element.removeEventListener("wheel", onWheel);
     }
-  }, [isDesktop]); // Dependency array ensures this runs when isDesktop changes
+  }, [isDesktop]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -356,15 +361,12 @@ const Events = () => {
         >
           {!hasScrolled && isDesktop && <ScrollIndicator />}
           <div
-            // --- MAIN FIX: Changed h-full to lg:h-full ---
-            // This ensures height is 100% only on large screens.
-            // On mobile, height will be determined by its content.
             className="relative w-full lg:h-full"
             style={
               isDesktop ? { width: `${DESKTOP_TRACK_WIDTH_PERCENT}%` } : {}
             }
           >
-            {/* Mobile Layout: A standard vertical flex column */}
+            {/* Mobile Layout */}
             <div className="lg:hidden relative w-full flex flex-col items-center gap-y-32 pt-8 pb-16">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-full bg-red-800/50 z-0"></div>
               {cases.map((caseData) => (
@@ -377,7 +379,7 @@ const Events = () => {
                 />
               ))}
             </div>
-            {/* Desktop Layout: Absolutely positioned items */}
+            {/* Desktop Layout */}
             <div className="hidden lg:block absolute top-0 left-0 w-full h-full">
               <svg className="absolute top-0 left-0 w-full h-full overflow-visible z-10 pointer-events-none">
                 <motion.path
@@ -400,7 +402,7 @@ const Events = () => {
             </div>
           </div>
         </div>
-        {/* Progress bar only for desktop view */}
+        {/* Progress bar */}
         {isDesktop && (
           <div className="hidden lg:block w-full max-w-7xl mx-auto mt-8 h-2">
             <div className="h-full bg-gray-800/50 rounded-full">

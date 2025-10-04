@@ -1,8 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { RobotSection } from "./RobotSection";
+import { useNavigate } from "react-router-dom"; // 1. Import useNavigate
+
+// RobotSection import seems unused in the provided code, but keeping it if you use it elsewhere.
+// import { RobotSection } from "./RobotSection";
 
 const AboutSection = () => {
+  const navigate = useNavigate(); // 2. Initialize the navigate function
+
   return (
     <div className="max-w-10/12 mx-auto flex flex-col items-center justify-center px-4 py-10 relative">
       {/* Animated Heading */}
@@ -49,7 +54,7 @@ const AboutSection = () => {
             transition={{ duration: 0.7 }}
             className="text-2xl md:text-4xl font-extrabold leading-tight"
           >
-            The No.1 Fest for:
+            Know our Board
           </motion.h1>
 
           <motion.h2
@@ -59,7 +64,7 @@ const AboutSection = () => {
             className="text-3xl md:text-5xl font-extrabold -mt-5 leading-tight"
           >
             <span className="inline-block bg-[#ff9a3c] text-[#1A1D24] py-1 px-6 rounded-xl -rotate-2 shadow-lg">
-              Web Designers & Devs
+              TB
             </span>
           </motion.h2>
 
@@ -68,19 +73,15 @@ const AboutSection = () => {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
             className="text-sm md:text-base text-gray-300 max-w-md leading-relaxed"
-          >
-            We are a team of passionate gamers and developers dedicated to
-            creating the best browsing experience for gamers. We believe in
-            speed, customization, and control.
-          </motion.p>
-
+          ></motion.p>
           <motion.button
+            onClick={() => navigate('/watch-recap')} // 3. Add onClick to navigate
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-3 bg-white text-[#1A1D24] rounded-full py-3 px-6 text-base font-bold cursor-pointer transition-transform duration-200 shadow-md"
+            className="inline-flex items-center gap-3 bg-white text-[#1A1D24] rounded-full py-2 px-4 sm:py-3 sm:px-6 text-sm sm:text-base font-bold cursor-pointer transition-transform duration-200 shadow-md"
           >
             <svg
-              className="w-5 h-5"
+              className="w-4 h-4 sm:w-5 sm:h-5"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
@@ -91,32 +92,18 @@ const AboutSection = () => {
                 clipRule="evenodd"
               />
             </svg>
-            Watch the 2024 Recap
+
+            <span className="hidden sm:inline">Watch the 2025 Recap</span>
+            <span className="inline sm:hidden">Watch</span>
           </motion.button>
         </div>
 
-        {/* Decorative images in 4 corners */}
+        {/* Decorative images */}
         {[
-          {
-            pos: "top-3 left-3",
-            src: "/home-images/h1.jpg",
-            alt: "Top Left",
-          },
-          {
-            pos: "top-3 right-3",
-            src: "/home-images/h2.jpg",
-            alt: "Top Right",
-          },
-          {
-            pos: "bottom-3 left-3",
-            src: "/home-images/h3.jpg",
-            alt: "Bottom Left",
-          },
-          {
-            pos: "bottom-3 right-3",
-            src: "/home-images/h4.jpg",
-            alt: "Bottom Right",
-          },
+          { pos: "top-3 left-3", src: "/home-images/h1.jpg" },
+          { pos: "top-3 right-3", src: "/home-images/h2.jpg" },
+          { pos: "bottom-3 left-3", src: "/home-images/h3.jpg" },
+          { pos: "bottom-3 right-3", src: "/home-images/h4.jpg" },
         ].map((img, i) => (
           <motion.div
             key={i}
@@ -124,19 +111,12 @@ const AboutSection = () => {
               x: [0, i % 2 === 0 ? 10 : -10, 0],
               y: [0, i % 2 === 0 ? -10 : 10, 0],
             }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className={`absolute ${img.pos} 
-              w-12 h-12 sm:w-16 sm:h-16 md:w-28 md:h-28 
-              rounded-xl overflow-hidden shadow-lg 
-              translate-x-[-20%] translate-y-[-20%] sm:translate-x-0 sm:translate-y-0`}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            className={`absolute ${img.pos} w-12 h-12 sm:w-16 sm:h-16 md:w-28 md:h-28 rounded-xl overflow-hidden shadow-lg translate-x-[-20%] translate-y-[-20%] sm:translate-x-0 sm:translate-y-0`}
           >
             <img
               src={img.src}
-              alt={img.alt}
+              alt="Decorative"
               className="w-full h-full object-cover"
             />
           </motion.div>
