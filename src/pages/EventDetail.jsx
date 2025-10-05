@@ -9,87 +9,87 @@ const cases = [
   {
     id: 1,
     caseNumber: "#1",
-    title: "The Crimson Quill",
+    title: "Snaphunt",
     description:
-      "Cryptic letters signed with crimson ink appear across the city.",
+      "A campus photo hunt for first-years. Capture the college spirit and win",
     image: "/event-images/e1.png",
     coverImage:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+      "/event-images/snap.png",
     rotation: -3,
   },
   {
     id: 2,
     caseNumber: "#2",
-    title: "Echoes of the Past",
+    title: "Aryabhatta Quiz",
     description:
-      "An old photograph surfaces, holding a clue to a decades-old mystery.",
+      "A challenging math quiz for all. Solve for glory and claim your prize.",
     image: "/event-images/e2.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     coverImage:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+      "/event-images/arya.png",
     rotation: 2,
   },
   {
     id: 3,
     caseNumber: "#3",
-    title: "The Silent Witness",
+    title: "Drone Exhibition",
     description:
-      "The only witness is a parrot who speaks only in riddles. Time to decipher.",
+      "An industrial trip to Mumbai's drone expo, exploring the future of flight technology.",
     image: "/event-images/e3.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     coverImage:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+      "/event-images/drone.png",
     rotation: 1,
   },
   {
     id: 4,
     caseNumber: "#4",
-    title: "The Midnight Cipher",
+    title: "Tech Elevate",
     description:
-      "A coded message, intercepted at midnight, points to a secret society.",
+      "Pitch your startup and hackathon ideas directly to industry experts.",
     image: "/event-images/e4.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     coverImage:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+      "/event-images/vulcan.png",
     rotation: -2,
   },
   {
     id: 5,
     caseNumber: "#5",
-    title: "Phantom's Fortune",
-    description: "A rumored treasure is hidden within a haunted opera house.",
+    title: "Math Event",
+    description: "A campus-wide math treasure hunt. Solve cryptic puzzles and race to win.",
     image: "/event-images/e5.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     coverImage:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+      "/event-images/math.png",
     rotation: 3,
   },
   {
     id: 6,
     caseNumber: "#6",
-    title: "The Sunken Locket",
+    title: "Vulcan",
     description:
-      "A diver discovers a locket in a shipwreck, containing a mysterious portrait.",
+      "Student researchers present groundbreaking work for a chance to get published.",
     image: "/event-images/e6.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     coverImage:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+      "/event-images/vulcan.png",
     rotation: -1,
   },
   {
     id: 7,
     caseNumber: "#7",
-    title: "The Gilded Cage",
-    description: "A prized songbird, the key to a conspiracy, has been stolen.",
+    title: "Tech Aakriti",
+    description: "",
     image: "/event-images/e7.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     coverImage:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+      "/event-images/techak.png",
     rotation: 2,
   },
   {
     id: 8,
     caseNumber: "#8",
-    title: "The Counterfeit Smile",
+    title: "Solutions",
     description:
-      "A famous painting is replaced by a forgery, with a hidden message.",
+      "Pune's largest technical symposium. A massive stage for inter-club innovation.",
     image: "/event-images/e8.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     coverImage:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+      "/upcomingEvent/solution.png",
     rotation: -4,
   },
 ];
