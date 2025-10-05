@@ -148,7 +148,7 @@ function Team() {
             transition={{ duration: 1, ease: "easeOut" }}
             viewport={{ once: false, amount: 0.3 }}
           >
-            <h1>DESIGN & MANAGEMENT</h1>
+            <h1>Club Members</h1>
           </motion.div>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-8">
