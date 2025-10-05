@@ -231,7 +231,7 @@ const UpcomingEvents = () => {
         <div className="events-container">
           {events.map((event, index) => (
             <Link
-              to={`/event/${event.id}`}
+              // to={`/event/${event.id}`}
               key={index}
               className="event-card-link"
             >
