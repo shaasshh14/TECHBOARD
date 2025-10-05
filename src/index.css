@@ -122,7 +122,8 @@ body {
 
 .nav-text {
   font-weight: 700;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 1.4rem;
 }
 
@@ -1060,27 +1061,21 @@ section {
 .train-overlay {
   position: fixed;
   inset: 0;
-  z-index: 5002;
+  z-index: 50;
   pointer-events: none;
+  isolation: isolate;
+  will-change: opacity;
 }
+
 .train-thumb {
-  position: fixed;
-  inset: 0;
+  position: absolute;
   offset-path: var(--path);
   offset-rotate: 0deg;
-  offset-distance: 0%;
-  width: 120px;
-  height: 68px;
-  object-fit: cover;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-  transform: translate(-50%, -50%) scale(0.6);
-  will-change: transform, filter, offset-distance, opacity;
-  animation-name: train-move;
-  animation-duration: 1000ms;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-  animation-fill-mode: forwards;
+  /* Make it compositor-friendly */
+  will-change: transform, offset-distance, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout paint style;
 }
 .train-thumb.train-thumb-hero {
   animation-name: train-move, hero-pop;
@@ -1129,9 +1124,12 @@ section {
 .transition-scrim {
   position: fixed;
   inset: 0;
-  z-index: 5001;
-  background: rgba(0, 0, 0, 0);
-  animation: scrimIn 240ms ease forwards;
+  background: rgba(
+    0,
+    0,
+    0,
+    0.35
+  ); /* avoid backdrop-filter: blur() during the animation */
 }
 @keyframes scrimIn {
   to {
@@ -1509,12 +1507,26 @@ section {
 }
 
 @keyframes gradient-move {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 .animate-gradient-move {
-  background: linear-gradient(120deg, #1a1a2e, #0f3460, #5f2c82, #49a09d, #a4508b, #5f0a87);
+  background: linear-gradient(
+    120deg,
+    #1a1a2e,
+    #0f3460,
+    #5f2c82,
+    #49a09d,
+    #a4508b,
+    #5f0a87
+  );
   background-size: 300% 300%;
   animation: gradient-move 8s ease-in-out infinite;
 }
@@ -1526,7 +1538,12 @@ section {
   width: 100vw;
   height: 100vh;
   z-index: -50;
-  background: radial-gradient(ellipse at 60% 40%, rgba(60,70,100,0.18) 0%, rgba(10,12,20,0.85) 60%, #090a13 100%);
+  background: radial-gradient(
+    ellipse at 60% 40%,
+    rgba(60, 70, 100, 0.18) 0%,
+    rgba(10, 12, 20, 0.85) 60%,
+    #090a13 100%
+  );
   /* Faint cloudy Milky Way */
   pointer-events: none;
   opacity: 0.95;
@@ -1544,7 +1561,9 @@ section {
 }
 
 /* Optionally, tweak star layers for more density and subtlety */
-.stars-bg, .stars-bg2, .stars-bg3 {
+.stars-bg,
+.stars-bg2,
+.stars-bg3 {
   opacity: 0.7;
   filter: blur(0.2px);
 }
@@ -1577,4 +1596,744 @@ section {
   background: linear-gradient(90deg, #49a09d 0%, #a5f3fc 60%, #818cf8 100%);
   border-radius: 2px;
   box-shadow: 0 0 8px #49a09d88;
+}
+
+/* ===== Gallery cleanup: static grey cards (no animations) ===== */
+
+/* Make the button wrapper simple and clickable (we keep your .initial-card for sizing) */
+.static-card-button {
+  all: unset;
+  display: block;
+  cursor: pointer;
+}
+
+/* The actual static grey card that fills its container */
+.static-card {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #3a3a3a, #2e2e2e);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.5),
+    -6px -6px 12px rgba(255, 255, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #eaeaea;
+  text-align: center;
+  padding: 16px;
+}
+
+.static-card h3 {
+  margin: 12px 0 8px;
+  font-size: clamp(1rem, 1.5vw, 18px);
+  line-height: 1.2;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.static-card p {
+  margin: 0 auto;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #cfcfcf;
+  max-width: 90%;
+}
+
+.static-card .badge {
+  font-size: 12px;
+  color: #a7a7a7;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+/* Kill card hover/launch animations and heavy effects */
+.initial-card {
+  background: transparent !important;
+  box-shadow: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+.initial-card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* When train starts, don't blur/scale the other cards */
+.gallery-initial-view.launching .initial-card:not(.is-launching) {
+  filter: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+  transition: none !important;
+}
+
+/* Don’t animate the launching card either */
+.initial-card.is-launching {
+  animation: none !important;
+}
+.initial-card.is-launching .content {
+  animation: none !important;
+}
+
+/* Optional: if you see any leftover tilt behavior */
+.initial-card.tilt-enabled:hover {
+  transform: none !important;
+}
+
+/* Optional: lighter slider image blur to reduce GPU cost */
+@keyframes clarify {
+  from {
+    filter: blur(8px);
+    opacity: 0.6;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+.clarify-start {
+  filter: blur(8px);
+  opacity: 0.6;
+}
+
+/* Optional: if performance is critical on mobile, avoid backdrop-filter on slider nav */
+/*
+.slider-navigation {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+*/
+
+/* ===== Crossfade (no blur) for slider images ===== */
+@keyframes fade-in-quick {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Override previous blur-based clarify styles */
+.clarify-start {
+  opacity: 0;
+  filter: none !important;
+}
+.clarify-end {
+  animation: fade-in-quick 240ms ease-out forwards;
+  filter: none !important;
+}
+
+/* Help the compositor handle the image smoothly */
+.image-display img {
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Remove blur during the 'transitioning' state for extra perf */
+.gallery-main-view.transitioning .image-display img {
+  filter: none !important;
+  transform: scale(0.992);
+  opacity: 0.95;
+}
+
+/* Optional: if you want to avoid any GPU-heavy backdrop blur on the nav */
+/*
+.slider-navigation {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+*/
+
+/* ===== Ensure all train thumbs animate along the path ===== */
+.train-thumb {
+  position: absolute;
+  offset-path: var(--path);
+  offset-rotate: 0deg;
+  will-change: transform, offset-distance, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout paint style;
+
+  /* animate along the path */
+  animation-name: train-move;
+  animation-duration: var(--train-dur, 1500ms);
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: forwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+.train-thumb.train-thumb-hero {
+  animation-name: train-move, hero-pop;
+  animation-duration: var(--train-dur, 1500ms), 520ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1),
+    cubic-bezier(0.16, 0.84, 0.44, 1);
+  animation-fill-mode: forwards, forwards;
+  animation-delay: 0ms, var(--hero-pop-delay, 1600ms);
+}
+
+@keyframes train-move {
+  0% {
+    offset-distance: 0%;
+    transform: translate(-50%, -50%) scale(0.6);
+    filter: blur(6px) opacity(0.7);
+  }
+  60% {
+    filter: blur(2px) opacity(1);
+  }
+  100% {
+    offset-distance: 100%;
+    transform: translate(-50%, -50%) scale(1);
+    filter: blur(0) opacity(1);
+  }
+}
+
+@keyframes hero-pop {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    transform: translate(
+        calc(-50% + var(--hero-dx, 0px)),
+        calc(-50% + var(--hero-dy, 0px))
+      )
+      scale(var(--hero-scale, 6.5));
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ===== Scatter fallback (mobile / reduced motion) ===== */
+.scatter-thumb {
+  position: absolute;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout paint style;
+  /* left/top are set inline from startRect center */
+  animation: scatter-move var(--dur, 1100ms) cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes scatter-move {
+  from {
+    transform: translate(-50%, -50%) scale(0.85);
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    transform: translate(
+        calc(-50% + var(--dx, 0px)),
+        calc(-50% + var(--dy, 0px))
+      )
+      scale(1);
+    opacity: 1;
+  }
+}
+
+/* ===== Crossfade (no blur) for slider images (keeps things snappy) ===== */
+@keyframes fade-in-quick {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.clarify-start {
+  opacity: 0;
+  filter: none !important;
+}
+.clarify-end {
+  animation: fade-in-quick 240ms ease-out forwards;
+  filter: none !important;
+}
+.image-display img {
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Optional: ensure scrim has no blur (perf safety) */
+.transition-scrim {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* Prevent first-frame snap: start centered, hidden, and paused */
+.train-overlay .train-thumb,
+.train-overlay .scatter-thumb {
+  opacity: 0;
+  visibility: hidden;
+  animation-play-state: paused;
+}
+
+/* Make sure train thumbs start at path start, centered */
+.train-overlay .train-thumb {
+  position: absolute;
+  left: 0; /* define anchor for offset-path math */
+  top: 0;
+  offset-distance: 0%;
+  transform: translate(-50%, -50%) scale(0.6) translateZ(0);
+}
+
+/* Scatter starts from the clicked card center */
+.train-overlay .scatter-thumb {
+  position: absolute;
+  transform: translate(-50%, -50%) scale(0.85) translateZ(0);
+}
+
+/* Go live: reveal and run animations */
+.train-overlay.is-live .train-thumb,
+.train-overlay.is-live .scatter-thumb {
+  opacity: 1;
+  visibility: visible;
+  animation-play-state: running;
+}
+
+
+/* ===== Prevent first-frame snap: start centered, hidden, and paused ===== */
+.train-overlay .train-thumb,
+.train-overlay .scatter-thumb {
+  opacity: 0;
+  visibility: hidden;
+  animation-play-state: paused;
+}
+
+/* Train thumbs: ensure they start at path start and are centered */
+.train-overlay .train-thumb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  offset-distance: 0%;
+  transform: translate(-50%, -50%) scale(0.6) translateZ(0);
+}
+
+/* Scatter thumbs: start from the clicked card center (left/top set inline) */
+.train-overlay .scatter-thumb {
+  position: absolute;
+  transform: translate(-50%, -50%) scale(0.85) translateZ(0);
+}
+
+/* Go live: reveal and run animations only after layout settles */
+.train-overlay.is-live .train-thumb,
+.train-overlay.is-live .scatter-thumb {
+  opacity: 1;
+  visibility: visible;
+  animation-play-state: running;
+}
+
+
+/* ===== 3D Parallax Folder Card (no compromise with Train) ===== */
+.folder-scene { perspective: 900px; }
+
+.folder-card {
+  --rx: 0deg; --ry: 0deg;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx)) rotateY(var(--ry)) translateZ(0);
+  transition: transform 220ms ease;
+  will-change: transform;
+}
+.folder-card.is-hovered { transition: transform 60ms linear; }
+
+.folder-card .layer {
+  position: absolute; left: 50%; top: 50%;
+  transform-style: preserve-3d;
+  /* base placement + depth + parallax Y */
+  transform:
+    translate(-50%, -50%)
+    translateY(var(--baseY, 0px))
+    translateZ(var(--z, 0px))
+    translateY(var(--y, 0px));
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 260ms ease;
+  will-change: transform;
+}
+
+/* Back body (orange) */
+.layer-back {
+  --z: 10px; --baseY: 12px;
+  width: 78%; height: 56%;
+  background: linear-gradient(180deg, #ff914d 0%, #ff6a00 100%);
+  border-radius: 16px 16px 20px 20px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.35), inset 0 -4px 0 rgba(0,0,0,.15);
+}
+
+/* Middle sheet (grey) */
+.layer-mid {
+  --z: 22px; --baseY: -2px;
+  width: 72%; height: 54%;
+  background: linear-gradient(180deg, #f3f4f6 0%, #d1d5db 100%);
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0,0,0,.28), inset 0 -3px 0 rgba(255,255,255,.35);
+}
+
+/* Front flap (yellow) + tab */
+.layer-front {
+  --z: 34px; --baseY: -32px;
+  width: 82%; height: 30%;
+  background: linear-gradient(180deg, #ffd64f 0%, #f4c12f 100%);
+  border-radius: 14px 14px 10px 10px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.35), inset 0 -2px 0 rgba(0,0,0,.12);
+  position: relative;
+}
+.layer-front::after {
+  content: "";
+  position: absolute;
+  left: 26px; top: -14px;
+  width: 64px; height: 20px;
+  background: linear-gradient(180deg, #ffd64f 0%, #f4c12f 100%);
+  border-radius: 8px 8px 0 0;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.12);
+}
+
+/* Parallax depth on hover: front goes down, others rise */
+.folder-card.is-hovered .layer-front { --y: 5px; }
+.folder-card.is-hovered .layer-mid   { --y: -4px; }
+.folder-card.is-hovered .layer-back  { --y: -2px; }
+
+/* Reduce motion: keep it subtle */
+@media (prefers-reduced-motion: reduce) {
+  .folder-card { transform: none !important; transition: none !important; }
+  .folder-card .layer { transition: none !important; }
+}
+
+/* ===== 3D Parallax Folder Card ===== */
+.folder-scene { perspective: 900px; }
+
+.folder-card {
+  --rx: 0deg; --ry: 0deg;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx)) rotateY(var(--ry)) translateZ(0);
+  transition: transform 220ms ease;
+  will-change: transform;
+}
+.folder-card.is-hovered { transition: transform 60ms linear; }
+
+.folder-card .layer {
+  position: absolute; left: 50%; top: 50%;
+  transform-style: preserve-3d;
+  transform:
+    translate(-50%, -50%)
+    translateY(var(--baseY, 0px))
+    translateZ(var(--z, 0px))
+    translateY(var(--y, 0px));
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 260ms ease;
+  will-change: transform;
+}
+
+/* Back body (orange) */
+.layer-back {
+  --z: 10px; --baseY: 12px;
+  width: 78%; height: 56%;
+  background: linear-gradient(180deg, #ff914d 0%, #ff6a00 100%);
+  border-radius: 16px 16px 20px 20px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.35), inset 0 -4px 0 rgba(0,0,0,.15);
+}
+
+/* Middle sheet (grey) */
+.layer-mid {
+  --z: 22px; --baseY: -2px;
+  width: 72%; height: 54%;
+  background: linear-gradient(180deg, #f3f4f6 0%, #d1d5db 100%);
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0,0,0,.28), inset 0 -3px 0 rgba(255,255,255,.35);
+}
+
+/* Front flap (yellow) */
+.layer-front {
+  --z: 34px; --baseY: -32px;
+  width: 82%; height: 30%;
+  background: linear-gradient(180deg, #ffd64f 0%, #f4c12f 100%);
+  border-radius: 14px 14px 10px 10px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.35), inset 0 -2px 0 rgba(0,0,0,.12);
+  position: relative;
+}
+.layer-front::after {
+  content: "";
+  position: absolute;
+  left: 26px; top: -14px;
+  width: 64px; height: 20px;
+  background: linear-gradient(180deg, #ffd64f 0%, #f4c12f 100%);
+  border-radius: 8px 8px 0 0;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.12);
+}
+
+/* Parallax depth on hover */
+.folder-card.is-hovered .layer-front { --y: 5px; }
+.folder-card.is-hovered .layer-mid   { --y: -4px; }
+.folder-card.is-hovered .layer-back  { --y: -2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .folder-card { transform: none !important; transition: none !important; }
+  .folder-card .layer { transition: none !important; }
+}
+
+/* ===== 3D Parallax Folder Card · Reference Design (mono glossy + subtle peek) ===== */
+.folder-scene { perspective: 900px; }
+
+/* Tunables */
+.folder-card {
+  --rx: 0deg; --ry: 0deg;
+  --peek-closed: -10px;   /* tiny peek when idle */
+  --peek-hover:  -100px;  /* small extra lift on hover */
+
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx)) rotateY(var(--ry)) translateZ(0);
+  transition: transform 220ms ease;
+  will-change: transform;
+  position: relative;
+  filter: drop-shadow(0 18px 28px rgba(0,0,0,.45));
+}
+.folder-card.is-hovered { transition: transform 60ms linear; }
+
+/* Back lip behind the front panel (curved top, like your ref) */
+.folder-card::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 18%;
+  transform: translate(-50%, -50%);
+  width: 92%;
+  height: 20%;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #5c636c 0%, #2f353c 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 8px 14px rgba(0,0,0,.28);
+  z-index: 15; /* between back(10) and mid(20) */
+  /* soft scoop on the right using a radial mask */
+  -webkit-mask-image: radial-gradient(140% 140% at 80% 0%, black 55%, transparent 56%);
+          mask-image: radial-gradient(140% 140% at 80% 0%, black 55%, transparent 56%);
+}
+
+/* Base layers */
+.folder-card .layer {
+  position: absolute; left: 50%; top: 50%;
+  transform-style: preserve-3d;
+  transform:
+    translate(-50%, -50%)
+    translateY(var(--baseY, 0px))
+    translateZ(var(--z, 0px))
+    translateY(var(--y, 0px));
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 260ms ease, background 260ms ease;
+  will-change: transform;
+}
+
+.layer-back { z-index: 10; }
+.layer-mid  { z-index: 20; }
+.layer-front{ z-index: 40; }
+
+/* Back body (deep graphite/blue) */
+.layer-back {
+  --z: 8px; --baseY: 24px;
+  width: 90%; height: 72%;
+  background: linear-gradient(180deg, #2a3341 0%, #0f141c 100%);
+  border-radius: 26px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    inset 0 -12px 20px rgba(0,0,0,.45),
+    0 8px 20px rgba(0,0,0,.35);
+}
+
+/* Middle sheet (charcoal) */
+.layer-mid {
+  --z: 22px; --baseY: 0px;
+  width: 82%; height: 62%;
+  background: linear-gradient(180deg, #676e77 0%, #2d3137 100%);
+  border-radius: 20px;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.18),
+    inset 0 -8px 18px rgba(0,0,0,.35),
+    0 10px 22px rgba(0,0,0,.30);
+}
+
+/* Front panel (light glossy) */
+.layer-front {
+  --z: 36px; --baseY: -46px;
+  width: 94%; height: 38%;
+  background: linear-gradient(180deg, #f1f3f5 0%, #c9ced4 60%, #aeb5bc 100%);
+  border-radius: 20px;
+  position: relative;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.90),
+    inset 0 -10px 18px rgba(0,0,0,.18),
+    0 12px 24px rgba(0,0,0,.38);
+}
+/* Gloss band */
+.layer-front::before {
+  content: "";
+  position: absolute;
+  left: 14px; right: 14px; top: 14px;
+  height: 44%;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,.65) 0%, rgba(255,255,255,.12) 100%);
+  mix-blend-mode: screen;
+  opacity: .9;
+  pointer-events: none;
+}
+
+/* Center "logo" cutout (built with 4 geometric pieces) */
+.front-logo {
+  position: absolute;
+  left: 50%; top: 54%;
+  transform: translate(-50%, -50%);
+  width: 28%;
+  aspect-ratio: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 0 rgba(255,255,255,.25)) drop-shadow(0 -1px 0 rgba(0,0,0,.25));
+}
+.front-logo .f-piece { position: absolute; }
+
+/* Top-left small light triangle */
+.front-logo .f-tri-tl {
+  left: 0; top: 0;
+  width: 48%; height: 34%;
+  background: linear-gradient(180deg, #ffffff 0%, #dcdfe3 100%);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  border-radius: 3px;
+}
+/* Top-right dark quarter */
+.front-logo .f-arc-tr {
+  right: 0; top: 0;
+  width: 58%; height: 58%;
+  background: linear-gradient(180deg, #2f3338 0%, #14171a 100%);
+  border-radius: 0 100% 0 0;
+}
+/* Bottom-left light quarter */
+.front-logo .f-arc-bl {
+  left: 0; bottom: 0;
+  width: 58%; height: 58%;
+  background: linear-gradient(180deg, #e9edf2 0%, #cdd3db 100%);
+  border-radius: 0 0 0 100%;
+}
+/* Diagonal dark triangle (center-right) */
+.front-logo .f-tri-diag {
+  right: 12%; top: 34%;
+  width: 48%; height: 48%;
+  background: linear-gradient(180deg, #30343a 0%, #171a1e 100%);
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+  border-radius: 4px;
+}
+
+/* Photos: always under the front panel (z 30) so they feel inside */
+.folder-card .photo-stack {
+  position: absolute;
+  left: 50%; top: 21%;
+  transform: translate(-50%, -50%) translateY(var(--peek-closed)) translateZ(28px);
+  width: 84%;
+  height: 0;
+  z-index: 30; /* IMPORTANT: under .layer-front (40) */
+  pointer-events: none;
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.folder-card .photo {
+  position: absolute;
+  top: 0;
+  width: 60%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 14px;
+  background: #1f2329;
+  box-shadow: 0 8px 20px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.12);
+}
+.folder-card .photo-a { left: 8%;  transform: rotate(-3.5deg) translateZ(0); }
+.folder-card .photo-b { right: 8%; transform: rotate( 3.5deg) translateZ(0); }
+
+/* Hover: small extra peek (still under the front panel) */
+.folder-card.is-hovered .photo-stack {
+  transform: translate(-50%, -50%) translateY(var(--peek-hover)) translateZ(28px);
+}
+
+/* Subtle parallax on hover */
+.folder-card.is-hovered .layer-front { --y: 5px; }
+.folder-card.is-hovered .layer-mid   { --y: -4px; }
+.folder-card.is-hovered .layer-back  { --y: -2px; }
+
+/* Container height for large folder + title */
+.initial-card.folder-large {
+  height: auto !important;
+  min-height: 560px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .folder-card { transform: none !important; transition: none !important; }
+  .folder-card .layer,
+  .folder-card .photo-stack { transition: none !important; }
+}
+
+/* ===== Gallery card layout: horizontal rows with wrapping ===== */
+.gallery-initial-view {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: clamp(1rem, 2.5vw, 2rem);
+  align-items: start;
+  width: 100%;
+  max-width: 1280px; /* center nicely on wide screens */
+  margin-inline: auto;
+}
+
+.initial-card {
+  width: auto !important;
+  flex: 0 0 auto !important;
+}
+
+.initial-card.folder-large {
+  min-width: 330px;  /* same folder width */
+  min-height: 560px; /* leave space for title */
+}
+
+@media (max-width: 680px) {
+  .gallery-initial-view {
+    grid-template-columns: 1fr; /* stack on small phones */
+  }
+}
+
+
+/* Force front panel to silver/grey */
+/* Match sample: silver front, grey tab, subtle gloss */
+.folder-card .layer-front {
+  background: linear-gradient(
+    180deg,
+    #f7f9fb 0%,   /* bright top highlight */
+    #e6eaef 26%,  /* soft light mid */
+    #cdd3da 60%,  /* neutral mid */
+    #8e949b 100%  /* cooler darker bottom */
+  ) !important;
+}
+
+/* Tab: light neutral grey (remove display: none if you want no tab) */
+.folder-card .layer-front::after {
+  background: linear-gradient(
+    180deg,
+    #f2f5f8 0%,
+    #ced5dd 100%
+  ) !important;
+  /* display: none; */
+}
+
+/* Gloss band: slightly stronger highlight like the reference */
+.folder-card .layer-front::before {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.68) 0%,
+    rgba(255,255,255,0.18) 100%
+  ) !important;
+}
+
+/* Back body: deep bluish graphite */
+.folder-card .layer-back {
+  background: linear-gradient(180deg, #3a4150 0%, #12151c 100%) !important;
+}
+
+/* Middle sheet: charcoal */
+.folder-card .layer-mid {
+  background: linear-gradient(180deg, #646b73 0%, #2b2f35 100%) !important;
 }
