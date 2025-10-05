@@ -23,12 +23,12 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
+  // ✅ Added function to scroll to top
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -43,7 +43,14 @@ const Header = () => {
         data-aos-easing="linear"
         data-aos-duration="1500"
       >
-        <Link to="/" onClick={closeMenu}>
+        {/* ✅ Call scrollToTop when logo clicked */}
+        <Link
+          to="/"
+          onClick={() => {
+            closeMenu();
+            scrollToTop();
+          }}
+        >
           <img
             src="/logo.jpg"
             alt="Site Logo"
@@ -53,7 +60,6 @@ const Header = () => {
       </div>
 
       <nav className={`header-nav-center ${isMenuOpen ? "active" : ""}`}>
-        {/* Nav links remain the same */}
         <Link to="/" className="nav-link" onClick={closeMenu}>
           <img
             src="/NavLogos/Home.png"
@@ -94,7 +100,11 @@ const Header = () => {
           <span className="nav-text">Team</span>
         </Link>
 
-        <Link to="/contact" className="cta-button contact-glass" onClick={closeMenu}>
+        <Link
+          to="/contact"
+          className="cta-button contact-glass"
+          onClick={closeMenu}
+        >
           <svg
             className="cta-icon"
             width="32"
