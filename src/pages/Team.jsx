@@ -152,8 +152,8 @@ function Team() {
 
           <NewProfileCard
             name="Anuj Kumar Sharma"
-            title="Code-Blooded"
-            description="Chess, CP, Analytical thinking."
+            title="Fullstack Developer"
+            description="Boxing. Devlopment. CP."
             imageUrl="Team/se4.png"
           />
         </div>
