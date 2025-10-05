@@ -32,10 +32,10 @@ const cases = [
   {
     id: 1,
     caseNumber: "#1",
-    title: "The Crimson Quill",
-    description: "Cryptic letters signed with crimson ink appear across the city.",
+    title: "Snaphunt",
+    description: "A campus photo hunt for first-years. Capture the college spirit and win",
     // New random cover image
-    coverImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+    coverImage: "/event-images/snap.png",
     // Inside image remains the same
     detailImage: "/event-images/e1_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: -3,
@@ -43,10 +43,10 @@ const cases = [
   {
     id: 2,
     caseNumber: "#2",
-    title: "Echoes of the Past",
-    description: "An old photograph surfaces, holding a clue to a decades-old mystery.",
+    title: "Aryabhatta Quiz",
+    description: "A challenging math quiz for all. Solve for glory and claim your prize.",
     // New random cover image
-    coverImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+    coverImage: "/event-images/arya.png",
     // Inside image remains the same
     detailImage: "/event-images/e2_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: 2,
@@ -54,10 +54,10 @@ const cases = [
   {
     id: 3,
     caseNumber: "#3",
-    title: "The Silent Witness",
-    description: "The only witness is a parrot who speaks only in riddles. Time to decipher.",
+    title: "Drone Exhibition",
+    description: "An industrial trip to Mumbai's drone expo, exploring the future of flight technology.",
     // New random cover image
-    coverImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+    coverImage: "/event-images/drone.png",
     // Inside image remains the same
     detailImage: "/event-images/e3_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: 1,
@@ -65,10 +65,10 @@ const cases = [
   {
     id: 4,
     caseNumber: "#4",
-    title: "The Midnight Cipher",
-    description: "A coded message, intercepted at midnight, points to a secret society.",
+    title: "Tech Elevate",
+    description: "Pitch your startup and hackathon ideas directly to industry experts.",
     // New random cover image
-   coverImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+   coverImage: "/event-images/techelev.png",
     // Inside image remains the same
     detailImage: "/event-images/e4_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: -2,
@@ -76,10 +76,10 @@ const cases = [
   {
     id: 5,
     caseNumber: "#5",
-    title: "Phantom's Fortune",
-    description: "A rumored treasure is hidden within a haunted opera house.",
+    title: "Math Event",
+    description: "A campus-wide math treasure hunt. Solve cryptic puzzles and race to win.",
     // New random cover image
-    coverImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+    coverImage: "/event-images/math.png",
     // Inside image remains the same
     detailImage: "/event-images/e5_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: 3,
@@ -87,10 +87,10 @@ const cases = [
   {
     id: 6,
     caseNumber: "#6",
-    title: "The Sunken Locket",
-    description: "A diver discovers a locket in a shipwreck, containing a mysterious portrait.",
+    title: "Vulcan",
+    description: "Student researchers present groundbreaking work for a chance to get published.",
     // New random cover image
-    coverImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+    coverImage: "/event-images/vulcan.png",
     // Inside image remains the same
     detailImage: "/event-images/e6_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: -1,
@@ -98,10 +98,10 @@ const cases = [
   {
     id: 7,
     caseNumber: "#7",
-    title: "The Gilded Cage",
-    description: "A prized songbird, the key to a conspiracy, has been stolen.",
+    title: "Tech Aakriti",
+    description: "Student researchers present groundbreaking work for a chance to get published.",
     // New random cover image
-    coverImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+    coverImage: "/event-images/techak.png",
     // Inside image remains the same
     detailImage: "/event-images/e7_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: 2,
@@ -109,10 +109,10 @@ const cases = [
   {
     id: 8,
     caseNumber: "#8",
-    title: "The Counterfeit Smile",
-    description: "A famous painting is replaced by a forgery, with a hidden message.",
+    title: "Solutions",
+    description: "Pune's largest technical symposium. A massive stage for inter-club innovation.",
     // New random cover image
-    coverImage: "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1973&auto=format&fit=crop",
+    coverImage: "/upcomingEvent/solution.png",
     // Inside image remains the same
     detailImage: "/event-images/e8_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: -4,

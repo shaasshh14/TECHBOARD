@@ -7,12 +7,12 @@ import Loader from "../components/Loader.jsx";
 
 // Data for the cases, which should be consistent with Events.jsx
 const cases = [
-    { id: 1, title: "The Crimson Quill", description: "Cryptic letters signed with crimson ink appear across the city.", image: "/event-images/e1.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+    { id: 1, title: "The Crimson Quill", description: "Cryptic letters signed with crimson ink appear across the city.", image: "/event-images/vulcan.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
     { id: 2, title: "Echoes of the Past", description: "An old photograph surfaces, holding a clue to a decades-old mystery.", image: "https://images.pexels.com/photos/935949/pexels-photo-935949.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
     { id: 3, title: "The Silent Witness", description: "The only witness is a parrot who speaks only in riddles. Time to decipher.", image: "https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
     { id: 4, title: "The Midnight Cipher", description: "A coded message, intercepted at midnight, points to a secret society.", image: "https://images.pexels.com/photos/2117283/pexels-photo-2117283.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
     { id: 5, title: "Phantom's Fortune", description: "A rumored treasure is hidden within a haunted opera house.", image: "https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-    { id: 6, title: "The Sunken Locket", description: "A diver discovers a locket in a shipwreck, containing a mysterious portrait.", image: "https://images.pexels.com/photos/761543/pexels-photo-761543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+    { id: 6, title: "The Sunken Locket", description: "A diver discovers a locket in a shipwreck, containing a mysterious portrait.", image: "/event-images/vulcan.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
     { id: 7, title: "The Gilded Cage", description: "A prized songbird, the key to a conspiracy, has been stolen.", image: "https://images.pexels.com/photos/131723/pexels-photo-131723.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
     { id: 8, title: "The Counterfeit Smile", description: "A famous painting is replaced by a forgery, with a hidden message.", image: "https://images.pexels.com/photos/1183992/pexels-photo-1183992.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
 
