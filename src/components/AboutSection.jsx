@@ -1,16 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom"; // 1. Import useNavigate
+import { useNavigate } from "react-router-dom"; 
 
-// RobotSection import seems unused in the provided code, but keeping it if you use it elsewhere.
-// import { RobotSection } from "./RobotSection";
+
 
 const AboutSection = () => {
-  const navigate = useNavigate(); // 2. Initialize the navigate function
+  const navigate = useNavigate(); 
 
   return (
     <div className="max-w-10/12 mx-auto flex flex-col items-center justify-center px-4 py-10 relative">
-      {/* Animated Heading */}
       <motion.h1
         initial={{ opacity: 0, y: -40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -23,7 +21,6 @@ const AboutSection = () => {
         About Us
       </motion.h1>
 
-      {/* Main card */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -34,7 +31,7 @@ const AboutSection = () => {
           p-6 mt-6 md:p-8 overflow-hidden
         "
       >
-        {/* Title */}
+
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -46,7 +43,7 @@ const AboutSection = () => {
           <span>What is TechBoard?</span>
         </motion.div>
 
-        {/* Content center */}
+
         <div className="flex flex-col justify-center items-center text-center gap-5 py-6 md:py-10">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -77,7 +74,7 @@ const AboutSection = () => {
             className="text-sm md:text-base text-gray-300 max-w-md leading-relaxed"
           ></motion.p>
           <motion.button
-            onClick={() => navigate("/watch-recap")} // 3. Add onClick to navigate
+            onClick={() => navigate("/watch-recap")} 
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center gap-3 bg-white text-[#1A1D24] rounded-full py-2 px-4 sm:py-3 sm:px-6 text-sm sm:text-base font-bold cursor-pointer transition-transform duration-200 shadow-md"
@@ -100,7 +97,6 @@ const AboutSection = () => {
           </motion.button>
         </div>
 
-        {/* Decorative images */}
         {[
           { pos: "top-3 left-3", src: "/home-images/h1.jpg" },
           { pos: "top-3 right-3", src: "/home-images/h2.jpg" },

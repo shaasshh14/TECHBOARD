@@ -5,11 +5,6 @@ import { RobotSection } from "./RobotSection"; // Optional robot section
 // FAQ data
 const faqData = [
   {
-    question: "What is the Tech Board?",
-    answer:
-      "The Tech Board is our college’s official technical community that organizes and manages all tech-related events, workshops, and competitions.",
-  },
-  {
     question: "What does the Tech Board do?",
     answer:
       "We host coding contests, gaming tournaments, hackathons, and technical festivals while representing our college at inter-college and national-level tech events.",
