@@ -137,7 +137,6 @@ function Team() {
 
       {/* ======================= NEW SECTION ======================= */}
 
-
       {/* ======================= DESIGN & MANAGEMENT SECTION ======================= */}
       <section className="px-6 py-16">
         <div className="animated-heading-container">
@@ -153,7 +152,7 @@ function Team() {
         </div>
         <div className="flex flex-wrap items-center justify-center gap-8">
           <ListProfileCard
-            title="TE MEMBERS"  /* <-- UPDATED TEXT */
+            title="TE MEMBERS" /* <-- UPDATED TEXT */
             items={[
               "Deepak Kumar",
               "Sunandha",
@@ -178,7 +177,7 @@ function Team() {
             ]}
           />
           <ListProfileCard
-            title="SE MEMBERS"  /* <-- UPDATED TEXT */
+            title="SE MEMBERS" /* <-- UPDATED TEXT */
             items={[
               "Mohit Dhaka",
               "Mayank Dhaka",
@@ -201,7 +200,6 @@ function Team() {
               "Ankit Singh",
               "Himanshu",
               "Himanshu Kumar",
-              "Manisha",
               "Arihant Kumar",
               "Romit Kumar",
               "Vicky Yadav",
@@ -209,7 +207,7 @@ function Team() {
               "Arun Kumar",
               "Adarsh Singh",
               "Rahul Choudhary",
-              "Himanshu Singh"
+              "Himanshu Singh",
             ]}
           />
         </div>
@@ -219,5 +217,5 @@ function Team() {
       <Footer />
     </div>
   );
-} 
+}
 export default Team;

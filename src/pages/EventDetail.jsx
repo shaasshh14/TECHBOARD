@@ -12,7 +12,7 @@ const cases = [
     title: "Snaphunt",
     description:
       "A campus photo hunt for first-years. Capture the college spirit and win",
-    image: "/event-images/e1.png",
+    image: "/event-images/e1.jpg",
     coverImage:
       "/event-images/snap.png",
     rotation: -3,
