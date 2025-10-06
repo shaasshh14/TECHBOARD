@@ -1,10 +1,11 @@
 import ParallaxFolderCard from "../components/ParallaxFolderCard.jsx";
 import Header from "../components/Header.jsx";
 import Footer from "../components/FooterCTA.jsx";
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import Loader from "../components/Loader.jsx";
 import AnimatedBackground from "../components/AnimatedBackground.jsx";
 import AOS from "aos";
+
 /* ------------------- Train Intro (desktop) ------------------- */
 const TrainIntro = ({ images, startRect, onDone, heroScale = 7 }) => {
   const travel = 1500;
@@ -63,7 +64,7 @@ const TrainIntro = ({ images, startRect, onDone, heroScale = 7 }) => {
 
   const dx = centerX - (clones[0]?.endX ?? centerX);
   const dy = centerY - (clones[0]?.endY ?? centerY);
-   
+
   return (
     <>
       <div className="transition-scrim" />
@@ -77,6 +78,7 @@ const TrainIntro = ({ images, startRect, onDone, heroScale = 7 }) => {
             decoding="async"
             width={c.thumbW}
             height={c.thumbH}
+            fetchpriority="low"       /* keep train thumbs low priority */
             className={`train-thumb ${i === 0 ? "train-thumb-hero" : ""}`}
             style={{
               width: `${c.thumbW}px`,
@@ -158,6 +160,7 @@ const ScatterIntro = ({ images, startRect, onDone }) => {
             decoding="async"
             width={c.thumbW}
             height={c.thumbH}
+            fetchpriority="low"
             className="scatter-thumb"
             style={{
               width: `${c.thumbW}px`,
@@ -176,24 +179,62 @@ const ScatterIntro = ({ images, startRect, onDone }) => {
   );
 };
 
-const ImageSlider = ({ images, onExit, otherCards, onLaunchOther, transitioning }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+/* ------------------- Slider ------------------- */
+const ImageSlider = ({
+  images,
+  onExit,
+  otherCards,
+  onLaunchOther,
+  transitioning,
+  initialIndex = 0,
+}) => {
+  const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [isClarifying, setIsClarifying] = useState(false);
 
+  useEffect(() => {
+    setCurrentIndex(initialIndex);
+  }, [initialIndex, images]);
+
+  // Keep showing current slide until the next image is decoded, then swap.
   const showSlide = useCallback(
     (index) => {
       if (index < 0 || index >= images.length) {
         onExit();
         return;
       }
+      const nextSrc = images[index];
       setIsClarifying(true);
-      setTimeout(() => {
+      const img = new Image();
+      img.decoding = "async";
+      img.onload = () => {
+        const d = img.decode ? img.decode() : Promise.resolve();
+        d.catch(() => {}).finally(() => {
+          setCurrentIndex(index);
+          setIsClarifying(false);
+        });
+      };
+      img.onerror = () => {
+        // Even on error, advance to avoid getting stuck
         setCurrentIndex(index);
         setIsClarifying(false);
-      }, 10);
+      };
+      img.src = nextSrc;
     },
-    [images.length, onExit]
+    [images, onExit]
   );
+
+  // Prefetch neighbors (next, prev, and one further ahead)
+  useEffect(() => {
+    const prefetch = (src) => {
+      if (!src) return;
+      const i = new Image();
+      i.decoding = "async";
+      i.src = src;
+    };
+    prefetch(images[currentIndex + 1]);
+    prefetch(images[currentIndex - 1]);
+    setTimeout(() => prefetch(images[currentIndex + 2]), 80);
+  }, [currentIndex, images]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -204,13 +245,6 @@ const ImageSlider = ({ images, onExit, otherCards, onLaunchOther, transitioning 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [currentIndex, showSlide, onExit]);
-
-  useEffect(() => {
-    images.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, [images]);
 
   return (
     <div className={`image-slider-view ${transitioning ? "is-transitioning" : ""}`}>
@@ -227,7 +261,9 @@ const ImageSlider = ({ images, onExit, otherCards, onLaunchOther, transitioning 
         <button
           className="edge-card right-edge"
           title={otherCards[1].title}
-          onClick={(e) => onLaunchOther(otherCards[1].id, e.currentTarget.getBoundingClientRect())}
+          onClick={(e) =>
+            onLaunchOther(otherCards[1].id, e.currentTarget.getBoundingClientRect())
+          }
           style={{ backgroundImage: `url(${otherCards[1].images[0]})` }}
           aria-label={`Open ${otherCards[1].title}`}
         />
@@ -264,14 +300,14 @@ const ImageSlider = ({ images, onExit, otherCards, onLaunchOther, transitioning 
             aria-selected={currentIndex === index}
             onClick={() => showSlide(index)}
           >
-            <img
-              className="thumbnail"
-              src={imgSrc}
-              alt={`Thumbnail ${index + 1}`}
-              loading="lazy"
-              decoding="async"
-              draggable="false"
-            />
+        <img
+            className="thumbnail"
+            src={imgSrc}
+            alt={`Thumbnail ${index + 1}`}
+            loading="lazy"
+            decoding="async"
+            draggable="false"
+          />
           </button>
         ))}
       </nav>
@@ -279,12 +315,17 @@ const ImageSlider = ({ images, onExit, otherCards, onLaunchOther, transitioning 
   );
 };
 
+/* ------------------- Gallery ------------------- */
 const Gallery = () => {
   const [selectedCardId, setSelectedCardId] = useState(null);
   const [transitioning, setTransitioning] = useState(false);
-  const [overlay, setOverlay] = useState(null); // { id, images, rect, mode, wait }
+  const [overlay, setOverlay] = useState(null); // { id, images, rect, mode, wait, initialIndex }
+  const [sliderStartIndex, setSliderStartIndex] = useState(0);
 
-/* ---------- cards data ---------- */
+  // Keep track of dynamic <link> preloads so we can clean them up
+  const headLinksRef = useRef([]);
+
+  /* ---------- cards data ---------- */
   const cards = useMemo(
     () => [
       {
@@ -293,13 +334,10 @@ const Gallery = () => {
         images: [
           "/TECHAAKRITI/p20.jpg",
           "/TECHAAKRITI/p2.jpg",
-          "/TECHAAKRITI/p3.jpg",
           "/TECHAAKRITI/p23.jpg",
-          "/TECHAAKRITI/p24.jpg",
           "/TECHAAKRITI/p21.jpg",
           "/TECHAAKRITI/p13.jpg",
           "/TECHAAKRITI/p6.jpg",
-          "/TECHAAKRITI/p5.jpg",
           "/TECHAAKRITI/p1.jpg",
           "/TECHAAKRITI/p19.jpg",
           "/TECHAAKRITI/p14.jpg",
@@ -314,11 +352,8 @@ const Gallery = () => {
           "/SOLUTIONS/x3.jpg",
           "/SOLUTIONS/x13.jpg",
           "/SOLUTIONS/x4.jpg",
-          "/SOLUTIONS/x5.jpg",
-          "/SOLUTIONS/x11.jpg",
           "/SOLUTIONS/x6.jpg",
           "/SOLUTIONS/x8.jpg",
-          "/SOLUTIONS/x9.jpg",
           "/SOLUTIONS/x7.jpg",
         ],
       },
@@ -344,7 +379,7 @@ const Gallery = () => {
   const selectedCardData = cards.find((card) => card.id === selectedCardId);
   const otherCards = cards.filter((card) => card.id !== selectedCardId);
 
-/* ---------- image preloading helpers ---------- */
+  /* ---------- image preload helpers ---------- */
   const preloadImage = (src, maxWaitMs = 900) =>
     new Promise((resolve) => {
       if (!src) return resolve();
@@ -355,7 +390,7 @@ const Gallery = () => {
         done = true;
         resolve();
       };
-      const t = setTimeout(finish, maxWaitMs); // safety timeout so we don't block too long
+      const t = setTimeout(finish, maxWaitMs);
       img.onload = () => {
         const d = img.decode ? img.decode() : Promise.resolve();
         d.catch(() => {}).finally(() => {
@@ -370,20 +405,33 @@ const Gallery = () => {
       img.src = src;
     });
 
-  const prewarmCard = (card) => {
-    if (!card) return;
-    const a = card.images?.[0];
-    const b = card.images?.[card.images.length - 1];
-    a && preloadImage(a, 1); // fire-and-forget
-    b && preloadImage(b, 1);
+  const addPreloadLink = (href, rel, asType, priority) => {
+    if (typeof document === "undefined" || !href) return null;
+    const link = document.createElement("link");
+    link.rel = rel;             // "preload" or "prefetch"
+    if (asType) link.as = asType; // "image" for preload
+    link.href = href;
+    if (priority) link.fetchPriority = priority; // "high" or "low"
+    document.head.appendChild(link);
+    return link;
   };
 
-  // Prewarm first/last of each card once
-  useEffect(() => {
-    cards.forEach(prewarmCard);
-  }, [cards]);
+  const installCardPreloads = (imgs, heroIdx = 0) => {
+    // Hero: preload high priority
+    const hero = imgs[heroIdx];
+    const links = [];
+    links.push(addPreloadLink(hero, "preload", "image", "high"));
+    // Next two: prefetch low priority (don’t block hero)
+    if (imgs[heroIdx + 1]) links.push(addPreloadLink(imgs[heroIdx + 1], "prefetch", null, "low"));
+    if (imgs[heroIdx + 2]) links.push(addPreloadLink(imgs[heroIdx + 2], "prefetch", null, "low"));
+    // store and return cleanup
+    headLinksRef.current.push(...links.filter(Boolean));
+    return () => {
+      headLinksRef.current.forEach((l) => l && l.remove());
+      headLinksRef.current = [];
+    };
+  };
 
-/* ---------- effect chooser ---------- */
   const computeShouldUseTrain = () => {
     if (typeof window === "undefined") return false;
     const supportsPath =
@@ -394,13 +442,17 @@ const Gallery = () => {
     return Boolean(supportsPath) && !isMobile && !prefersReduced;
   };
 
-/* ---------- overlay flow ---------- */
+  /* ---------- overlay flow ---------- */
   const triggerOverlayTo = (id, rect, mode) => {
     const card = cards.find((c) => c.id === id);
     if (!card) return;
     setTransitioning(true);
-    const wait = preloadImage(card.images?.[0]); // preload hero for instant first slide
-    setOverlay({ id, images: card.images, rect, mode, wait });
+    const imgs = card.images || [];
+    const heroIdx = 0; // change if you want a custom hero per card
+    const cleanup = installCardPreloads(imgs, heroIdx);
+    // Preload hero for instant first slide
+    const wait = preloadImage(imgs[heroIdx], 1500);
+    setOverlay({ id, images: imgs, rect, mode, wait, initialIndex: heroIdx, cleanup });
   };
 
   const finishOverlay = () => {
@@ -409,12 +461,15 @@ const Gallery = () => {
     const w = o.wait || Promise.resolve();
     w.then(() => {
       setSelectedCardId(o.id);
+      setSliderStartIndex(o.initialIndex ?? 0);
+      // remove link preloads
+      if (o.cleanup) o.cleanup();
       setOverlay(null);
       setTimeout(() => setTransitioning(false), 180);
     });
   };
 
-/* ---------- click handlers ---------- */
+  /* ---------- click handlers ---------- */
   const handleCardClick = (card, event) => {
     if (overlay) return;
     const rect = event.currentTarget.getBoundingClientRect();
@@ -430,19 +485,14 @@ const Gallery = () => {
   };
 
   const showInitial = !selectedCardId && !overlay;
- const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    AOS.init({
-      duration: 1500,
-      once: true,
-    });
+    AOS.init({ duration: 1500, once: true });
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500);
+    const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -453,9 +503,10 @@ const Gallery = () => {
       </div>
     );
   }
+
   return (
     <>
-     <div className="fixed inset-0 -z-10">
+      <div className="fixed inset-0 -z-10">
         <AnimatedBackground />
       </div>
       <Header />
@@ -469,8 +520,8 @@ const Gallery = () => {
                 const isLaunching = overlay?.id === card.id;
                 const circleClass = getEdgeClassFor(card);
                 const imgs = card.images || [];
-                const first = imgs[0];
-                const last = imgs.length > 1 ? imgs[imgs.length - 1] : undefined;
+                const previewA = imgs[0];
+                const previewB = imgs.length > 1 ? imgs[imgs.length - 1] : undefined;
 
                 return (
                   <ParallaxFolderCard
@@ -478,8 +529,8 @@ const Gallery = () => {
                     className={`folder-large ${isLaunching ? "is-launching" : ""} ${circleClass}`}
                     onClick={(e) => !overlay && handleCardClick(card, e)}
                     title={card.title}
-                    previewA={first}
-                    previewB={last}
+                    previewA={previewA}
+                    previewB={previewB}
                   />
                 );
               })}
@@ -487,7 +538,7 @@ const Gallery = () => {
           </div>
         )}
 
-        {/* Overlay animations (slider is unmounted while overlay runs to keep it smooth) */}
+        {/* Overlay animations (slider is unmounted while overlay runs) */}
         {overlay && overlay.mode === "train" && (
           <TrainIntro
             images={overlay.images}
@@ -517,6 +568,7 @@ const Gallery = () => {
                 triggerOverlayTo(id, rect, mode);
               }}
               transitioning={transitioning}
+              initialIndex={sliderStartIndex}
             />
           </div>
         )}
