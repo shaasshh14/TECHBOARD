@@ -27,16 +27,13 @@ const throttle = (func, delay) => {
   };
 };
 
-// --- UPDATED DATA: New random images for 'coverImage' ---
 const cases = [
   {
     id: 1,
     caseNumber: "#1",
     title: "Snaphunt",
     description: "A campus photo hunt for first-years. Capture the college spirit and win",
-    // New random cover image
     coverImage: "/event-images/snap.png",
-    // Inside image remains the same
     detailImage: "/event-images/e1_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: -3,
   },
@@ -45,9 +42,7 @@ const cases = [
     caseNumber: "#2",
     title: "Aryabhatta Quiz",
     description: "A challenging math quiz for all. Solve for glory and claim your prize.",
-    // New random cover image
     coverImage: "/event-images/arya.png",
-    // Inside image remains the same
     detailImage: "/event-images/e2_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: 2,
   },
@@ -55,10 +50,8 @@ const cases = [
     id: 3,
     caseNumber: "#3",
     title: "Drone Exhibition",
-    description: "An industrial trip to Mumbai's drone expo, exploring the future of flight technology.",
-    // New random cover image
+    description: "An industrial trip to Mumbai's drone expo, exploring the future of flight technology.",
     coverImage: "/event-images/drone.png",
-    // Inside image remains the same
     detailImage: "/event-images/e3_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: 1,
   },
@@ -67,9 +60,7 @@ const cases = [
     caseNumber: "#4",
     title: "Tech Elevate",
     description: "Pitch your startup and hackathon ideas directly to industry experts.",
-    // New random cover image
-   coverImage: "/event-images/techelev.png",
-    // Inside image remains the same
+    coverImage: "/event-images/techelev.png",
     detailImage: "/event-images/e4_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: -2,
   },
@@ -78,9 +69,7 @@ const cases = [
     caseNumber: "#5",
     title: "Math Event",
     description: "A campus-wide math treasure hunt. Solve cryptic puzzles and race to win.",
-    // New random cover image
     coverImage: "/event-images/math.png",
-    // Inside image remains the same
     detailImage: "/event-images/e5_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: 3,
   },
@@ -89,9 +78,7 @@ const cases = [
     caseNumber: "#6",
     title: "Vulcan",
     description: "Student researchers present groundbreaking work for a chance to get published.",
-    // New random cover image
     coverImage: "/event-images/vulcan.png",
-    // Inside image remains the same
     detailImage: "/event-images/e6_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: -1,
   },
@@ -100,9 +87,7 @@ const cases = [
     caseNumber: "#7",
     title: "Tech Aakriti",
     description: "Student researchers present groundbreaking work for a chance to get published.",
-    // New random cover image
     coverImage: "/event-images/techak.png",
-    // Inside image remains the same
     detailImage: "/event-images/e7_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: 2,
   },
@@ -110,10 +95,8 @@ const cases = [
     id: 8,
     caseNumber: "#8",
     title: "Solutions",
-    description: "Pune's largest technical symposium. A massive stage for inter-club innovation.",
-    // New random cover image
+    description: "Pune's largest technical symposium. A massive stage for inter-club innovation.",
     coverImage: "/upcomingEvent/solution.png",
-    // Inside image remains the same
     detailImage: "/event-images/e8_inside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     rotation: -4,
   },
@@ -193,7 +176,8 @@ const CaseClue = ({ caseData, isDesktop, setPinRef, scrollXProgress }) => {
               }
             : {}
         }
-        initial={{ opacity: 0, y: 50 }}
+        // --- FIX: Make initial state visible on mobile, animated on desktop ---
+        initial={isDesktop ? { opacity: 0, y: 50 } : { opacity: 1, y: 0 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6 }}
@@ -217,14 +201,14 @@ const CaseClue = ({ caseData, isDesktop, setPinRef, scrollXProgress }) => {
                   className="w-full h-auto object-cover"
                 />
               </div>
-              <div className="shake-number bg-yellow-200 p-2 text-center text-4xl font-bold text-gray-800 shadow-md w-[80px] -mt-5 z-10">
+              <div className="shake-number bg-yellow-200 p-2 text-center text-3xl sm:text-4xl font-bold text-gray-800 shadow-md w-[80px] -mt-5 z-10">
                 {caseData.caseNumber}
               </div>
-              <div className="shake-description bg-gray-200 p-3 shadow-sm text-gray-700 leading-relaxed w-[90%] text-center -mt-2">
-                <h3 className="text-lg font-bold mb-1 text-red-700">
+              <div className="shake-description bg-gray-200 p-2 sm:p-3 shadow-sm text-gray-700 leading-relaxed w-[90%] text-center -mt-2">
+                <h3 className="text-base sm:text-lg font-bold mb-1 text-red-700">
                   {caseData.title}
                 </h3>
-                <p className="text-sm">{caseData.description}</p>
+                <p className="text-xs sm:text-sm">{caseData.description}</p>
               </div>
             </div>
           </div>
@@ -366,9 +350,8 @@ const Events = () => {
               isDesktop ? { width: `${DESKTOP_TRACK_WIDTH_PERCENT}%` } : {}
             }
           >
-            {/* Mobile Layout */}
-            <div className="lg:hidden relative w-full flex flex-col items-center gap-y-32 pt-8 pb-16">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-full bg-red-800/50 z-0"></div>
+            <div className="lg:hidden relative w-full flex flex-col items-center gap-y-16 pt-8 pb-16">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-full bg-red-800/40 z-0"></div>
               {cases.map((caseData) => (
                 <CaseClue
                   key={caseData.id}
@@ -379,7 +362,7 @@ const Events = () => {
                 />
               ))}
             </div>
-            {/* Desktop Layout */}
+            
             <div className="hidden lg:block absolute top-0 left-0 w-full h-full">
               <svg className="absolute top-0 left-0 w-full h-full overflow-visible z-10 pointer-events-none">
                 <motion.path
@@ -402,7 +385,7 @@ const Events = () => {
             </div>
           </div>
         </div>
-        {/* Progress bar */}
+        
         {isDesktop && (
           <div className="hidden lg:block w-full max-w-7xl mx-auto mt-8 h-2">
             <div className="h-full bg-gray-800/50 rounded-full">
