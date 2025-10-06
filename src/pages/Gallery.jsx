@@ -2,7 +2,9 @@ import ParallaxFolderCard from "../components/ParallaxFolderCard.jsx";
 import Header from "../components/Header.jsx";
 import Footer from "../components/FooterCTA.jsx";
 import { useState, useEffect, useCallback, useMemo } from "react";
-
+import Loader from "../components/Loader.jsx";
+import AnimatedBackground from "../components/AnimatedBackground.jsx";
+import AOS from "aos";
 /* ------------------- Train Intro (desktop) ------------------- */
 const TrainIntro = ({ images, startRect, onDone, heroScale = 7 }) => {
   const travel = 1500;
@@ -61,7 +63,7 @@ const TrainIntro = ({ images, startRect, onDone, heroScale = 7 }) => {
 
   const dx = centerX - (clones[0]?.endX ?? centerX);
   const dy = centerY - (clones[0]?.endY ?? centerY);
-
+   
   return (
     <>
       <div className="transition-scrim" />
@@ -428,9 +430,34 @@ const Gallery = () => {
   };
 
   const showInitial = !selectedCardId && !overlay;
+ const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1500,
+      once: true,
+    });
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-black">
+        <Loader />
+      </div>
+    );
+  }
   return (
     <>
+     <div className="fixed inset-0 -z-10">
+        <AnimatedBackground />
+      </div>
       <Header />
 
       <div className={`gallery-v2-container ${selectedCardId ? "gallery-v2-active" : ""}`}>
