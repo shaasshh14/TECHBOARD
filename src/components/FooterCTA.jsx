@@ -27,7 +27,7 @@ const Footer = () => {
                 href="mailto:techboard.official@gmail.com"
                 className="text-blue-400 hover:underline"
               >
-                techboard.official@gmail.com
+                technicalboard@aitpune.edu.in
               </a>
             </p>
           </div>
@@ -83,7 +83,7 @@ const Footer = () => {
 
                 {/* YouTube */}
                 <a
-                  href="https://www.youtube.com"
+                  href="https://www.youtube.com/@TechnicalBoard-AITPune"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 bg-[#1a1a26] rounded-lg hover:bg-red-600 transition"
