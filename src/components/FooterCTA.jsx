@@ -1,17 +1,25 @@
 import React from "react";
 
 const Footer = () => {
+  // Smooth scroll to top when logo is clicked
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer id="contact" className="bg-[#0d0d14] text-gray-300 py-6 relative"> 
+    <footer id="contact" className="bg-[#0d0d14] text-gray-300 py-6 relative">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* --- Secretary Contact --- */}
           <div>
             <h3 className="font-semibold text-white mb-2">Secretary Contact</h3>
             <p className="text-sm leading-relaxed mb-2">
-              <span className="font-medium">Secretary:</span> Shashank Tiwari & Sneha
+              <span className="font-medium">Secretary:</span> Shashank Tiwari &
+              Sneha
             </p>
             <p className="text-sm leading-relaxed mb-2">
-              <span className="font-medium">Mobile:</span> +91 98765 43210
+              <span className="font-medium">Mobile:</span> +91 8882465015 , +91
+              6387029949
             </p>
             <p className="text-sm leading-relaxed">
               <span className="font-medium">Official Email:</span>{" "}
@@ -24,6 +32,7 @@ const Footer = () => {
             </p>
           </div>
 
+          {/* --- About Techboard --- */}
           <div>
             <h3 className="font-semibold text-white mb-2">About Techboard</h3>
             <p className="text-sm leading-relaxed mb-2">
@@ -32,6 +41,7 @@ const Footer = () => {
             </p>
 
             <div className="flex items-center justify-between mt-4">
+              {/* --- Social Media Icons --- */}
               <div className="flex space-x-3">
                 {/* LinkedIn */}
                 <a
@@ -48,7 +58,7 @@ const Footer = () => {
                     className="w-4 h-4"
                   >
                     <title>LinkedIn</title>
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" />
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452z" />
                   </svg>
                 </a>
 
@@ -71,12 +81,12 @@ const Footer = () => {
                   </svg>
                 </a>
 
-                {/* Twitter/X */}
+                {/* YouTube */}
                 <a
-                  href="https://twitter.com"
+                  href="https://www.youtube.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 bg-[#1a1a26] rounded-lg hover:bg-sky-400 transition"
+                  className="p-2 bg-[#1a1a26] rounded-lg hover:bg-red-600 transition"
                 >
                   <svg
                     role="img"
@@ -85,25 +95,33 @@ const Footer = () => {
                     fill="currentColor"
                     className="w-4 h-4"
                   >
-                    <title>X</title>
-                    <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                    <title>YouTube</title>
+                    <path d="M23.498 6.186a2.974 2.974 0 0 0-2.094-2.104C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.404.582A2.974 2.974 0 0 0 .502 6.186C0 8.085 0 12 0 12s0 3.915.502 5.814a2.974 2.974 0 0 0 2.094 2.104C4.495 20.5 12 20.5 12 20.5s7.505 0 9.404-.582a2.974 2.974 0 0 0 2.094-2.104C24 15.915 24 12 24 12s0-3.915-.502-5.814ZM9.75 15.5v-7l6 3.5-6 3.5Z" />
                   </svg>
                 </a>
               </div>
 
-              <img
-                src="/logo.jpg"
-                alt="Techboard Club Small Logo"
-                className="w-16 h-auto rounded-full"
-              />
+              {/* --- Clickable TECHBOARD Logo --- */}
+              <button
+                onClick={scrollToTop}
+                className="focus:outline-none hover:scale-110 transition-transform cursor-pointer"
+                aria-label="Scroll to top"
+              >
+                <img
+                  src="/logo.jpg"
+                  alt="Techboard Club Small Logo"
+                  className="w-16 h-auto rounded-full"
+                />
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* --- Bottom Fade Line with Love Message --- */}
+      {/* --- Bottom Line --- */}
       <div className="mt-6 border-t border-gray-700 pt-3 text-center text-sm text-gray-400">
-        Made with <span className="text-red-500">❤️</span> and support by Techboard
+        Made with <span className="text-red-500">❤️</span> and support by{" "}
+        <span className="font-semibold text-white">Techboard</span>
       </div>
     </footer>
   );

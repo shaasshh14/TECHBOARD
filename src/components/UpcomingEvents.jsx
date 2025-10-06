@@ -6,7 +6,7 @@ const events = [
   {
     id: "web3-metaverse",
     displayDate: "OCT 08 2025",
-    countdownDate: "2025-12-08T09:00:00",
+    countdownDate: "2026-02-26T09:00:00",
     title: "SOLUTION 2K25",
     location: "AIT PUNE",
     description:
@@ -16,7 +16,7 @@ const events = [
   {
     id: "ai-in-design",
     displayDate: "NOV 15 2025",
-    countdownDate: "2025-11-15T10:30:00",
+    countdownDate: "2026-01-22T00:00:00",
     title: "TECHNICAL AKRITI",
     location: "AIT PUNE",
     description:
@@ -225,7 +225,9 @@ const UpcomingEvents = () => {
           <h1>
             Upcoming <span>Events</span>
           </h1>
-          <p>Join us for our upcoming events and connect with the tech community.</p>
+          <p>
+            Join us for our upcoming events and connect with the tech community.
+          </p>
         </div>
 
         <div className="events-container">
@@ -245,8 +247,8 @@ const UpcomingEvents = () => {
                 </div>
                 <div className="card-content">
                   {/* <p className="event-date">{event.displayDate}</p> */}
-                   <h3 className="event-title">{event.title}</h3>
-                  <CountdownTimer targetDate={event.countdownDate} />  
+                  <h3 className="event-title">{event.title}</h3>
+                  <CountdownTimer targetDate={event.countdownDate} />
                   <p className="event-location">{event.location}</p>
                   <p className="event-description">{event.description}</p>
                 </div>

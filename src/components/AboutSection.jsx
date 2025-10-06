@@ -64,7 +64,9 @@ const AboutSection = () => {
             className="text-3xl md:text-5xl font-extrabold -mt-5 leading-tight"
           >
             <span className="inline-block bg-[#ff9a3c] text-[#1A1D24] py-1 px-6 rounded-xl -rotate-2 shadow-lg">
-              TB
+              We host coding contests, gaming tournaments, hackathons, and
+              technical festivals while representing our college at
+              inter-college and national-level tech events.
             </span>
           </motion.h2>
 
@@ -75,7 +77,7 @@ const AboutSection = () => {
             className="text-sm md:text-base text-gray-300 max-w-md leading-relaxed"
           ></motion.p>
           <motion.button
-            onClick={() => navigate('/watch-recap')} // 3. Add onClick to navigate
+            onClick={() => navigate("/watch-recap")} // 3. Add onClick to navigate
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center gap-3 bg-white text-[#1A1D24] rounded-full py-2 px-4 sm:py-3 sm:px-6 text-sm sm:text-base font-bold cursor-pointer transition-transform duration-200 shadow-md"
